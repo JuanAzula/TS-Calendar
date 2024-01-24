@@ -1,0 +1,12 @@
+@import url("modal.css");
+@import url("colors.css");
+@import url("header.css");
+@import url("calendar.css");
+@import url("footer.css");
+
+* {
+    /* margin: 0;
+    padding: 0; */
+    box-sizing: border-box;
+    font-family: "Mulish", sans-serif;
+}
