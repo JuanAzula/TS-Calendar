@@ -1,3 +1,7 @@
+import { prevNext } from "./components/Calendar";
+
+
+
 // ///////// EVENT LISTENERS FOR ADD EVENT BUTTON
 const eventButton = document.getElementById("add-event");
 const label = document.querySelector("#add-event .header__button--text");
@@ -43,3 +47,21 @@ document.addEventListener("click", (event) => {
     }
   }
 });
+
+// EVENT LISTENERS FOR CALENDAR
+const prenexIcons = document
+  .querySelectorAll(".calendar--navigation span");
+
+prenexIcons.forEach(icon => {
+
+  // When an icon is clicked
+  icon.addEventListener("click", () => {
+
+    // Call the prevNext function
+    prevNext(icon);
+  })
+
+});
+
+// EVENT LISTENERS FOR MODAL
+

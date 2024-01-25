@@ -42,11 +42,32 @@
 
   <!-- ///////////////////////////// CALENDAR -->
 
-  <main id="calendar" class="calendar">
+  <main id="calendar" class="calendar__container">
 
-    <div id="calendar-container" class="calendar__div">
+    <div class="calendar">
+      <header class="calendar__header">
+        <p class="calendar-current-date"></p>
+        <div class="calendar--navigation">
+          <span id="calendar-prev" class="material-symbols-rounded">
+            - </span>
+          <span id="calendar-next" class="material-symbols-rounded">
+            +
+          </span>
+        </div>
+      </header>
 
-
+      <div class="calendar-body">
+        <ul class="calendar-weekdays">
+          <li>Sun</li>
+          <li>Mon</li>
+          <li>Tue</li>
+          <li>Wed</li>
+          <li>Thu</li>
+          <li>Fri</li>
+          <li>Sat</li>
+        </ul>
+        <ul class="calendar-dates"></ul>
+      </div>
     </div>
 
 
@@ -93,8 +114,17 @@
 
   </footer>
 
+  <div class="holder">
+    <div class="candle">
+      <div class="blinking-glow"></div>
+      <div class="thread"></div>
+      <div class="glow"></div>
+      <div class="flame"></div>
+    </div>
+  </div>
 
   <script type="module" src="/src/main.ts"></script>
+  <script type="module" src="/src/app.ts"></script>
 </body>
 
 </html>
