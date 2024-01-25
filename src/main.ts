@@ -1,22 +1,26 @@
+
 import { prevNext } from "./components/Calendar";
 
-
+import { StoreEvent } from "./components/Modal";
 
 // ///////// EVENT LISTENERS FOR ADD EVENT BUTTON
 const eventButton = document.getElementById("add-event");
 const label = document.querySelector("#add-event .header__button--text");
+const modal = document.getElementById("modal");
+const overlay = document.querySelector(".overlay");
 
-if (eventButton && eventButton instanceof HTMLButtonElement) {
+if (eventButton && overlay && modal && eventButton instanceof HTMLButtonElement) {
   eventButton.addEventListener("click", () => {
-    const modal = document.getElementById("modal");
-    modal?.classList.remove("hide-modal");
+    overlay.classList.remove("hide-modal");
+    modal.classList.remove("hide-modal");
+    const event = localStorage.getItem("events")
+    console.log(event)
   })
 }
 
-if (label && label instanceof HTMLSpanElement) {
+if (label && modal && label instanceof HTMLSpanElement) {
   label.addEventListener("click", () => {
-    const modal = document.getElementById("modal");
-    modal?.classList.remove("hide-modal");
+    modal.classList.remove("hide-modal");
   })
 }
 
@@ -26,8 +30,15 @@ const closeModal = document.getElementById("close");
 
 if (closeModal && closeModal instanceof HTMLButtonElement) {
   closeModal?.addEventListener("click", () => {
-    const modal = document.getElementById("modal");
+    overlay?.classList.add("hide-modal");
     modal?.classList.add("hide-modal");
+  })
+}
+
+
+if (overlay && overlay instanceof HTMLDivElement) {
+  overlay?.addEventListener("click", () => {
+    overlay.classList.add("hide-modal");
   })
 }
 
@@ -65,3 +76,18 @@ prenexIcons.forEach(icon => {
 
 // EVENT LISTENERS FOR MODAL
 
+//  /////// EVENT LISTENERS FOR SUBMIT BUTTON
+
+const submitButton = document.getElementById("submit");
+const title = document.getElementById("title");
+const date = document.getElementById("date");
+const time = document.getElementById("time");
+
+if (submitButton && submitButton instanceof HTMLButtonElement && title && title instanceof HTMLInputElement && date && date instanceof HTMLInputElement && time && time instanceof HTMLInputElement) {
+  submitButton?.addEventListener("click", () => {
+    const titleValue = title?.value;
+    const dateValue = date?.value;
+    const timeValue = time?.value;
+    StoreEvent(titleValue, dateValue, timeValue);
+  })
+}
