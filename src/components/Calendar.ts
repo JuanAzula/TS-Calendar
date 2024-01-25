@@ -33,9 +33,15 @@ export function createCalendar(month: Months, year: number): void {
         // Omplir amb els dies del mes
         for (let day = 1; day <= daysInMonth; day++) {
             let dayCell = document.createElement('div');
-            dayCell.className = "day-item";
+            dayCell?.classList.add("day-item");
             dayCell.textContent = day.toString();
+
+
+            const monthValue = (month).toString().padStart(1, '0'); // Asegurarse de que el mes tenga al menos dos dígitos
+            const dateValue = `${year}-${monthValue + 1}-${day}`;
+            dayCell.setAttribute("data-date", dateValue);
             calendarGrid.appendChild(dayCell);
+            console.log(dayCell.getAttribute("data-date"))
         }
     }
 }
