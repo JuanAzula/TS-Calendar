@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    background-color: var(--indigo-200);
+    background-color: #6c6c6cde;
     padding: 1rem;
     border-radius: 0.5rem;
     position: absolute;
@@ -42,7 +42,7 @@
 }
 
 .modal__button:hover {
-    background: var(--indigo-500);
+    background: rgba(234, 234, 234, 0.468);
 }
 
 .modal__input {

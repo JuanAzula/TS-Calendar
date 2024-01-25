@@ -40,7 +40,7 @@ document.addEventListener("keydown", (event) => {
 })
 
 document.addEventListener("click", (event) => {
-  const modal = document.getElementById("modal");
+  const modal = document.querySelector("#modal .modal__div");
   if (modal !== null && event.target !== null) {
     if (event.target !== modal && event.target !== eventButton && event.target !== label) {
       modal.classList.add("hide-modal");

@@ -10,7 +10,7 @@
 }
 
 .calendar {
-    background: #fff;
+    background: #ffffff7c;
     width: 750px;
     height: 550px;
     border-radius: 10px;
@@ -37,7 +37,7 @@ header .calendar--navigation span {
     line-height: 38px;
     border-radius: 50%;
     user-select: none;
-    color: #aeabab;
+    color: #000000;
     font-size: 1.9rem;
 }
 
@@ -46,7 +46,7 @@ header .calendar--navigation span {
 }
 
 header .calendar--navigation span:hover {
-    background: var(--indigo-100);
+    background: rgba(0, 0, 0, 0.275);
 }
 
 header .calendar-current-date {
@@ -72,7 +72,7 @@ header .calendar-current-date {
 .calendar-body li {
     width: calc(100% / 7);
     font-size: 1.07rem;
-    color: #414141;
+    color: #000000;
 }
 
 .calendar-body .calendar-weekdays li {
@@ -108,11 +108,11 @@ header .calendar-current-date {
 }
 
 .calendar-dates li.active::before {
-    background: var(--indigo-600);
+    background: rgb(0, 0, 0);
 }
 
 .calendar-dates li:not(.active):hover::before {
-    background: var(--indigo-200);
+    background: rgba(0, 0, 0, 0.275);
 }
 
 @media screen and (max-width: 800px) {

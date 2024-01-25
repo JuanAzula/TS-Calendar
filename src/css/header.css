@@ -5,7 +5,8 @@
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    background-color: var(--indigo-300);
+    background-color: #ffffff5f;
+    /* background-color: var(--indigo-300); */
     border-bottom: 1px solid black
 }
 
@@ -20,7 +21,7 @@
     position: relative;
     cursor: pointer;
     align-self: flex-end;
-    background-color: var(--indigo-600);
+    background-color: rgba(255, 255, 255, 0.206);
     border-radius: 20px;
     padding: 9px 12px;
     gap: 8px;
@@ -44,7 +45,7 @@
 }
 
 .header__button:hover {
-    background: var(--indigo-800);
+    background: rgba(255, 255, 255, 0.371);
 }
 
 .header__button:hover .svg-icon {

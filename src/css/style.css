@@ -13,6 +13,16 @@
 
 }
 
+body {
+    background-image: url(../assets/wallpaperflare.com_wallpaper.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+footer p {
+    color: white
+}
 
 /* body {
     display: flex;
