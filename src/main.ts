@@ -16,3 +16,8 @@ if (closeModal && closeModal instanceof HTMLButtonElement) {
     modal?.classList.add("hide-modal");
   })
 }
+
+// ///////// CALENDAR
+7
+import { createCalendar } from "./components/Calendar"
+createCalendar(new Date().getMonth(), new Date().getFullYear());
