@@ -36,6 +36,7 @@ if (closeModal && closeModal instanceof HTMLButtonElement) {
 if (overlay && overlay instanceof HTMLDivElement) {
   overlay?.addEventListener("click", () => {
     overlay.classList.add("hide-modal");
+    modal?.classList.add("hide-modal");
   })
 }
 
