@@ -45,21 +45,10 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     const modal = document.getElementById("modal");
     modal?.classList.add("hide-modal");
-  }
-})
-
-//  /////// EVENT LISTENERS FOR SUBMIT BUTTON
-
-const submitButton = document.getElementById("submit");
-const title = document.getElementById("title");
-const date = document.getElementById("date");
-const time = document.getElementById("time");
-
-if (submitButton && submitButton instanceof HTMLButtonElement && title && title instanceof HTMLInputElement && date && date instanceof HTMLInputElement && time && time instanceof HTMLInputElement) {
-  submitButton?.addEventListener("click", () => {
-    const titleValue = title?.value;
-    const dateValue = date?.value;
-    const timeValue = time?.value;
-    StoreEvent(titleValue, dateValue, timeValue);
   })
 }
+
+// ///////// CALENDAR
+7
+import { createCalendar } from "./components/Calendar"
+createCalendar(new Date().getMonth(), new Date().getFullYear());
