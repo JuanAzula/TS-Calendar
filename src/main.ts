@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   getEvents();
 })
 
+
+
 // ///////// EVENT LISTENERS FOR ADD EVENT BUTTON
 const eventButton = document.getElementById("add-event");
 const label = document.querySelector("#add-event .header__button--text");
@@ -65,11 +67,15 @@ const date = document.getElementById("date");
 const time = document.getElementById("time");
 
 if (submitButton && submitButton instanceof HTMLButtonElement && title && title instanceof HTMLInputElement && date && date instanceof HTMLInputElement && time && time instanceof HTMLInputElement) {
-  submitButton?.addEventListener("submit", (event) => {
+  submitButton?.addEventListener("click", (event) => {
+    console.log("hola")
     event?.preventDefault();
     const titleValue = title?.value;
     const dateValue = date?.value;
     const timeValue = time?.value;
+    console.log(titleValue, dateValue, timeValue)
     StoreEvent(titleValue, dateValue, timeValue);
+    overlay?.classList.add("hide-modal");
+    modal?.classList.add("hide-modal");
   })
 }

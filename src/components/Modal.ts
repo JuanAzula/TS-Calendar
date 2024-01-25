@@ -1,4 +1,5 @@
 
+
 let eventsTotal: { title: string, date: string, time: string }[] = [];
 const previousEvents = localStorage.getItem("events");
 export const StoreEvent = (title: string, date: string, time: string) => {
@@ -14,7 +15,6 @@ export const StoreEvent = (title: string, date: string, time: string) => {
         // Guardar la lista actualizada en el localStorage
         localStorage.setItem("events", JSON.stringify(eventsTotal));
 
-        getEvents();
     }
 }
 export function getEvents() {
