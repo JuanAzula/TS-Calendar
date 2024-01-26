@@ -24,8 +24,9 @@
     border-radius: 20px;
     padding: 9px 12px;
     gap: 8px;
-    border: none;
+    border: 1px solid black;
     margin-right: 10%;
+
 }
 
 .header__button--text {
