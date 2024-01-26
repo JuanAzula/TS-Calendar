@@ -76,21 +76,20 @@
       <div id="modal-div" class="modal__div">
         <h1 class="modal__h1">Add Event</h1>
 
-        <form id="form" class="modal__form">
-          <label for="title" class="modal__label">Title</label>
-          <input
-            id="title"
-            class="modal__input"
-            type="text"
-            placeholder="Title"
-            required
-          />
-          <label for="date" class="modal__label">Date</label>
-          <input id="date" class="modal__input" type="date" required />
-          <label for="time" class="modal__label">Time</label>
-          <input id="time" class="modal__input" type="time" required />
-          <button id="submit" class="modal__button">Submit</button>
-        </form>
+      <form id="form" class="modal__form">
+        <label for="title" class="modal__label">Title</label>
+        <input id="title" class="modal__input" type="text" placeholder="Title" required />
+        <label for="date" class="modal__label">Date</label>
+        <input id="date" class="modal__input" type="date" required />
+        <input id="checkbox" class="modal__input" type="checkbox"   />
+        <label id='endDate-label' for="title" class="hide-modal">End date</label>
+        <input id="endDate" class="hide-modal" type="date" required />
+        <label for="time" class="modal__label">Time</label>
+        <input id="time" class="modal__input" type="time" required />
+        <label  id="endTimeLabel" for="title" class="hide-modal">End Time</label>
+        <input id="endTimeInput" class="hide-modal" type="time">
+        <button id="submit" class="modal__button">Submit</button>
+      </form>
 
         <div class="modal__div--close">
           <button id="close" class="modal__button">close</button>
