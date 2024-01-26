@@ -51,5 +51,22 @@ export function getEvents() {
         } else {
             console.log("No date found")
         }
+
+        eventDiv.addEventListener("click", () => {
+            const eventContainer = document.getElementById("event-info");
+            const overlay = document.querySelector(".overlay");
+            eventContainer?.classList.replace("hide-event", "event--info");
+            eventTime.classList.remove("event--tooltip");
+            eventTime.classList.add("hide-modal");
+
+            const eventSpan = document.getElementById("event-span");
+
+            if (eventSpan) {
+                eventSpan.textContent = `${event.title}: ${event.time}`;
+            }
+
+            overlay?.classList.remove("hide-modal");
+        })
+
     })
 }

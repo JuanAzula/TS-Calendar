@@ -42,5 +42,5 @@
     border: 2px solid var(--indigo-950);
     width: 10rem;
     height: 8rem;
-    overflow-y: scroll auto;
+    overflow-y: scroll;
 }

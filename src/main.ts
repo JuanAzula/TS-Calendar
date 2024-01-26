@@ -92,26 +92,26 @@ if (submitButton && submitButton instanceof HTMLButtonElement && title && title 
 
 // /////// EVENT LISTENERS FOR EVENTS
 
-const events = document.querySelectorAll(".day-item .event");
+// const events = document.querySelectorAll(".day-item .event");
 
-if (events) {
-  events.forEach((event) => {
-    event.addEventListener("click", () => {
-      console.log(event.textContent)
-      overlay?.classList.remove("hide-modal");
-
-
-      const eventContainer = document.getElementById("event-info");
-
-      eventContainer?.classList.replace("hide-event", "event--info");
-
-      const eventSpan = document.getElementById("event-span");
-
-      if (eventSpan) {
-        eventSpan.textContent = event.textContent;
-      }
+// if (events) {
+//   events.forEach((event) => {
+//     event.addEventListener("click", () => {
+//       console.log(event.textContent)
+//       overlay?.classList.remove("hide-modal");
 
 
-    })
-  })
-}
+//       const eventContainer = document.getElementById("event-info");
+
+//       eventContainer?.classList.replace("hide-event", "event--info");
+
+//       const eventSpan = document.getElementById("event-span");
+
+//       if (eventSpan) {
+//         eventSpan.textContent = event.textContent;
+//       }
+
+
+//     })
+//   })
+// }
