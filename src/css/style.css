@@ -11,3 +11,7 @@
     font-family: "Mulish", sans-serif;
 
 }
+
+.preserve-spaces {
+    white-space: pre;
+  }

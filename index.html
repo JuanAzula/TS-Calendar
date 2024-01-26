@@ -43,6 +43,15 @@
   <!-- ///////////////////////////// CALENDAR -->
 
   <main id="calendar" class="calendar">
+    <div class="calendar__header">
+      <span class="preserve-spaces">2024 </span>
+      <span>January</span>
+
+
+    </div>
+
+
+
 
     <div id="calendar-container" class="calendar__div">
         <div>Monday</div>
@@ -57,7 +66,25 @@
 
 
 
+
+    <div class="day-names__container">
+      <div class="day-name">Monday</div>
+      <div class="day-name">Tuesday</div>
+      <div class="day-name">Wednesday</div>
+      <div class="day-name">Thursday</div>
+      <div class="day-name">Friday</div>
+      <div class="day-name">Saturday</div>
+      <div class="day-name">Sunday</div>
+
     </div>
+
+    <div id="calendar-container" class="calendar__div">
+
+    </div>
+
+    
+
+    
 
 
 
@@ -80,6 +107,9 @@
         <input id="title" class="modal__input" type="text" placeholder="Title" required />
         <label for="date" class="modal__label">Date</label>
         <input id="date" class="modal__input" type="date" required />
+        <input id="checkbox" class="modal__input" type="checkbox"   />
+        <label id='endDate-label' for="title" class="hide-modal">End date</label>
+        <input id="endDate" class="hide-modal" type="date" required />
         <label for="time" class="modal__label">Time</label>
         <input id="time" class="modal__input" type="time" required />
         <button id="submit" class="modal__button">Submit</button>

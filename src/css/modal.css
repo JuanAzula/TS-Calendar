@@ -3,6 +3,19 @@
 }
 
 
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(0, 0, 0, 0.6); */
+    backdrop-filter: blur(3px);
+    z-index: 1;
+}
+
+
+
 .modal__div {
     display: flex;
     flex-direction: column;
@@ -51,4 +64,13 @@
     padding: 0.5rem;
     border-radius: 0.5rem;
     border: 1px solid black
+}
+
+.event {
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 0.25rem;
+    margin: 0.2rem;
+    border-radius: 0.5rem;
+    background-color: var(--indigo-100);
 }
