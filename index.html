@@ -20,10 +20,19 @@
   <!-- ////////////////////////////// HEADER -->
   <header class="header">
 
-    <h1 class="header__h1">Ts Calendar</h1>
-
     <div class="header__div">
-      <button id="add-event" class="header__button">Add Event</button>
+      <h1 class="header__h1">Ts Calendar</h1>
+      <button id="add-event" class="header__button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
+          <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+            <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+            <path d="m8 3v4"></path>
+            <path d="m16 3v4"></path>
+            <path d="m4 11h16"></path>
+          </g>
+        </svg>
+        <span class="header__button--text">Add to Calendar</span>
+      </button>
     </div>
 
   </header>
@@ -34,11 +43,36 @@
   <!-- ///////////////////////////// CALENDAR -->
 
   <main id="calendar" class="calendar">
-
-    <div id="calendar-container" class="calendar__div">
+    <div class="calendar__header">
+      <span class="preserve-spaces">2024 </span>
+      <span>January</span>
 
 
     </div>
+
+
+
+
+
+
+    <div class="day-names__container">
+      <div class="day-name">Monday</div>
+      <div class="day-name">Tuesday</div>
+      <div class="day-name">Wednesday</div>
+      <div class="day-name">Thursday</div>
+      <div class="day-name">Friday</div>
+      <div class="day-name">Saturday</div>
+      <div class="day-name">Sunday</div>
+
+    </div>
+
+    <div id="calendar-container" class="calendar__div">
+
+    </div>
+
+    
+
+    
 
 
 
@@ -50,9 +84,9 @@
 
 
   <!-- //////////////////////////// MODAL -->
-  <section id="modal" class="hide-modal">
+  <section id="modal" class=" hide-modal">
 
-    <div class="modal__div">
+    <div id="modal-div" class="modal__div">
 
       <h1 class="modal__h1">Add Event</h1>
 
@@ -74,6 +108,7 @@
 
 
   </section>
+  <div class="overlay hide-modal"></div>
 
 
   <!-- /////////////////////////// FOOTER -->
