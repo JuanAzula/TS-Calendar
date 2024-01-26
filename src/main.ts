@@ -1,5 +1,5 @@
 import { createCalendar } from "./components/Calendar"
-import { StoreEvent } from "./components/Modal";
+import { StoreEvent } from "./components/Modal"
 
 
 document.addEventListener("DOMContentLoaded", () => {
