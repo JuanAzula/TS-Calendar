@@ -55,8 +55,18 @@ document.addEventListener("keydown", (event) => {
   }
   if (event.key === "Escape") {
     const modal = document.getElementById("modal");
+    const eventContainer = document.getElementById("event-info");
     modal?.classList.add("hide-modal");
+    eventContainer?.classList.replace("event--info", "hide-event");
   }
+})
+
+overlay?.addEventListener("click", () => {
+  const modal = document.getElementById("modal");
+  const eventContainer = document.getElementById("event-info");
+  modal?.classList.add("hide-modal");
+  eventContainer?.classList.replace("event--info", "hide-event");
+  overlay?.classList.add("hide-modal");
 })
 
 //  /////// EVENT LISTENERS FOR SUBMIT BUTTON
@@ -77,5 +87,31 @@ if (submitButton && submitButton instanceof HTMLButtonElement && title && title 
     StoreEvent(titleValue, dateValue, timeValue);
     overlay?.classList.add("hide-modal");
     modal?.classList.add("hide-modal");
+  })
+}
+
+// /////// EVENT LISTENERS FOR EVENTS
+
+const events = document.querySelectorAll(".day-item .event");
+
+if (events) {
+  events.forEach((event) => {
+    event.addEventListener("click", () => {
+      console.log(event.textContent)
+      overlay?.classList.remove("hide-modal");
+
+
+      const eventContainer = document.getElementById("event-info");
+
+      eventContainer?.classList.replace("hide-event", "event--info");
+
+      const eventSpan = document.getElementById("event-span");
+
+      if (eventSpan) {
+        eventSpan.textContent = event.textContent;
+      }
+
+
+    })
   })
 }

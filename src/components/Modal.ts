@@ -28,11 +28,17 @@ export function getEvents() {
         const eventDiv = document.createElement("div");
         eventDiv.classList.add("event");
 
-        eventDiv.innerHTML = `
-            <p>${event.title}</p>
-            `;
-        // <p>Date: ${event.date}</p>
-        // <p>Time: ${event.time}</p>
+        const eventName = document.createElement("p");
+        eventName.textContent = event.title + " ";
+
+        const eventTime = document.createElement("p");
+        eventTime.textContent = event.time + " ";
+
+        // eventTime.classList.add("hide-modal", "event--tooltip");
+        eventTime.classList.add("event--tooltip");
+
+        eventDiv.appendChild(eventName);
+        eventDiv.appendChild(eventTime);
 
         console.log(event.date)
         const dayDiv = document.querySelector(`.day-item[data-date='${event.date}']`);
