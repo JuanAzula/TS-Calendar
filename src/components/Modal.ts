@@ -73,9 +73,9 @@ export function getEvents() {
             const eventSpan: any = document.getElementById("event-span");
 
             if (eventSpan && eventSpan.endTime === undefined && eventSpan.endDate === undefined) {
-                eventSpan.textContent = `${event.title}: ${event.time}`;
+                eventSpan.textContent = `${event.title}:\n ${event.time}`;
             } else {
-                eventSpan.textContent = `${event.title}: ${event.time} ends at ${event.endTime} on ${event.endDate}`;
+                eventSpan.textContent = `${event.title}: \n ${event.time} ends at ${event.endTime} on ${event.endDate}`;
             }
 
             overlay?.classList.remove("hide-modal");

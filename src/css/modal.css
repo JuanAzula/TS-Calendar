@@ -27,13 +27,21 @@
 .event-info__div {
     /* border: 1px solid black; */
     /* border-radius: 0.5rem; */
+    height: 79%;
+    width: 90%;
     padding: 2rem;
     background-color: var(--indigo-500);
+    z-index: 6;
 
 }
 
-.event-info__span {
+/* .event-info span {} */
+
+.event-info__div .event-info__span {
     color: white;
+    height: 100%;
+    width: 100%;
+    z-index: 6;
 }
 
 .overlay {
@@ -54,9 +62,9 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    
-    overflow-y: scroll ;
-   
+
+    overflow-y: scroll;
+
     background-color: var(--indigo-200);
     padding: 1rem;
     border-radius: 0.5rem;
