@@ -44,6 +44,31 @@ if (closeModal && closeModal instanceof HTMLButtonElement) {
 // ///////// CALENDAR
 createCalendar(new Date().getMonth(), new Date().getFullYear());
 
+// //////// EVENT LISTENERS FOR CHECKBOX END DATE
+
+const endDateCheckbox = document.getElementById('checkbox') as HTMLButtonElement;
+const endDateLabel = document.getElementById('endDate-label')!;
+const endDateInput = document.getElementById('endDate')! as HTMLInputElement;
+const endDateTimeLabel = document.getElementById('endTimeLabel')!;
+const endDateTimeInput = document.getElementById('endTimeInput') as HTMLButtonElement;
+
+let isEndDateVisible = false;
+
+endDateCheckbox.addEventListener('click', ()=>{
+  if(isEndDateVisible){   
+  endDateLabel?.classList.add("hide-modal");
+  endDateInput?.classList.add("hide-modal");
+  endDateTimeLabel.classList.add("hide-modal");
+  endDateTimeInput.classList.add("hide-modal");
+  }else{
+    endDateLabel.classList.replace("hide-modal", 'modal__label');
+    endDateInput.classList.replace("hide-modal", 'modal__input');
+    endDateTimeLabel.classList.replace("hide-modal", 'modal__label');
+    endDateTimeInput.classList.replace("hide-modal", 'modal__input');
+  }
+  isEndDateVisible = !isEndDateVisible;
+})
+
 
 // //////// EVENT LISTENERS FOR CLOSE MODAL
 document.addEventListener("keydown", (event) => {
