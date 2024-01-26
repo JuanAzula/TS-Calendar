@@ -69,6 +69,26 @@ endDateCheckbox.addEventListener('click', () => {
   isEndDateVisible = !isEndDateVisible;
 })
 
+// //////// EVENT LISTENERS FOR CHECKBOX REMINDER
+
+const reminmderCheckbox = document.getElementById('reminmderCheckbox');
+const reminderTime = document.getElementById('reminderTime');
+
+let isCheckboxVisible = false;
+
+if(reminmderCheckbox && reminmderCheckbox instanceof HTMLInputElement){
+  reminmderCheckbox.addEventListener('click', ()=>{
+    if(isCheckboxVisible){
+      reminderTime?.classList.add("hide-modal");
+    }else {
+      reminderTime?.classList.replace("hide-modal", 'modal__label')
+
+    }
+    isCheckboxVisible = !isCheckboxVisible;
+  })
+}
+
+
 
 // //////// EVENT LISTENERS FOR CLOSE MODAL
 document.addEventListener("keydown", (event) => {

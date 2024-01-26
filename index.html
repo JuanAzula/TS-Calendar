@@ -67,6 +67,7 @@
       <form id="form" class="modal__form">
         <label for="title" class="modal__label">Title</label>
         <input id="title" class="modal__input" type="text" placeholder="Title" required />
+        <textarea type="" rows="5" cols="40" id="textDescription" class=""></textarea>
         <label for="date" class="modal__label">Date</label>
         <input id="date" class="modal__input" type="date" required />
         <label for="time" class="modal__label">Time</label>
@@ -76,7 +77,17 @@
         <label id='endDate-label' for="title" class="hide-modal">End date</label>
         <input id="endDate" class="hide-modal" type="date" required />
         <label id="endTimeLabel" for="title" class="hide-modal">End Time</label>
-        <input id="endTimeInput" class="hide-modal" type="time">
+        <input id="endTimeInput" class="hide-modal" type="time">Set reminder
+        <label for="title">
+        <input type="checkbox" id="reminmderCheckbox" class="modal__input">
+        </label>
+        <select id="reminderTime" class="hide-modal">
+          <option value="5">5 minuts before</option>
+          <option value="10">10 minuts before</option>
+          <option value="15">15 minuts before</option>
+          <option value="30">30 minuts before</option>
+          <option value="60">1 hour before</option>
+        </select>
         <button id="submit" class="modal__button">Submit</button>
       </form>
 
