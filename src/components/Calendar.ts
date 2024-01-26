@@ -1,3 +1,5 @@
+import { getEvents } from "./Modal";
+
 enum Months {
 
     January = 0,
@@ -43,6 +45,7 @@ export function createCalendar(month: Months, year: number): void {
             calendarGrid.appendChild(dayCell);
             console.log(dayCell.getAttribute("data-date"))
         }
+        getEvents();
     }
 }
 

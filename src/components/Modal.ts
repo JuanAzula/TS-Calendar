@@ -29,10 +29,10 @@ export function getEvents() {
         eventDiv.classList.add("event");
 
         eventDiv.innerHTML = `
-            <p>Title: ${event.title}</p>
-            <p>Date: ${event.date}</p>
-            <p>Time: ${event.time}</p>
-        `;
+            <p>${event.title}</p>
+            `;
+        // <p>Date: ${event.date}</p>
+        // <p>Time: ${event.time}</p>
 
         console.log(event.date)
         const dayDiv = document.querySelector(`.day-item[data-date='${event.date}']`);
