@@ -1,5 +1,5 @@
-import { createCalendar } from "./components/Calendar"
-import { StoreEvent } from "./components/Modal"
+import { createCalendar, currentMonth, currentYear } from "./components/Calendar"
+import { StoreEvent } from "./components/Modal";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -42,7 +42,7 @@ if (closeModal && closeModal instanceof HTMLButtonElement) {
 }
 
 // ///////// CALENDAR
-createCalendar(new Date().getMonth(), new Date().getFullYear());
+createCalendar(currentMonth, currentYear);
 
 
 // //////// EVENT LISTENERS FOR CLOSE MODAL

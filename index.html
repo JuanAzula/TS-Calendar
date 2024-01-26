@@ -1,135 +1,110 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./src/assets/calendaricon.png"
+      alt="calendar icon"
+    />
+    <link href="./src/css/style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap"
+      rel="stylesheet"
+    />
+    <title>TS Calendar</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="./src/assets/calendaricon.png" alt="calendar icon" />
-  <link href="./src/css/style.css" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap"
-    rel="stylesheet">
-  <title>TS Calendar</title>
-</head>
+  <body>
+    <div id="app"></div>
 
-<body>
-  <div id="app"></div>
+    <!-- ////////////////////////////// HEADER -->
+    <header class="header">
+      <div class="header__div">
+        <h1 class="header__h1">Ts Calendar</h1>
+        <button id="add-event" class="header__button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            viewBox="0 0 24 24"
+            height="24"
+            fill="none"
+            class="svg-icon"
+          >
+            <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+              <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+              <path d="m8 3v4"></path>
+              <path d="m16 3v4"></path>
+              <path d="m4 11h16"></path>
+            </g>
+          </svg>
+          <span class="header__button--text">Add to Calendar</span>
+        </button>
+      </div>
+    </header>
 
-  <!-- ////////////////////////////// HEADER -->
-  <header class="header">
+    <!-- ///////////////////////////// CALENDAR -->
 
-    <div class="header__div">
-      <h1 class="header__h1">Ts Calendar</h1>
-      <button id="add-event" class="header__button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
-          <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-            <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-            <path d="m8 3v4"></path>
-            <path d="m16 3v4"></path>
-            <path d="m4 11h16"></path>
-          </g>
-        </svg>
-        <span class="header__button--text">Add to Calendar</span>
-      </button>
-    </div>
+    <main id="calendar" class="calendar">
+      <div class="calendar__header">
+        <span id="back-arrow">⬅️</span>
 
-  </header>
-
-
-
-
-  <!-- ///////////////////////////// CALENDAR -->
-
-  <main id="calendar" class="calendar">
-    <div class="calendar__header">
-      <span class="preserve-spaces">2024 </span>
-      <span>January</span>
-
-
-    </div>
-
-
-
-
-
-
-    <div class="day-names__container">
-      <div class="day-name">Monday</div>
-      <div class="day-name">Tuesday</div>
-      <div class="day-name">Wednesday</div>
-      <div class="day-name">Thursday</div>
-      <div class="day-name">Friday</div>
-      <div class="day-name">Saturday</div>
-      <div class="day-name">Sunday</div>
-
-    </div>
-
-    <div id="calendar-container" class="calendar__div">
-
-    </div>
-
-
-
-
-
-
-
-
-
-
-  </main>
-
-
-
-  <!-- //////////////////////////// MODAL -->
-  <section id="modal" class=" hide-modal">
-
-    <div id="modal-div" class="modal__div">
-
-      <h1 class="modal__h1">Add Event</h1>
-
-      <form id="form" class="modal__form">
-        <label for="title" class="modal__label">Title</label>
-        <input id="title" class="modal__input" type="text" placeholder="Title" required />
-        <label for="date" class="modal__label">Date</label>
-        <input id="date" class="modal__input" type="date" required />
-        <label for="time" class="modal__label">Time</label>
-        <input id="time" class="modal__input" type="time" required />
-        <button id="submit" class="modal__button">Submit</button>
-      </form>
-
-      <div class="modal__div--close">
-        <button id="close" class="modal__button">close</button>
+        <span class="current-month preserve-spaces" id="current-month"> January </span>
+        <span class="preserve-spaces" id="current-year">2024 </span>
+        <span id="forward-arrow">➡️</span>
       </div>
 
-    </div>
+      <div class="day-names__container">
+        <div class="day-name">Monday</div>
+        <div class="day-name">Tuesday</div>
+        <div class="day-name">Wednesday</div>
+        <div class="day-name">Thursday</div>
+        <div class="day-name">Friday</div>
+        <div class="day-name">Saturday</div>
+        <div class="day-name">Sunday</div>
+      </div>
 
+      <div id="calendar-container" class="calendar__div"></div>
+    </main>
 
-  </section>
-  <div class="overlay hide-modal"></div>
+    <!-- //////////////////////////// MODAL -->
+    <section id="modal" class="hide-modal">
+      <div id="modal-div" class="modal__div">
+        <h1 class="modal__h1">Add Event</h1>
 
+        <form id="form" class="modal__form">
+          <label for="title" class="modal__label">Title</label>
+          <input
+            id="title"
+            class="modal__input"
+            type="text"
+            placeholder="Title"
+            required
+          />
+          <label for="date" class="modal__label">Date</label>
+          <input id="date" class="modal__input" type="date" required />
+          <label for="time" class="modal__label">Time</label>
+          <input id="time" class="modal__input" type="time" required />
+          <button id="submit" class="modal__button">Submit</button>
+        </form>
 
-  <!-- ///////////////////////////// EVENT INFO -->
+        <div class="modal__div--close">
+          <button id="close" class="modal__button">close</button>
+        </div>
+      </div>
+    </section>
+    <div class="overlay hide-modal"></div>
 
-  <section id="event-info" class="hide-event">
-    <div class="event-info__div">
-      <span id="event-span" class="event-info__span"></span>
-    </div>
-  </section>
+    <!-- /////////////////////////// FOOTER -->
 
+    <footer class="footer" id="footer">
+      <p class="footer__p">Made with ❤️ by SQUAD HAMILTON</p>
+    </footer>
 
-  <!-- /////////////////////////// FOOTER -->
-
-  <footer class="footer" id="footer">
-
-    <p class="footer__p">Made with ❤️ by SQUAD HAMILTON</p>
-
-  </footer>
-
-
-  <script type="module" src="/src/main.ts"></script>
-</body>
-
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
