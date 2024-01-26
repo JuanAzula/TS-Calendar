@@ -54,13 +54,13 @@ const endDateTimeInput = document.getElementById('endTimeInput') as HTMLButtonEl
 
 let isEndDateVisible = false;
 
-endDateCheckbox.addEventListener('click', ()=>{
-  if(isEndDateVisible){   
-  endDateLabel?.classList.add("hide-modal");
-  endDateInput?.classList.add("hide-modal");
-  endDateTimeLabel.classList.add("hide-modal");
-  endDateTimeInput.classList.add("hide-modal");
-  }else{
+endDateCheckbox.addEventListener('click', () => {
+  if (isEndDateVisible) {
+    endDateLabel?.classList.add("hide-modal");
+    endDateInput?.classList.add("hide-modal");
+    endDateTimeLabel.classList.add("hide-modal");
+    endDateTimeInput.classList.add("hide-modal");
+  } else {
     endDateLabel.classList.replace("hide-modal", 'modal__label');
     endDateInput.classList.replace("hide-modal", 'modal__input');
     endDateTimeLabel.classList.replace("hide-modal", 'modal__label');
@@ -100,16 +100,20 @@ const submitButton = document.getElementById("submit");
 const title = document.getElementById("title");
 const date = document.getElementById("date");
 const time = document.getElementById("time");
+const endDate = document.getElementById("endDate")
+const endTime = document.getElementById("endTimeInput")
 
-if (submitButton && submitButton instanceof HTMLButtonElement && title && title instanceof HTMLInputElement && date && date instanceof HTMLInputElement && time && time instanceof HTMLInputElement) {
+if (submitButton && submitButton instanceof HTMLButtonElement && title && title instanceof HTMLInputElement && date && date instanceof HTMLInputElement && time && time instanceof HTMLInputElement && endDate && endDate instanceof HTMLInputElement && endTime && endTime instanceof HTMLInputElement) {
   submitButton?.addEventListener("click", (event) => {
     console.log("hola")
     event?.preventDefault();
     const titleValue = title?.value;
     const dateValue = date?.value;
     const timeValue = time?.value;
+    const endDateValue = endDate?.value;
+    const endTimeValue = endTime?.value;
     console.log(titleValue, dateValue, timeValue)
-    StoreEvent(titleValue, dateValue, timeValue);
+    StoreEvent(titleValue, dateValue, timeValue, endDateValue, endTimeValue);
     overlay?.classList.add("hide-modal");
     modal?.classList.add("hide-modal");
   })
