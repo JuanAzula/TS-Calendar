@@ -77,6 +77,7 @@
         <label id='endDate-label' for="title" class="hide-modal">End date</label>
         <input id="endDate" class="hide-modal" type="date" required />
         <label id="endTimeLabel" for="title" class="hide-modal">End Time</label>
+
         <input id="endTimeInput" class="hide-modal" type="time">Set reminder
         <label for="title">
         <input type="checkbox" id="reminmderCheckbox" class="modal__input">
@@ -88,6 +89,16 @@
           <option value="30">30 minuts before</option>
           <option value="60">1 hour before</option>
         </select>
+
+        <label for="eventType">Tipo de Evento:</label>
+        <select id="eventType" name="eventType">
+          <option value="reunión">Reunión</option>
+          <option value="fiesta">Fiesta</option>
+          <option value="trabajo">Trabajo</option>
+          <option value="conferencia">Conferencia</option>
+          <option value="otro">Otro</option>
+
+
         <button id="submit" class="modal__button">Submit</button>
       </form>
 
