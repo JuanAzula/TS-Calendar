@@ -73,16 +73,35 @@ export function getEvents() {
             eventTime.classList.remove("event--tooltip");
             eventTime.classList.add("hide-modal");
 
-            const eventSpan: any = document.getElementById("event-span");
+            const titleSpan: any = document.getElementById("title-span");
+            const timeSpan: any = document.getElementById("time-span");
+            const dateSpan: any = document.getElementById("date-span");
+            const descriptionSpan: any = document.getElementById("description-span");
+            const endDateSpan: any = document.getElementById("endDate-span");
+            const endTimeSpan: any = document.getElementById("endTime-span");
 
-            if (eventSpan && eventSpan.endTime === undefined && eventSpan.endDate === undefined) {
-                eventSpan.textContent = `${event.title}:\n ${event.time}`;
-            } else {
-                eventSpan.textContent = `${event.title}: \n ${event.time} ends at ${event.endTime} on ${event.endDate}`;
-            }
+            titleSpan.textContent = "Title: " + event.title;
+            timeSpan.textContent = "Time: " + event.time;
+            dateSpan.textContent = "Date: " + event.date;
+            // descriptionSpan.textContent = "Description: " + event.description;
+            endDateSpan.textContent = "End Date: " + event.endDate;
+            endTimeSpan.textContent = "End Time: " + event.endTime;
 
             overlay?.classList.remove("hide-modal");
         })
 
     })
 }
+
+
+
+
+
+
+
+
+// if (eventSpan && eventSpan.endTime === undefined && eventSpan.endDate === undefined) {
+//     eventSpan.textContent = `${event.title}:\n ${event.time}`;
+// } else {
+//     eventSpan.textContent = `${event.title}: \n ${event.time} ends at ${event.endTime} on ${event.endDate}`;
+// }
