@@ -44,7 +44,7 @@ export function getEvents() {
         endTimeSpan.textContent = event.endTime;
 
         const eventDetails = document.createElement("p");
-        eventDetails.textContent = "Date: " + event.date + " Time: " + event.time + " End Date: " + event.endDate + " End Time: " + event.endTime;
+        eventDetails.textContent = "Date: " + event.date + " Description: " + event.description + " Time: " + event.time + " End Date: " + event.endDate + " End Time: " + event.endTime;
 
         endDateSpan.classList.add("hide-modal");
         endTimeSpan.classList.add("hide-modal");
