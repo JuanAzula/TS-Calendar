@@ -96,6 +96,7 @@ document.addEventListener("keydown", (event) => {
     const eventContainer = document.getElementById("event-info");
     modal?.classList.add("hide-modal");
     eventContainer?.classList.replace("event--info", "hide-event");
+    overlay?.classList.add("hide-modal");
   }
 })
 
@@ -157,5 +158,50 @@ if (deleteButton && deleteButton instanceof HTMLButtonElement) {
     eventContainer?.classList.replace("event--info", "hide-event");
     overlay?.classList.add("hide-modal");
 
+  })
+}
+
+// /////// ADD DAYCELL EVENT
+
+const dayCells: any = document.querySelectorAll(".day-item");
+const dayButton: any = document.querySelectorAll(".day-item .day__button");
+
+if (dayCells) {
+  dayCells.forEach((dayCell: any) => {
+    dayCell.addEventListener("mouseover", () => {
+
+      const dayData = dayCell.getAttribute("data-date");
+      const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
+
+      addButton?.classList.remove("hide-modal");
+    })
+    dayCell.addEventListener("mouseout", () => {
+
+      const dayData = dayCell.getAttribute("data-date");
+      const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
+
+      addButton?.classList.add("hide-modal");
+    })
+  })
+}
+
+
+
+if (dayButton) {
+  dayButton.forEach((button: any) => {
+    button.addEventListener("click", () => {
+      modal?.classList.remove("hide-modal");
+      overlay?.classList.remove("hide-modal");
+
+      const dataDate = button.getAttribute("data-date");
+
+      if (date && date instanceof HTMLInputElement) {
+        date.value = dataDate;
+      }
+
+
+
+      console.log(button.getAttribute('data-date'));
+    })
   })
 }

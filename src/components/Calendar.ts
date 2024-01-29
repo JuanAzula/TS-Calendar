@@ -38,6 +38,11 @@ export function createCalendar(month: Months, year: number): void {
       dayCell?.classList.add("day-item");
       dayCell.textContent = day.toString().padStart(2, "0");
 
+      const dayButton = document.createElement("button");
+      dayButton.classList.add("day__button");
+      dayButton.classList.add("hide-modal");
+      dayButton.textContent = "add";
+
       const monthValue = month.toString(); // Asegurarse de que el mes tenga al menos dos dígitos
       // console.log("hola" + monthValue);
       if (monthValue == '11' || monthValue == '10' || monthValue == '12') {
@@ -47,6 +52,8 @@ export function createCalendar(month: Months, year: number): void {
           .toString()
           .padStart(2, "0")}`;
         dayCell.setAttribute("data-date", dateValue);
+        dayButton.setAttribute("data-date", dateValue);
+        dayCell.appendChild(dayButton);
         calendarGrid.appendChild(dayCell);
         // console.log(dayCell.getAttribute("data-date"));
       } else {
@@ -55,6 +62,9 @@ export function createCalendar(month: Months, year: number): void {
           .toString()
           .padStart(2, "0")}`;
         dayCell.setAttribute("data-date", dateValue);
+        dayButton.setAttribute("data-date", dateValue);
+
+        dayCell.appendChild(dayButton);
         calendarGrid.appendChild(dayCell);
         // console.log(dayCell.getAttribute("data-date"));
       }
