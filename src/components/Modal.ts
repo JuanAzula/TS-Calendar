@@ -1,8 +1,8 @@
 import { createCalendar, currentMonth, currentYear } from "./Calendar";
 
 
-let eventsTotal: { title: string, date: string, time: string, endDate: string, endTime: string }[] = [];
-export const StoreEvent = (title: string, date: string, time: string, endDate: string, endTime: string) => {
+let eventsTotal: { title: string, date: string, time: string, endDate: string, endTime: string, description: string }[] = [];
+export const StoreEvent = (title: string, date: string, time: string, endDate: string, endTime: string, description: string) => {
     if (title && date && time) {
         const previousEvents = localStorage.getItem("events");
         // Obtener la lista actual de eventos del localStorage
@@ -11,7 +11,7 @@ export const StoreEvent = (title: string, date: string, time: string, endDate: s
         }
 
         // Agregar el nuevo evento a la lista
-        eventsTotal.push({ title, date, time, endDate, endTime });
+        eventsTotal.push({ title, date, time, endDate, endTime, description });
 
         // Guardar la lista actualizada en el localStorage
         localStorage.setItem("events", JSON.stringify(eventsTotal));
@@ -27,7 +27,7 @@ export function getEvents() {
         eventsTotal = JSON.parse(previousEvents);
     }
 
-    eventsTotal.forEach((event: { title: string, date: string, time: string, endDate: string, endTime: string }) => {
+    eventsTotal.forEach((event: { title: string, date: string, time: string, endDate: string, endTime: string, description: string }) => {
         const eventDiv = document.createElement("div");
         eventDiv.classList.add("event");
 
@@ -43,16 +43,21 @@ export function getEvents() {
         const endTimeSpan = document.createElement("span");
         endTimeSpan.textContent = event.endTime;
 
+        const eventDetails = document.createElement("p");
+        eventDetails.textContent = "Date: " + event.date + " Time: " + event.time + " End Date: " + event.endDate + " End Time: " + event.endTime;
+
         endDateSpan.classList.add("hide-modal");
         endTimeSpan.classList.add("hide-modal");
 
         // eventTime.classList.add("hide-modal", "event--tooltip");
-        eventTime.classList.add("event--tooltip");
+        // eventTime.classList.add("event--tooltip");
+        eventDetails.classList.add("event--tooltip");
 
         eventDiv.appendChild(eventName);
         eventDiv.appendChild(eventTime);
         eventDiv.appendChild(endDateSpan);
         eventDiv.appendChild(endTimeSpan);
+        eventDiv.appendChild(eventDetails);
 
         console.log(event.date)
         const dayDiv = document.querySelector(`.day-item[data-date='${event.date}']`);
@@ -83,7 +88,12 @@ export function getEvents() {
             titleSpan.textContent = "Title: " + event.title;
             timeSpan.textContent = "Time: " + event.time;
             dateSpan.textContent = "Date: " + event.date;
-            // descriptionSpan.textContent = "Description: " + event.description;
+            if (event.description === "") {
+                descriptionSpan.textContent = "Description: No description";
+            } else {
+                descriptionSpan.textContent = "Description: " + event.description;
+
+            }
             endDateSpan.textContent = "End Date: " + event.endDate;
             endTimeSpan.textContent = "End Time: " + event.endTime;
 

@@ -122,8 +122,9 @@ const date = document.getElementById("date");
 const time = document.getElementById("time");
 const endDate = document.getElementById("endDate")
 const endTime = document.getElementById("endTimeInput")
+const textDescription = document.getElementById("textDescription");
 
-if (submitButton && submitButton instanceof HTMLButtonElement && title && title instanceof HTMLInputElement && date && date instanceof HTMLInputElement && time && time instanceof HTMLInputElement && endDate && endDate instanceof HTMLInputElement && endTime && endTime instanceof HTMLInputElement) {
+if (submitButton && submitButton instanceof HTMLButtonElement && title && title instanceof HTMLInputElement && date && date instanceof HTMLInputElement && time && time instanceof HTMLInputElement && endDate && endDate instanceof HTMLInputElement && endTime && endTime instanceof HTMLInputElement && textDescription instanceof HTMLTextAreaElement) {
   submitButton?.addEventListener("click", (event) => {
     console.log("hola")
     event?.preventDefault();
@@ -132,8 +133,10 @@ if (submitButton && submitButton instanceof HTMLButtonElement && title && title 
     const timeValue = time?.value;
     const endDateValue = endDate?.value;
     const endTimeValue = endTime?.value;
+    const descriptionValue = textDescription?.value;
+
     console.log(titleValue, dateValue, timeValue)
-    StoreEvent(titleValue, dateValue, timeValue, endDateValue, endTimeValue);
+    StoreEvent(titleValue, dateValue, timeValue, endDateValue, endTimeValue, descriptionValue);
     overlay?.classList.add("hide-modal");
     modal?.classList.add("hide-modal");
 
