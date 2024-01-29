@@ -88,6 +88,15 @@ if(reminmderCheckbox && reminmderCheckbox instanceof HTMLInputElement){
   })
 }
 
+// //////// EVENT LISTENERS FOR VALIDATION
+
+const validationInputTitle = document.getElementById('title');
+const validationTextarea = document.getElementById('textDescription');
+ const validationTime = document.getElementById('time');
+const validationEnddate = document.getElementById('endDate');
+const validationEndtime = document.getElementById('endTimeInput');
+
+
 
 
 // //////// EVENT LISTENERS FOR CLOSE MODAL

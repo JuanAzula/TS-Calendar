@@ -1,4 +1,4 @@
-
+import { Event } from "../interfaces/event"
 
 let eventsTotal: { title: string, date: string, time: string, endDate: string, endTime: string }[] = [];
 const previousEvents = localStorage.getItem("events");
