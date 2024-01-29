@@ -1,85 +1,93 @@
+import { Event } from "../interfaces/event";
+import { setReminder } from "./Reminder";
 
-
-let eventsTotal: { title: string, date: string, time: string, endDate: string, endTime: string }[] = [];
+let eventsTotal: Event[] = [];
 const previousEvents = localStorage.getItem("events");
-export const StoreEvent = (title: string, date: string, time: string, endDate: string, endTime: string) => {
-    if (title && date && time) {
-        // Obtener la lista actual de eventos del localStorage
-        if (previousEvents) {
-            eventsTotal = JSON.parse(previousEvents);
-        }
-
-        // Agregar el nuevo evento a la lista
-        eventsTotal.push({ title, date, time, endDate, endTime });
-
-        // Guardar la lista actualizada en el localStorage
-        localStorage.setItem("events", JSON.stringify(eventsTotal));
-
-    }
-}
-export function getEvents() {
-
-    // const previousEvents = localStorage.getItem("events");
+export const StoreEvent = (event: Event) => {
+  if (event.title && event.date && event.time) {
+    // Obtener la lista actual de eventos del localStorage
     if (previousEvents) {
-        eventsTotal = JSON.parse(previousEvents);
+      eventsTotal = JSON.parse(previousEvents);
     }
 
-    eventsTotal.forEach((event: { title: string, date: string, time: string, endDate: string, endTime: string }) => {
-        const eventDiv = document.createElement("div");
-        eventDiv.classList.add("event");
+    // Agregar el nuevo evento a la lista
+    eventsTotal.push(event);
 
-        const eventName = document.createElement("p");
-        eventName.textContent = event.title + " ";
+    // Guardar la lista actualizada en el localStorage
+    localStorage.setItem("events", JSON.stringify(eventsTotal));
+  }
+};
+export function getEvents() {
+  // const previousEvents = localStorage.getItem("events");
+  if (previousEvents) {
+    eventsTotal = JSON.parse(previousEvents);
+  }
 
-        const eventTime = document.createElement("p");
-        eventTime.textContent = event.time + " ";
+  eventsTotal.forEach((event: Event) => {
+    const eventDiv = document.createElement("div");
+    eventDiv.classList.add("event");
 
-        const endDateSpan = document.createElement("span");
-        endDateSpan.textContent = event.endDate + " ";
+    const eventName = document.createElement("p");
+    eventName.textContent = event.title + " ";
 
-        const endTimeSpan = document.createElement("span");
-        endTimeSpan.textContent = event.endTime;
+    const eventTime = document.createElement("p");
+    eventTime.textContent = event.time + " ";
 
-        endDateSpan.classList.add("hide-modal");
-        endTimeSpan.classList.add("hide-modal");
+    const endDateSpan = document.createElement("span");
+    endDateSpan.textContent = event.endDate + " ";
 
-        // eventTime.classList.add("hide-modal", "event--tooltip");
-        eventTime.classList.add("event--tooltip");
+    const endTimeSpan = document.createElement("span");
+    //endTimeSpan.textContent = event.endTime;
 
-        eventDiv.appendChild(eventName);
-        eventDiv.appendChild(eventTime);
-        eventDiv.appendChild(endDateSpan);
-        eventDiv.appendChild(endTimeSpan);
+    endDateSpan.classList.add("hide-modal");
+    endTimeSpan.classList.add("hide-modal");
 
-        console.log(event.date)
-        const dayDiv = document.querySelector(`.day-item[data-date='${event.date}']`);
-        console.log(dayDiv)
-        const dateDiv = dayDiv?.getAttribute("data-date")
+    // eventTime.classList.add("hide-modal", "event--tooltip");
+    eventTime.classList.add("event--tooltip");
 
-        if (dateDiv !== null && dateDiv == event.date) {
-            console.log("Date found")
-            dayDiv?.appendChild(eventDiv);
-        } else {
-            console.log("No date found")
-        }
+    if (event.reminder) {
+      setReminder(event);
+    }
 
-        eventDiv.addEventListener("click", () => {
-            const eventContainer = document.getElementById("event-info");
-            const overlay = document.querySelector(".overlay");
-            eventContainer?.classList.replace("hide-event", "event--info");
-            eventTime.classList.remove("event--tooltip");
-            eventTime.classList.add("hide-modal");
+    eventDiv.appendChild(eventName);
+    eventDiv.appendChild(eventTime);
+    eventDiv.appendChild(endDateSpan);
+    eventDiv.appendChild(endTimeSpan);
 
-            const eventSpan: any = document.getElementById("event-span");
+    //console.log(event.date);
+    const dayDiv = document.querySelector(
+      `.day-item[data-date='${event.dateString}']`
+    );
+    console.log(dayDiv);
+    const dateDiv = dayDiv?.getAttribute("data-date");
 
-            if (eventSpan && eventSpan.endTime === undefined && eventSpan.endDate === undefined) {
-                eventSpan.textContent = `${event.title}:\n ${event.time}`;
-            } else {
-                eventSpan.textContent = `${event.title}: \n ${event.time} ends at ${event.endTime} on ${event.endDate}`;
-            }
+    if (dateDiv !== null && dateDiv == event.dateString) {
+      console.log("Date found");
+      dayDiv?.appendChild(eventDiv);
+    } else {
+     console.log("No date found");
+    }
 
-            overlay?.classList.remove("hide-modal");
-        })
+    eventDiv.addEventListener("click", () => {
+      const eventContainer = document.getElementById("event-info");
+      const overlay = document.querySelector(".overlay");
+      eventContainer?.classList.replace("hide-event", "event--info");
+      eventTime.classList.remove("event--tooltip");
+      eventTime.classList.add("hide-modal");
 
-    })
+      const eventSpan: any = document.getElementById("event-span");
+
+      if (
+        eventSpan &&
+        eventSpan.endTime === undefined &&
+        eventSpan.endDate === undefined
+      ) {
+        eventSpan.textContent = `${event.title}:\n ${event.time}`;
+      } else {
+        eventSpan.textContent = `${event.title}: \n ${event.time} ends at ${event.endTime} on ${event.endDate}`;
+      }
+
+      overlay?.classList.remove("hide-modal");
+    });
+  });
 }

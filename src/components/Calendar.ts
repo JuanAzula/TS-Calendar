@@ -18,7 +18,7 @@ enum Months {
 export function createCalendar(month: Months, year: number): void {
   const firstDay: number = new Date(year, month - 1, 1).getDay();
   const firstDayAdjusted: number = firstDay === 0 ? 6 : firstDay - 1;
-  const daysInMonth: number = new Date(year, month + 1, 0).getDate();
+  const daysInMonth: number = new Date(year, month, 0).getDate();
 
   const calendarGrid: HTMLElement | null =
     document.getElementById("calendar-container");
