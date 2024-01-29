@@ -40,8 +40,8 @@ export function createCalendar(month: Months, year: number): void {
 
       const monthValue = month.toString(); // Asegurarse de que el mes tenga al menos dos dígitos
       console.log("hola" + monthValue);
-      if (monthValue == '11' || monthValue == '10' || monthValue == '12') {
-        console.log('squad');
+      if (monthValue == "11" || monthValue == "10" || monthValue == "12") {
+        console.log("squad");
 
         const dateValue = `${year}-${monthValue}-${day
           .toString()
@@ -50,7 +50,7 @@ export function createCalendar(month: Months, year: number): void {
         calendarGrid.appendChild(dayCell);
         console.log(dayCell.getAttribute("data-date"));
       } else {
-        console.log('hamilton');
+        console.log("hamilton");
         const dateValue = `${year}-0${monthValue}-${day
           .toString()
           .padStart(2, "0")}`;

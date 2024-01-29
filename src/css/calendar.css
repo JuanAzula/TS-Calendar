@@ -53,3 +53,7 @@
     height: 8rem;
     overflow-y: scroll;
 }
+
+.past-event{
+    background-color: var(--indigo-600);
+}

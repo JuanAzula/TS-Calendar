@@ -15,19 +15,19 @@ export const StoreEvent = (event: Event) => {
     // Agregar el nuevo evento a la lista
     eventsTotal.push(event);
 
-        // Guardar la lista actualizada en el localStorage
-        localStorage.setItem("events", JSON.stringify(eventsTotal));
+    // Guardar la lista actualizada en el localStorage
+    localStorage.setItem("events", JSON.stringify(eventsTotal));
 
-        createCalendar(currentMonth, currentYear);
-    }
-}
+    createCalendar(currentMonth, currentYear);
+  }
+};
 export function getEvents() {
-    const previousEvents = localStorage.getItem("events");
+  const previousEvents = localStorage.getItem("events");
 
-    // const previousEvents = localStorage.getItem("events");
-    if (previousEvents) {
-        eventsTotal = JSON.parse(previousEvents);
-    }
+  // const previousEvents = localStorage.getItem("events");
+  if (previousEvents) {
+    eventsTotal = JSON.parse(previousEvents);
+  }
 
   eventsTotal.forEach((event: Event) => {
     const eventDiv = document.createElement("div");
@@ -42,29 +42,45 @@ export function getEvents() {
     const endDateSpan = document.createElement("span");
     endDateSpan.textContent = event.endDate + " ";
 
-        const endTimeSpan = document.createElement("span");
-        endTimeSpan.textContent = event.endTime;
+    const endTimeSpan = document.createElement("span");
+    //endTimeSpan.textContent = event.endTime;
 
-        const eventDetails = document.createElement("p");
-        eventDetails.textContent = "Date: " + event.date + " Description: " + event.description + " Time: " + event.time + " Type: " + event.type + " End Date: " + event.endDate + " End Time: " + event.endTime;
+    const eventDetails = document.createElement("p");
+    eventDetails.textContent =
+      "Date: " +
+      event.date +
+      " Description: " +
+      event.description +
+      " Time: " +
+      event.time +
+      " Type: " +
+      event.type +
+      " End Date: " +
+      event.endDate +
+      " End Time: " +
+      event.endTime;
 
-        endDateSpan.classList.add("hide-modal");
-        endTimeSpan.classList.add("hide-modal");
-        eventTime.classList.add("hide-modal");
+    endDateSpan.classList.add("hide-modal");
+    endTimeSpan.classList.add("hide-modal");
+    eventTime.classList.add("hide-modal");
 
     // eventTime.classList.add("hide-modal", "event--tooltip");
     // eventTime.classList.add("event--tooltip");
-        eventDetails.classList.add("event--tooltip");
-
-    if (event.reminder) {
+    eventDetails.classList.add("event--tooltip");
+    const isPastEvent = checkIsPastEvent(event.date)
+    if (!isPastEvent && event.reminder) {
       setReminder(event);
+    } 
+    
+    if(isPastEvent){
+      eventDiv.classList.add('past-event')
     }
 
-        eventDiv.appendChild(eventName);
-        eventDiv.appendChild(eventTime);
-        eventDiv.appendChild(endDateSpan);
-        eventDiv.appendChild(endTimeSpan);
-        eventDiv.appendChild(eventDetails);
+    eventDiv.appendChild(eventName);
+    eventDiv.appendChild(eventTime);
+    eventDiv.appendChild(endDateSpan);
+    eventDiv.appendChild(endTimeSpan);
+    eventDiv.appendChild(eventDetails);
 
     //console.log(event.date);
     const dayDiv = document.querySelector(
@@ -77,7 +93,7 @@ export function getEvents() {
       console.log("Date found");
       dayDiv?.appendChild(eventDiv);
     } else {
-     console.log("No date found");
+      console.log("No date found");
     }
 
     eventDiv.addEventListener("click", () => {
@@ -87,43 +103,46 @@ export function getEvents() {
       eventTime.classList.remove("event--tooltip");
       eventTime.classList.add("hide-modal");
 
-            const titleSpan: any = document.getElementById("title-span");
-            const timeSpan: any = document.getElementById("time-span");
-            const dateSpan: any = document.getElementById("date-span");
-            const descriptionSpan: any = document.getElementById("description-span");
-            const endDateSpan: any = document.getElementById("endDate-span");
-            const endTimeSpan: any = document.getElementById("endTime-span");
-            const typeSpan: any = document.getElementById("type-span");
+      const titleSpan: any = document.getElementById("title-span");
+      const timeSpan: any = document.getElementById("time-span");
+      const dateSpan: any = document.getElementById("date-span");
+      const descriptionSpan: any = document.getElementById("description-span");
+      const endDateSpan: any = document.getElementById("endDate-span");
+      const endTimeSpan: any = document.getElementById("endTime-span");
+      const typeSpan: any = document.getElementById("type-span");
 
-            titleSpan.textContent = "Title: " + event.title;
-            timeSpan.textContent = "Time: " + event.time;
-            dateSpan.textContent = "Date: " + event.date;
-            if (event.description === undefined) {
-                descriptionSpan.textContent = "";
-            } else {
-                descriptionSpan.textContent = "Description: " + event.description;
+      titleSpan.textContent = "Title: " + event.title;
+      timeSpan.textContent = "Time: " + event.time;
+      dateSpan.textContent = "Date: " + event.date;
+      if (event.description === undefined) {
+        descriptionSpan.textContent = "";
+      } else {
+        descriptionSpan.textContent = "Description: " + event.description;
+      }
+      if (event.type === undefined) {
+        typeSpan.textContent = "";
+      } else {
+        typeSpan.textContent = "Type: " + event.type;
+      }
+      // if (event.endDate === '') {
+      //     endDateSpan.textContent = "";
+      // } else {
+      //     endDateSpan.textContent = "End Date: " + event.endDate;
 
-            }
-            if (event.type === undefined) {
-                typeSpan.textContent = "";
-            } else {
-                typeSpan.textContent = "Type: " + event.type;
+      // }
+      // if (event.endTime === '') {
+      //     endTimeSpan.textContent = "";
+      // } else {
+      //     endTimeSpan.textContent = "End Time: " + event.endTime;
 
-            }
-            if (event.endDate === '') {
-                endDateSpan.textContent = "";
-            } else {
-                endDateSpan.textContent = "End Date: " + event.endDate;
-
-            }
-            if (event.endTime === '') {
-                endTimeSpan.textContent = "";
-            } else {
-                endTimeSpan.textContent = "End Time: " + event.endTime;
-
-            }
+      // }
 
       overlay?.classList.remove("hide-modal");
     });
   });
+}
+function checkIsPastEvent(startDate: Date) {
+  const startTime = new Date(startDate).getTime();
+  const now = new Date().getTime();
+  return startTime < now ;
 }
