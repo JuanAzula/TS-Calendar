@@ -91,19 +91,29 @@ export function getEvents() {
             timeSpan.textContent = "Time: " + event.time;
             dateSpan.textContent = "Date: " + event.date;
             if (event.description === undefined) {
-                descriptionSpan.textContent = "Description: No description";
+                descriptionSpan.textContent = "";
             } else {
                 descriptionSpan.textContent = "Description: " + event.description;
 
             }
             if (event.type === undefined) {
-                typeSpan.textContent = "Type: No type";
+                typeSpan.textContent = "";
             } else {
                 typeSpan.textContent = "Type: " + event.type;
 
             }
-            endDateSpan.textContent = "End Date: " + event.endDate;
-            endTimeSpan.textContent = "End Time: " + event.endTime;
+            if (event.endDate === '') {
+                endDateSpan.textContent = "";
+            } else {
+                endDateSpan.textContent = "End Date: " + event.endDate;
+
+            }
+            if (event.endTime === '') {
+                endTimeSpan.textContent = "";
+            } else {
+                endTimeSpan.textContent = "End Time: " + event.endTime;
+
+            }
 
             overlay?.classList.remove("hide-modal");
         })
