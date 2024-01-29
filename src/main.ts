@@ -1,5 +1,5 @@
 import { createCalendar, currentMonth, currentYear } from "./components/Calendar"
-import { StoreEvent } from "./components/Modal";
+import { StoreEvent, deleteEvent } from "./components/Modal";
 
 
 // ///////// EVENT LISTENERS FOR ADD EVENT BUTTON
@@ -27,7 +27,7 @@ if (label && modal && label instanceof HTMLSpanElement) {
 // ///////// EVENT LISTENERS FOR CLOSE BUTTON
 const closeModal = document.getElementById("close");
 
-if (closeModal && closeModal instanceof HTMLButtonElement) {
+if (closeModal && closeModal instanceof HTMLSpanElement) {
   closeModal?.addEventListener("click", () => {
     overlay?.classList.add("hide-modal");
     modal?.classList.add("hide-modal");
@@ -120,7 +120,6 @@ const typeSelected = document.getElementById("eventType");
 
 if (submitButton && submitButton instanceof HTMLButtonElement && title && title instanceof HTMLInputElement && date && date instanceof HTMLInputElement && time && time instanceof HTMLInputElement && endDate && endDate instanceof HTMLInputElement && endTime && endTime instanceof HTMLInputElement && textDescription instanceof HTMLTextAreaElement && typeSelected instanceof HTMLSelectElement) {
   submitButton?.addEventListener("click", (event) => {
-    console.log("hola")
     event?.preventDefault();
     const titleValue = title?.value;
     const dateValue = date?.value;
@@ -138,28 +137,25 @@ if (submitButton && submitButton instanceof HTMLButtonElement && title && title 
   })
 }
 
-// /////// EVENT LISTENERS FOR EVENTS
+// /////// DELETE EVENT
 
-// const events = document.querySelectorAll(".day-item .event");
+const deleteButton = document.getElementById("delete-event");
 
-// if (events) {
-//   events.forEach((event) => {
-//     event.addEventListener("click", () => {
-//       console.log(event.textContent)
-//       overlay?.classList.remove("hide-modal");
+if (deleteButton && deleteButton instanceof HTMLButtonElement) {
+  deleteButton?.addEventListener("click", () => {
+    const modal = document.getElementById("modal");
+    const eventContainer = document.getElementById("event-info");
 
+    const eventTitle = document.getElementById("title-span")?.textContent;
+    const eventDate = document.getElementById("date-span")?.textContent;
 
-//       const eventContainer = document.getElementById("event-info");
+    if (eventTitle && eventDate) {
+      deleteEvent(eventTitle, eventDate);
+    }
 
-//       eventContainer?.classList.replace("hide-event", "event--info");
+    modal?.classList.add("hide-modal");
+    eventContainer?.classList.replace("event--info", "hide-event");
+    overlay?.classList.add("hide-modal");
 
-//       const eventSpan = document.getElementById("event-span");
-
-//       if (eventSpan) {
-//         eventSpan.textContent = event.textContent;
-//       }
-
-
-//     })
-//   })
-// }
+  })
+}

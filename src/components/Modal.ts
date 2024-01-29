@@ -19,6 +19,35 @@ export const StoreEvent = (title: string, date: string, time: string, endDate: s
         createCalendar(currentMonth, currentYear);
     }
 }
+
+export function deleteEvent(title: string, date: string) {
+    const previousEvents = localStorage.getItem("events");
+    let eventsTotalFilter: any = [];
+    console.log("título: ", title, date)
+
+    if (previousEvents) {
+        eventsTotal = JSON.parse(previousEvents);
+
+        eventsTotal.forEach((event: { title: string, date: string, time: string, endDate: string, endTime: string, description: string, type: string }) => {
+
+            const eventTitle = "Title: " + event.title
+            const eventDate = "Date: " + event.date
+
+
+            if (eventTitle !== title && eventDate !== date) {
+                console.log(event.title, title, event.date, date)
+                eventsTotalFilter.push(event);
+            }
+        })
+
+
+        localStorage.setItem("events", JSON.stringify(eventsTotalFilter));
+        createCalendar(currentMonth, currentYear);
+    }
+
+}
+
+
 export function getEvents() {
     const previousEvents = localStorage.getItem("events");
 

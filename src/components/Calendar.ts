@@ -39,24 +39,24 @@ export function createCalendar(month: Months, year: number): void {
       dayCell.textContent = day.toString().padStart(2, "0");
 
       const monthValue = month.toString(); // Asegurarse de que el mes tenga al menos dos dígitos
-      console.log("hola" + monthValue);
+      // console.log("hola" + monthValue);
       if (monthValue == '11' || monthValue == '10' || monthValue == '12') {
-        console.log('squad');
+        // console.log('squad');
 
         const dateValue = `${year}-${monthValue}-${day
           .toString()
           .padStart(2, "0")}`;
         dayCell.setAttribute("data-date", dateValue);
         calendarGrid.appendChild(dayCell);
-        console.log(dayCell.getAttribute("data-date"));
+        // console.log(dayCell.getAttribute("data-date"));
       } else {
-        console.log('hamilton');
+        // console.log('hamilton');
         const dateValue = `${year}-0${monthValue}-${day
           .toString()
           .padStart(2, "0")}`;
         dayCell.setAttribute("data-date", dateValue);
         calendarGrid.appendChild(dayCell);
-        console.log(dayCell.getAttribute("data-date"));
+        // console.log(dayCell.getAttribute("data-date"));
       }
     }
   }
@@ -87,7 +87,7 @@ function changeMonth(current: Months, change: number): void {
   const currentMonthSpan = document.getElementById(
     "current-month"
   ) as HTMLSpanElement;
-  console.log(currentMonthSpan);
+  // console.log(currentMonthSpan);
   currentMonthSpan?.classList.add("preserve-spaces");
   const currentYearSpan = document.getElementById(
     "current-year"
@@ -126,7 +126,7 @@ function changeMonth(current: Months, change: number): void {
 
   currentMonth = newMonth;
   currentYear = newYear;
-  console.log(currentMonth, currentYear);
+  // console.log(currentMonth, currentYear);
 }
 
 // Pots cridar aquesta funció amb el mes i any actuals

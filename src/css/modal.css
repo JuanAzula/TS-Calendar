@@ -95,7 +95,8 @@
     border: 1px solid black;
     padding: 4px 12px;
     letter-spacing: 1px;
-    margin-bottom: 3px;
+    margin-bottom: 7px;
+    background: var(--indigo-50);
 }
 
 .modal__button:hover {
