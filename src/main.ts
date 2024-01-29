@@ -129,6 +129,8 @@ const time = document.getElementById("time");
 const endDate = document.getElementById("endDate");
 const endTime = document.getElementById("endTimeInput");
 const reminderDuration = document.getElementById("reminderTime")
+const textDescription = document.getElementById("textDescription");
+const typeSelected = document.getElementById("eventType");
 
 if (
   submitButton &&
@@ -142,7 +144,7 @@ if (
   endDate &&
   endDate instanceof HTMLInputElement &&
   endTime &&
-  endTime instanceof HTMLInputElement &&
+  endTime instanceof HTMLInputElement && textDescription instanceof HTMLTextAreaElement && typeSelected instanceof HTMLSelectElement &&
   reminderDuration && reminderDuration instanceof HTMLSelectElement
 ) {
   submitButton?.addEventListener("click", (event) => {
@@ -157,7 +159,9 @@ if (
     const reminderValue = reminderDuration.value;
     console.log(completeDate);
     const endDateValue = endDate?.value; // pasar a date
-    const endTimeValue = endTime?.value; // pasar a date
+    const endTimeValue = endTime?.value;
+    const descriptionValue = textDescription?.value;
+    const typeValue = typeSelected?.value; 
     console.log(reminderValue);
     const eventObject: Event = {
       title: titleValue,

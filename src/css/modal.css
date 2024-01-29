@@ -39,8 +39,8 @@
 
 .event-info__div .event-info__span {
     color: white;
-    height: 100%;
-    width: 100%;
+    /* height: 100%; */
+    /* width: 100%; */
     z-index: 6;
 }
 
@@ -95,6 +95,7 @@
     border: 1px solid black;
     padding: 4px 12px;
     letter-spacing: 1px;
+    margin-bottom: 3px;
 }
 
 .modal__button:hover {
@@ -127,9 +128,11 @@
     padding: 8px;
     background-color: rgba(255, 255, 255, 0.05);
     border: 1px solid #ccc;
+    width: 8rem;
     border-radius: 5px;
     opacity: 0;
     transition: visibility 0s 1s;
+    font-size: 12px;
 }
 
 .event:hover {
