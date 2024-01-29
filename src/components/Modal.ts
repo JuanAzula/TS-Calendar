@@ -1,9 +1,10 @@
+import { createCalendar, currentMonth, currentYear } from "./Calendar";
 
 
 let eventsTotal: { title: string, date: string, time: string, endDate: string, endTime: string }[] = [];
-const previousEvents = localStorage.getItem("events");
 export const StoreEvent = (title: string, date: string, time: string, endDate: string, endTime: string) => {
     if (title && date && time) {
+        const previousEvents = localStorage.getItem("events");
         // Obtener la lista actual de eventos del localStorage
         if (previousEvents) {
             eventsTotal = JSON.parse(previousEvents);
@@ -15,9 +16,11 @@ export const StoreEvent = (title: string, date: string, time: string, endDate: s
         // Guardar la lista actualizada en el localStorage
         localStorage.setItem("events", JSON.stringify(eventsTotal));
 
+        createCalendar(currentMonth, currentYear);
     }
 }
 export function getEvents() {
+    const previousEvents = localStorage.getItem("events");
 
     // const previousEvents = localStorage.getItem("events");
     if (previousEvents) {

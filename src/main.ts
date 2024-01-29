@@ -1,5 +1,5 @@
 import { createCalendar, currentMonth, currentYear } from "./components/Calendar"
-import { StoreEvent } from "./components/Modal";
+import { StoreEvent, getEvents } from "./components/Modal";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -76,11 +76,11 @@ const reminderTime = document.getElementById('reminderTime');
 
 let isCheckboxVisible = false;
 
-if(reminmderCheckbox && reminmderCheckbox instanceof HTMLInputElement){
-  reminmderCheckbox.addEventListener('click', ()=>{
-    if(isCheckboxVisible){
+if (reminmderCheckbox && reminmderCheckbox instanceof HTMLInputElement) {
+  reminmderCheckbox.addEventListener('click', () => {
+    if (isCheckboxVisible) {
       reminderTime?.classList.add("hide-modal");
-    }else {
+    } else {
       reminderTime?.classList.replace("hide-modal", 'modal__label')
 
     }
@@ -136,6 +136,7 @@ if (submitButton && submitButton instanceof HTMLButtonElement && title && title 
     StoreEvent(titleValue, dateValue, timeValue, endDateValue, endTimeValue);
     overlay?.classList.add("hide-modal");
     modal?.classList.add("hide-modal");
+
   })
 }
 
