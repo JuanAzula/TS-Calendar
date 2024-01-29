@@ -1,8 +1,8 @@
 import { createCalendar, currentMonth, currentYear } from "./Calendar";
 
 
-let eventsTotal: { title: string, date: string, time: string, endDate: string, endTime: string, description: string }[] = [];
-export const StoreEvent = (title: string, date: string, time: string, endDate: string, endTime: string, description: string) => {
+let eventsTotal: { title: string, date: string, time: string, endDate: string, endTime: string, description: string, type: string }[] = [];
+export const StoreEvent = (title: string, date: string, time: string, endDate: string, endTime: string, description: string, type: string) => {
     if (title && date && time) {
         const previousEvents = localStorage.getItem("events");
         // Obtener la lista actual de eventos del localStorage
@@ -11,7 +11,7 @@ export const StoreEvent = (title: string, date: string, time: string, endDate: s
         }
 
         // Agregar el nuevo evento a la lista
-        eventsTotal.push({ title, date, time, endDate, endTime, description });
+        eventsTotal.push({ title, date, time, endDate, endTime, description, type });
 
         // Guardar la lista actualizada en el localStorage
         localStorage.setItem("events", JSON.stringify(eventsTotal));
@@ -27,7 +27,7 @@ export function getEvents() {
         eventsTotal = JSON.parse(previousEvents);
     }
 
-    eventsTotal.forEach((event: { title: string, date: string, time: string, endDate: string, endTime: string, description: string }) => {
+    eventsTotal.forEach((event: { title: string, date: string, time: string, endDate: string, endTime: string, description: string, type: string }) => {
         const eventDiv = document.createElement("div");
         eventDiv.classList.add("event");
 
@@ -44,7 +44,7 @@ export function getEvents() {
         endTimeSpan.textContent = event.endTime;
 
         const eventDetails = document.createElement("p");
-        eventDetails.textContent = "Date: " + event.date + " Description: " + event.description + " Time: " + event.time + " End Date: " + event.endDate + " End Time: " + event.endTime;
+        eventDetails.textContent = "Date: " + event.date + " Description: " + event.description + " Time: " + event.time + " Type: " + event.type + " End Date: " + event.endDate + " End Time: " + event.endTime;
 
         endDateSpan.classList.add("hide-modal");
         endTimeSpan.classList.add("hide-modal");
@@ -85,14 +85,21 @@ export function getEvents() {
             const descriptionSpan: any = document.getElementById("description-span");
             const endDateSpan: any = document.getElementById("endDate-span");
             const endTimeSpan: any = document.getElementById("endTime-span");
+            const typeSpan: any = document.getElementById("type-span");
 
             titleSpan.textContent = "Title: " + event.title;
             timeSpan.textContent = "Time: " + event.time;
             dateSpan.textContent = "Date: " + event.date;
-            if (event.description === "") {
+            if (event.description === undefined) {
                 descriptionSpan.textContent = "Description: No description";
             } else {
                 descriptionSpan.textContent = "Description: " + event.description;
+
+            }
+            if (event.type === undefined) {
+                typeSpan.textContent = "Type: No type";
+            } else {
+                typeSpan.textContent = "Type: " + event.type;
 
             }
             endDateSpan.textContent = "End Date: " + event.endDate;

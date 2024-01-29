@@ -1,12 +1,5 @@
 import { createCalendar, currentMonth, currentYear } from "./components/Calendar"
-import { StoreEvent, getEvents } from "./components/Modal";
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  // getEvents();
-})
-
+import { StoreEvent } from "./components/Modal";
 
 
 // ///////// EVENT LISTENERS FOR ADD EVENT BUTTON
@@ -123,8 +116,9 @@ const time = document.getElementById("time");
 const endDate = document.getElementById("endDate")
 const endTime = document.getElementById("endTimeInput")
 const textDescription = document.getElementById("textDescription");
+const typeSelected = document.getElementById("eventType");
 
-if (submitButton && submitButton instanceof HTMLButtonElement && title && title instanceof HTMLInputElement && date && date instanceof HTMLInputElement && time && time instanceof HTMLInputElement && endDate && endDate instanceof HTMLInputElement && endTime && endTime instanceof HTMLInputElement && textDescription instanceof HTMLTextAreaElement) {
+if (submitButton && submitButton instanceof HTMLButtonElement && title && title instanceof HTMLInputElement && date && date instanceof HTMLInputElement && time && time instanceof HTMLInputElement && endDate && endDate instanceof HTMLInputElement && endTime && endTime instanceof HTMLInputElement && textDescription instanceof HTMLTextAreaElement && typeSelected instanceof HTMLSelectElement) {
   submitButton?.addEventListener("click", (event) => {
     console.log("hola")
     event?.preventDefault();
@@ -134,9 +128,10 @@ if (submitButton && submitButton instanceof HTMLButtonElement && title && title 
     const endDateValue = endDate?.value;
     const endTimeValue = endTime?.value;
     const descriptionValue = textDescription?.value;
+    const typeValue = typeSelected?.value;
 
     console.log(titleValue, dateValue, timeValue)
-    StoreEvent(titleValue, dateValue, timeValue, endDateValue, endTimeValue, descriptionValue);
+    StoreEvent(titleValue, dateValue, timeValue, endDateValue, endTimeValue, descriptionValue, typeValue);
     overlay?.classList.add("hide-modal");
     modal?.classList.add("hide-modal");
 
