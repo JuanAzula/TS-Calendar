@@ -42,7 +42,7 @@ export function createCalendar(month: Months, year: number): void {
       console.log("hola" + monthValue);
       if (monthValue == '11' || monthValue == '10' || monthValue == '12') {
         console.log('squad');
-       
+
         const dateValue = `${year}-${monthValue}-${day
           .toString()
           .padStart(2, "0")}`;

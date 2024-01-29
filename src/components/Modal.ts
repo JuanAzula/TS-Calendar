@@ -48,6 +48,7 @@ export function getEvents() {
 
         endDateSpan.classList.add("hide-modal");
         endTimeSpan.classList.add("hide-modal");
+        eventTime.classList.add("hide-modal");
 
         // eventTime.classList.add("hide-modal", "event--tooltip");
         // eventTime.classList.add("event--tooltip");
