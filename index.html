@@ -69,7 +69,7 @@
         <input id="title" class="modal__input" type="text" placeholder="Title" required />
         <textarea placeholder="Description" rows="5" cols="40" id="textDescription" class="modal__input"></textarea>
         <label for="date" class="modal__label">Date</label>
-        <input id="date" class="modal__input" type="date" required />
+        <input id="date" class="modal__input" type="date" value="2024-01-01" required />
         <label for="time" class="modal__label">Time</label>
         <input id="time" class="modal__input" type="time" required />
         End Date and Time
@@ -91,7 +91,7 @@
         </select>
 
         <label for="eventType">Event Type:</label>
-        <select id="eventType" name="eventType">
+        <select id="eventType" name="eventType" required>
           <option value="Meeting">Meeting</option>
           <option value="Party">Party</option>
           <option value="Work">Work</option>
@@ -100,11 +100,12 @@
         </select>
 
         <button id="submit" class="modal__button">Save</button>
+
+        <div class="modal__div--close">
+          <span id="close" class="modal__button">Cancel</span>
+        </div>
       </form>
 
-      <div class="modal__div--close">
-        <button id="close" class="modal__button">Cancel</button>
-      </div>
     </div>
   </section>
   <div class="overlay hide-modal"></div>
@@ -120,6 +121,10 @@
       <p id="endTime-span" class="event-info__span"></p>
       <p id="type-span" class="event-info__span"></p>
     </div>
+    <div class="event-info__div--close">
+      <button id="delete-event" class="event-info__button">Delete</button>
+    </div>
+
   </section>
 
   <!-- /////////////////////////// FOOTER -->

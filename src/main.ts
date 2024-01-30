@@ -3,7 +3,7 @@ import {
   currentMonth,
   currentYear,
 } from "./components/Calendar";
-import { StoreEvent } from "./components/Modal";
+import { StoreEvent, deleteEvent } from "./components/Modal";
 import { Event, EventType, Reminder } from "./interfaces/event";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -39,7 +39,7 @@ if (label && modal && label instanceof HTMLSpanElement) {
 // ///////// EVENT LISTENERS FOR CLOSE BUTTON
 const closeModal = document.getElementById("close");
 
-if (closeModal && closeModal instanceof HTMLButtonElement) {
+if (closeModal && closeModal instanceof HTMLSpanElement) {
   closeModal?.addEventListener("click", () => {
     overlay?.classList.add("hide-modal");
     modal?.classList.add("hide-modal");
@@ -109,6 +109,7 @@ document.addEventListener("keydown", (event) => {
     const eventContainer = document.getElementById("event-info");
     modal?.classList.add("hide-modal");
     eventContainer?.classList.replace("event--info", "hide-event");
+    overlay?.classList.add("hide-modal");
   }
 });
 
@@ -148,7 +149,6 @@ if (
   reminderDuration && reminderDuration instanceof HTMLSelectElement
 ) {
   submitButton?.addEventListener("click", (event) => {
-    console.log("hola");
     event?.preventDefault();
     const titleValue = title?.value;
     const dateValueString = date?.value;
@@ -185,79 +185,20 @@ if (
     StoreEvent(eventObject);
     overlay?.classList.add("hide-modal");
     modal?.classList.add("hide-modal");
-  });
+
+  })
 }
 
-function convertHour(time: string, date: Date) {
-  const timeString = time;
+// /////// DELETE EVENT
 
-  const parts = timeString.split(":");
-  const hours = parseInt(parts[0], 10); // Convert the hours part to number
-  const minutes = parseInt(parts[1], 10); // Convert the minutes part to number
-
-  // Create a new Date object (this will create a date with the current time)
-  //date.setHours = new Date();
-
-  // Set the hours and minutes to the Date object
-  date.setHours(hours, minutes, 0, 0); // The last two zeros are for seconds and milliseconds
-
-  // // Now you can use date to get the hours and minutes if needed
-  // const setHours = date.getHours(); // Get the hours
-  // const setMinutes = date.getMinutes(); // Get the minutes// Obtener los minutos
-  return date.getHours();
-}
-
-function getCompleteDate(date: Date, hours: number) {
-  date.setHours(hours);
-  return date;
-}
-
-function convertToReminderEnum(value: string): Reminder | null {
-  switch (value) {
-    case Reminder.FiveMinutes:
-      return Reminder.FiveMinutes;
-    case Reminder.TenMinutes:
-      return Reminder.TenMinutes;
-    case Reminder.FifteenMinutes:
-      return Reminder.FifteenMinutes;
-    case Reminder.ThirtyMinutes:
-      return Reminder.ThirtyMinutes;
-    case Reminder.OneHour:
-      return Reminder.OneHour;
-    default:
-      return null;
-  }
-}
-
-function convertToTypeEnum(value: string): EventType | null {
-  switch (value) {
-    case EventType.Meeting:
-      return EventType.Meeting;
-    case EventType.Party:
-      return EventType.Party;
-    case EventType.Work:
-      return EventType.Work;
-    case EventType.Conference:
-      return EventType.Conference;
-    case EventType.Other:
-      return EventType.Other;
-    default:
-      return null;
-  }
-}
-
-// Uso de la función para convertir la cadena a enum
-
-
-// /////// EVENT LISTENERS FOR EVENTS
-
-// const events = document.querySelectorAll(".day-item .event");
+const deleteButton = document.getElementById("delete-event");
 
 // if (events) {
 //   events.forEach((event) => {
 //     event.addEventListener("click", () => {
 //       console.log(event.textContent)
 //       overlay?.classList.remove("hide-modal");
+
 
 //       const eventContainer = document.getElementById("event-info");
 
@@ -268,6 +209,7 @@ function convertToTypeEnum(value: string): EventType | null {
 //       if (eventSpan) {
 //         eventSpan.textContent = event.textContent;
 //       }
+
 
 //     })
 //   })
