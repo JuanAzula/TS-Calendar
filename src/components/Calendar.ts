@@ -196,7 +196,7 @@ function changeMonth(current: Months, change: number): void {
     currentYearSpan.textContent = newYear.toString();
     // Asegura que se mantenga en el rango 0-11
   }
-  
+
   currentMonth = newMonth;
   currentYear = newYear;
   // console.log(currentMonth, currentYear);
