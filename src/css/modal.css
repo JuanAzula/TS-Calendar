@@ -123,6 +123,10 @@
     background-color: var(--indigo-100);
 }
 
+.event p {
+    font-size: 15px;
+}
+
 .event--tooltip {
     position: absolute;
     top: 100%;
