@@ -158,21 +158,24 @@ if (
     const completeDate = getCompleteDate(dateValue, timeValue);
     const reminderValue = reminderDuration.value;
     console.log(completeDate);
-    const endDateValue = endDate?.value; // pasar a date
-    const endTimeValue = endTime?.value;
+    const endDateValueString = endDate?.value; // pasar a date
+    const endDateValue = new Date(endDateValueString);
+    const endTimeValueString = endTime?.value;
+    const endTimeValue = convertHour(endTimeValueString, endDateValue);
+    const completeEndDate = getCompleteDate(endDateValue, endTimeValue);
     const descriptionValue = textDescription?.value;
-    const typeValue = typeSelected?.value; 
+    const typeValue = typeSelected?.value;
     console.log(reminderValue);
     const eventObject: Event = {
       title: titleValue,
-      description: "", 
+      description: descriptionValue,
       dateString: dateValueString,//coger description del formulario
       date: dateValue,
       time: timeValue,
       completeDate: completeDate,
-      endDate: dateValue, //hay que cambiarlo
-      endTime: timeValue, //hay que cambiarlo
-      type: EventType.Meeting, //coger reminder del formulario
+      endDate: completeEndDate, //hay que cambiarlo
+      endTime: endTimeValue, //hay que cambiarlo
+      type: convertToTypeEnum(typeValue), //coger reminder del formulario
       reminder: convertToReminderEnum(reminderValue),//coger reminder del formulario
     };
 
@@ -208,18 +211,35 @@ function getCompleteDate(date: Date, hours: number) {
 
 function convertToReminderEnum(value: string): Reminder | null {
   switch (value) {
-      case Reminder.FiveMinutes:
-          return Reminder.FiveMinutes;
-      case Reminder.TenMinutes:
-          return Reminder.TenMinutes;
-      case Reminder.FifteenMinutes:
-          return Reminder.FifteenMinutes;
-      case Reminder.ThirtyMinutes:
-          return Reminder.ThirtyMinutes;
-      case Reminder.OneHour:
-          return Reminder.OneHour;
-      default:
-          return null; 
+    case Reminder.FiveMinutes:
+      return Reminder.FiveMinutes;
+    case Reminder.TenMinutes:
+      return Reminder.TenMinutes;
+    case Reminder.FifteenMinutes:
+      return Reminder.FifteenMinutes;
+    case Reminder.ThirtyMinutes:
+      return Reminder.ThirtyMinutes;
+    case Reminder.OneHour:
+      return Reminder.OneHour;
+    default:
+      return null;
+  }
+}
+
+function convertToTypeEnum(value: string): EventType | null {
+  switch (value) {
+    case EventType.Meeting:
+      return EventType.Meeting;
+    case EventType.Party:
+      return EventType.Party;
+    case EventType.Work:
+      return EventType.Work;
+    case EventType.Conference:
+      return EventType.Conference;
+    case EventType.Other:
+      return EventType.Other;
+    default:
+      return null;
   }
 }
 
