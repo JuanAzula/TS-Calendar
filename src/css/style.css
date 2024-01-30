@@ -15,6 +15,7 @@
 .preserve-spaces {
     white-space: pre;
   }
+ 
   body{
-    background: var(--indigo-200);
+    background-color: aqua;
   }

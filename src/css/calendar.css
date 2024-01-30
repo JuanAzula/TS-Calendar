@@ -1,3 +1,7 @@
+
+
+
+
 .calendar__div {
     display: grid;
     /* grid-template-rows: repeat(6, 1fr); 
@@ -10,7 +14,7 @@
     max-width: 70rem;
     max-height: 80%;
     border:1px solid rgb(255, 255, 255);
-    box-shadow: 3px 3px 50px rgb(255, 255, 255);
+    /* box-shadow: 3px 3px 30px rgb(255, 255, 255); */
     border-radius: 0.5rem;
     margin: 2rem 1rem 1rem 10rem;
     background-color: white;
@@ -86,7 +90,12 @@
     overflow-y: scroll;
     box-shadow: 0.5px 0.5px 10px rgb(243, 243, 243);
     background-color: rgb(240, 248, 255);
+    transition: transform 0.3s ease;
+    cursor: pointer;
 }
+.day-item:hover {
+    transform: scale(1.2); /* Amplía la tarjeta en un 10% al hacer hover */
+  }
 
 @keyframes changeMonthAnimation {
     from { opacity: 0; transform: translateY(-20px); }
