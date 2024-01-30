@@ -119,25 +119,25 @@ export function getEvents() {
             titleSpan.textContent = "Title: " + event.title;
             timeSpan.textContent = "Time: " + event.time;
             dateSpan.textContent = "Date: " + event.date;
-            if (event.description === undefined) {
+            if (event.description === undefined || event.description === "") {
                 descriptionSpan.textContent = "";
             } else {
                 descriptionSpan.textContent = "Description: " + event.description;
 
             }
-            if (event.type === undefined) {
+            if (event.type === undefined || event.type === "") {
                 typeSpan.textContent = "";
             } else {
                 typeSpan.textContent = "Type: " + event.type;
 
             }
-            if (event.endDate === '') {
+            if (event.endDate === '' || event.endDate === undefined) {
                 endDateSpan.textContent = "";
             } else {
                 endDateSpan.textContent = "End Date: " + event.endDate;
 
             }
-            if (event.endTime === '') {
+            if (event.endTime === '' || event.endTime === undefined) {
                 endTimeSpan.textContent = "";
             } else {
                 endTimeSpan.textContent = "End Time: " + event.endTime;
