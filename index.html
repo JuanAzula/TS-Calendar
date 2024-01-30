@@ -37,26 +37,47 @@
 
   <!-- ///////////////////////////// CALENDAR -->
 
-  <main id="calendar" class="calendar">
-    <div class="calendar__header">
-      <span id="back-arrow">⬅️</span>
+  <main class="calendar--container">
+    <div id="calendar" class="calendar">
+      <div class="calendar__header">
+        <div class="calendar--month__container">
+          <span class="calendar--month preserve-spaces" id="current-month"> January </span>
+          <span class="preserve-spaces calendar--year" id="current-year">2024 </span>
 
-      <span class="current-month preserve-spaces" id="current-month" > January </span>
-      <span class="preserve-spaces" id="current-year">2024 </span>
-      <span id="forward-arrow">➡️</span>
+        </div>
+        <div class="calendar--arrow__container">
+          <span id="back-arrow" class="calendar--arrow"><svg xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-arrow-big-left" width="44" height="44" viewBox="0 0 24 24"
+              stroke-width="1.5" stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M20 15h-8v3.586a1 1 0 0 1 -1.707 .707l-6.586 -6.586a1 1 0 0 1 0 -1.414l6.586 -6.586a1 1 0 0 1 1.707 .707v3.586h8a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1z" />
+            </svg>
+          </span>
+          <span id="forward-arrow" class="calendar--arrow"><svg xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-arrow-big-right" width="44" height="44" viewBox="0 0 24 24"
+              stroke-width="1.5" stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M4 9h8v-3.586a1 1 0 0 1 1.707 -.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1 -1.707 -.707v-3.586h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1z" />
+            </svg>
+          </span>
+
+        </div>
+      </div>
+
+      <div class="day-names__container">
+        <div class="day-name">Monday</div>
+        <div class="day-name">Tuesday</div>
+        <div class="day-name">Wednesday</div>
+        <div class="day-name">Thursday</div>
+        <div class="day-name">Friday</div>
+        <div class="day-name">Saturday</div>
+        <div class="day-name">Sunday</div>
+      </div>
+
+      <div id="calendar-container" class="calendar__div"></div>
     </div>
-
-    <div class="day-names__container">
-      <div class="day-name">Monday</div>
-      <div class="day-name">Tuesday</div>
-      <div class="day-name">Wednesday</div>
-      <div class="day-name">Thursday</div>
-      <div class="day-name">Friday</div>
-      <div class="day-name">Saturday</div>
-      <div class="day-name">Sunday</div>
-    </div>
-
-    <div id="calendar-container" class="calendar__div"></div>
   </main>
 
   <!-- //////////////////////////// MODAL -->
@@ -66,8 +87,9 @@
 
       <form id="form" class="modal__form">
         <label for="title" class="modal__label">Title</label>
-        <input id="title" class="modal__input" type="text"  placeholder="Title" required maxlength="20" minlength="1" />
-        <textarea placeholder="Description" rows="5" cols="40" maxlength="500" id="textDescription" class="modal__input"></textarea>
+        <input id="title" class="modal__input" type="text" placeholder="Title" required maxlength="20" minlength="1" />
+        <textarea placeholder="Description" rows="5" cols="40" maxlength="500" id="textDescription"
+          class="modal__input"></textarea>
         <label for="date" class="modal__label">Date</label>
         <input id="date" class="modal__input" type="date" value="2024-01-01" required />
         <label for="time" class="modal__label">Time</label>
