@@ -174,6 +174,7 @@ if (
       time: timeValue,
       timeString: timeValueString,
       completeDate: completeDate,
+      startDateTimestamp: getTimestamp(completeDate),
       endDate: completeEndDate, //hay que cambiarlo
       endDateString: endDateValueString,
       endTime: endTimeValue, //hay que cambiarlo
@@ -235,6 +236,13 @@ function convertHour(time: string, date: Date) {
 function getCompleteDate(date: Date, hours: number) {
   date.setHours(hours);
   return date;
+}
+
+function getTimestamp(date:Date){
+  const eventDate = new Date (date);
+  //console.log(eventDate);
+  const eventDateMS = eventDate.getTime()
+  return eventDateMS
 }
 
 function convertToReminderEnum(value: string): Reminder | null {

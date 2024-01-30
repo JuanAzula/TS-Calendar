@@ -37,9 +37,9 @@ function getReminderDuration(duration: Reminder): number {
   }
 
 export function setReminder(event:Event){
-    console.log('funcionando');
+    //console.log('funcionando');
     const eventDate = new Date (event.completeDate);
-    console.log(eventDate);
+    //console.log(eventDate);
     const eventDateMS = eventDate.getTime() // devuelve chorronumero de la fecha del evento
     const currentDateObject = Date.now();
     const currentDate = new Date(currentDateObject)
@@ -52,7 +52,7 @@ export function setReminder(event:Event){
         alert(`Your event ${event.title} will start at ${eventDate.toLocaleTimeString()}.`);
     }, difference);}
     
-    //al entrar en el página, función forEach que guarde un item en local storage con un arary de timestamps de todos los reminders que debo iniciar
+    //al entrar en el página, función forEach que guarde un item en local storage con un array de timestamps de todos los reminders que debo iniciar
     // de este array. Ordenar el array (y todo el localstorage) por fecha de inicio. Función .sort(). 
     //array vació y push de todos los timestamps. 
     //El primer valor del array es el más cercano a ahora y es el que se pasa a setReminder. 

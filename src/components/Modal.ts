@@ -218,3 +218,17 @@ export function deleteEvent(title: string, date: string) {
     createCalendar(currentMonth, currentYear);
   }
 }
+
+
+
+function sortEvents(){
+    const previousEvents = localStorage.getItem("events");
+
+    // const previousEvents = localStorage.getItem("events");
+    if (previousEvents) {
+      eventsTotal = JSON.parse(previousEvents);
+    }
+    
+    eventsTotal.sort((a, b) => a.startDateTimestamp - b.startDateTimestamp)
+    return eventsTotal
+}
