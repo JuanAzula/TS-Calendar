@@ -121,7 +121,7 @@ overlay?.addEventListener("click", () => {
   overlay?.classList.add("hide-modal");
 });
 
-// //  /////// EVENT LISTENERS FOR SUBMIT BUTTON
+//  /////// EVENT LISTENERS FOR SUBMIT BUTTON
 
 const submitButton = document.getElementById("submit");
 const title = document.getElementById("title");
@@ -149,15 +149,40 @@ if (
   reminderDuration && reminderDuration instanceof HTMLSelectElement
 ) {
   submitButton?.addEventListener("click", (event) => {
-    console.log("hola")
     event?.preventDefault();
     const titleValue = title?.value;
-    const dateValue = date?.value;
-    const timeValue = time?.value;
-    const endDateValue = endDate?.value;
-    const endTimeValue = endTime?.value;
-    console.log(titleValue, dateValue, timeValue)
-    StoreEvent(titleValue, dateValue, timeValue, endDateValue, endTimeValue);
+    const dateValueString = date?.value;
+    const dateValue = new Date(dateValueString);
+    const timeValueString = time?.value;
+    const timeValue = convertHour(timeValueString, dateValue);
+    const completeDate = getCompleteDate(dateValue, timeValue);
+    const reminderValue = reminderDuration.value;
+    console.log(completeDate);
+    const endDateValueString = endDate?.value; // pasar a date
+    const endDateValue = new Date(endDateValueString);
+    const endTimeValueString = endTime?.value;
+    const endTimeValue = convertHour(endTimeValueString, endDateValue);
+    const completeEndDate = getCompleteDate(endDateValue, endTimeValue);
+    const descriptionValue = textDescription?.value;
+    const typeValue = typeSelected?.value;
+    console.log(reminderValue);
+    const eventObject: Event = {
+      title: titleValue,
+      description: descriptionValue,
+      dateString: dateValueString,//coger description del formulario
+      date: dateValue,
+      time: timeValue,
+      timeString: timeValueString,
+      completeDate: completeDate,
+      endDate: completeEndDate, //hay que cambiarlo
+      endDateString: endDateValueString,
+      endTime: endTimeValue, //hay que cambiarlo
+      endTimeString: endTimeValueString,
+      type: convertToTypeEnum(typeValue), //coger reminder del formulario
+      reminder: convertToReminderEnum(reminderValue),//coger reminder del formulario
+    };
+
+    StoreEvent(eventObject);
     overlay?.classList.add("hide-modal");
     modal?.classList.add("hide-modal");
 
