@@ -4,11 +4,13 @@ import {
   currentYear,
 } from "./components/Calendar";
 import { StoreEvent, deleteEvent } from "./components/Modal";
+
 import { Event, EventType, Reminder } from "./interfaces/event";
 
 document.addEventListener("DOMContentLoaded", () => {
   // getEvents();
 });
+
 
 // ///////// EVENT LISTENERS FOR ADD EVENT BUTTON
 const eventButton = document.getElementById("add-event");
@@ -174,6 +176,7 @@ if (
       time: timeValue,
       timeString: timeValueString,
       completeDate: completeDate,
+      startDateTimestamp: getTimestamp(completeDate),
       endDate: completeEndDate, //hay que cambiarlo
       endDateString: endDateValueString,
       endTime: endTimeValue, //hay que cambiarlo
@@ -213,6 +216,8 @@ if (deleteButton && deleteButton instanceof HTMLButtonElement) {
 }
 
 
+
+
 function convertHour(time: string, date: Date) {
   const timeString = time;
 
@@ -235,6 +240,13 @@ function convertHour(time: string, date: Date) {
 function getCompleteDate(date: Date, hours: number) {
   date.setHours(hours);
   return date;
+}
+
+function getTimestamp(date:Date){
+  const eventDate = new Date (date);
+  //console.log(eventDate);
+  const eventDateMS = eventDate.getTime()
+  return eventDateMS
 }
 
 function convertToReminderEnum(value: string): Reminder | null {
@@ -270,3 +282,7 @@ function convertToTypeEnum(value: string): EventType | null {
       return null;
   }
 }
+
+
+
+//checkEvents(sortEvents())

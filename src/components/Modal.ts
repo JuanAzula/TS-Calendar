@@ -1,5 +1,5 @@
 import { Event } from "../interfaces/event";
-import { setReminder } from "./Reminder";
+import { checkEvents } from "./Reminder";
 import { createCalendar, currentMonth, currentYear } from "./Calendar";
 
 let eventsTotal: Event[] = [];
@@ -65,17 +65,21 @@ export function getEvents() {
         endTimeSpan.classList.add("hide-modal");
         eventTime.classList.add("hide-modal");
 
-        // eventTime.classList.add("hide-modal", "event--tooltip");
-        // eventTime.classList.add("event--tooltip");
-        eventDetails.classList.add("event--tooltip");
-        const isPastEvent = checkIsPastEvent(event.date);
-        if (!isPastEvent && event.reminder) {
-            setReminder(event);
-        }
+    // eventTime.classList.add("hide-modal", "event--tooltip");
+    // eventTime.classList.add("event--tooltip");
+    eventDetails.classList.add("event--tooltip");
+    const isPastEvent = checkIsPastEvent(event.date);
+    // if (!isPastEvent && event.reminder) {
+    //   setReminder(event);
+    // }
 
-        if (isPastEvent) {
-            eventDiv.classList.add("past-event");
-        }
+    if (isPastEvent) {
+      eventDiv.classList.add("past-event");
+    }
+
+    if (eventsTotal) {
+      checkEvents(eventsTotal);
+    }
 
         eventDiv.appendChild(eventName);
         eventDiv.appendChild(eventTime);
@@ -190,10 +194,10 @@ if (dayButton) {
     });
 }
 
-function checkIsPastEvent(startDate: Date) {
-    const startTime = new Date(startDate).getTime();
-    const now = new Date().getTime();
-    return startTime < now;
+function checkIsPastEvent(startDate: Date): boolean {
+  const startTime = new Date(startDate).getTime();
+  const now = new Date().getTime();
+  return startTime < now;
 }
 
 export function deleteEvent(title: string, date: string) {
@@ -218,3 +222,18 @@ export function deleteEvent(title: string, date: string) {
         createCalendar(currentMonth, currentYear);
     }
 }
+
+export function sortEvents() {
+  const previousEvents = localStorage.getItem("events");
+
+  // const previousEvents = localStorage.getItem("events");
+  if (previousEvents) {
+    eventsTotal = JSON.parse(previousEvents);
+  }
+
+  eventsTotal.sort((a, b) => a.startDateTimestamp - b.startDateTimestamp);
+  console.log(eventsTotal);
+  return eventsTotal;
+}
+
+//sortEvents()

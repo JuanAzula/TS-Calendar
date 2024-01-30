@@ -15,6 +15,24 @@ enum Months {
   December,
 }
 
+
+// Create a Date object with Date.now()
+const todayDate: Date = new Date(Date.now());
+
+// Extract the year, month, and day with explicit types
+const year: number = todayDate.getFullYear(); // Year
+const month: number = todayDate.getMonth() + 1; // Month (add 1 because months range from 0 to 11)
+const day: number = todayDate.getDate(); // Day of the month
+
+// Function to format month and day to ensure two digits
+const formatWithZero: (num: number) => string = (num) => (num < 10 ? `0${num}` : num.toString());
+
+// Format the date in YYYY-MM-DD format using string template literals
+const formattedDate: string = `${year}-${formatWithZero(month)}-${formatWithZero(day)}`;
+
+console.log(formattedDate); 
+
+
 export function createCalendar(month: Months, year: number): void {
   const firstDay: number = new Date(year, month - 1, 1).getDay();
   const firstDayAdjusted: number = firstDay === 0 ? 6 : firstDay - 1;
@@ -37,6 +55,8 @@ export function createCalendar(month: Months, year: number): void {
       let dayCell = document.createElement("div");
       dayCell?.classList.add("day-item");
       dayCell.textContent = day.toString().padStart(2, "0");
+      
+      
 
       const dayButton = document.createElement("button");
       dayButton.classList.add("day__button");
@@ -68,6 +88,13 @@ export function createCalendar(month: Months, year: number): void {
         calendarGrid.appendChild(dayCell);
         // console.log(dayCell.getAttribute("data-date"));
       }
+      if (dayCell) {
+        // Acceder al atributo 'data-mi-atributo'
+        const attribute: string | null = dayCell.getAttribute('data-date');
+        if (attribute === formattedDate){
+          dayCell.classList.remove('day-item')
+          dayCell.classList.add('current-day-item')
+        }
     }
   }
   getEvents();
@@ -121,6 +148,7 @@ export function createCalendar(month: Months, year: number): void {
       })
     })
   }
+}
 }
 
 const backArrow = document.getElementById("back-arrow") as HTMLSpanElement;
@@ -209,3 +237,6 @@ function changeMonth(current: Months, change: number): void {
 export let currentMonth: Months = new Date().getMonth() + 1;
 export let currentYear: number = new Date().getFullYear();
 createCalendar(currentMonth, currentYear);
+
+
+
