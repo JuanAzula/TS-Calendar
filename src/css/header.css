@@ -5,12 +5,14 @@
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    background-color: var(--indigo-300);
-    border-bottom: 1px solid black
+    background-color: rgba(72, 115, 140, 0.183);
+    /* Ajusta el valor alfa (0.5 en este ejemplo) para controlar la opacidad */
+    /* border-bottom: 1px solid black */
 }
 
 .header__h1 {
     margin-left: 5%;
+    color: #fff;
 }
 
 .header__button {
@@ -20,7 +22,7 @@
     position: relative;
     cursor: pointer;
     align-self: flex-end;
-    background-color: var(--indigo-600);
+    background-color: rgba(72, 115, 140, 0.183);
     border-radius: 20px;
     padding: 9px 12px;
     gap: 8px;

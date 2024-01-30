@@ -68,7 +68,7 @@
 
     overflow-y: scroll;
 
-    background-color: var(--indigo-200);
+    background-color: rgba(255, 255, 255, 0.45);
     padding: 1rem;
     border-radius: 0.5rem;
     position: absolute;
