@@ -1,5 +1,5 @@
 import { Event } from "../interfaces/event";
-import { checkEvents, setReminder } from "./Reminder";
+import { checkEvents, getReminderDuration, setReminder } from "./Reminder";
 import { createCalendar, currentMonth, currentYear } from "./Calendar";
 
 let eventsTotal: Event[] = [];
@@ -209,6 +209,15 @@ export function checkIsPastEvent(startDate: Date): boolean {
     const startTime = new Date(startDate).getTime();
     const now = new Date().getTime();
     return startTime < now;
+}
+
+export function checkIsPastEventWithReminder2(event: Event) {
+    if (event.reminder) {
+        const reminderTime = getReminderDuration(event.reminder);
+        const now = new Date().getTime();
+        const timestamp = event.startDateTimestamp
+        return timestamp - now + 100000 > reminderTime;
+    }
 }
 
 export function deleteEvent(title: string, date: string) {

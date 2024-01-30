@@ -3,8 +3,8 @@ import {
   currentMonth,
   currentYear,
 } from "./components/Calendar";
-import { StoreEvent, checkIsPastEvent, deleteEvent } from "./components/Modal";
-import { checkIsPastEventWithReminder, getReminderDuration } from "./components/Reminder";
+import { StoreEvent, checkIsPastEvent, checkIsPastEventWithReminder2, deleteEvent } from "./components/Modal";
+import { getReminderDuration } from "./components/Reminder";
 
 import { Event, EventType, Reminder } from "./interfaces/event";
 
@@ -301,11 +301,13 @@ function checkEventsWithReminder() {
     const eventId = event.completeDate.toString();
     const eventDate = new Date(event.completeDate);
     const eventDateMS = eventDate.getTime();
-    if (event.reminder && checkIsPastEventWithReminder(event) && !eventsWithAlertShown.has(eventId)) {
+    checkIsPastEvent(event.date);
+    if (event.reminder && checkIsPastEventWithReminder2(event) && !eventsWithAlertShown.has(eventId)) {
       const reminderTime = getReminderDuration(event.reminder);
       console.log(reminderTime);
       const newCurrentDateMS = Date.now();
-      const difference = eventDateMS - newCurrentDateMS - reminderTime;
+      const difference = eventDateMS - newCurrentDateMS;
+      console.log("EventDateMS:", eventDateMS, "newCurrentDateMS:", newCurrentDateMS, "reminderTime:", reminderTime);
       console.log(difference);
       if (difference <= reminderTime) {
         alert(
@@ -317,6 +319,7 @@ function checkEventsWithReminder() {
         console.log('no hay alerta');
       }
     }
+
   })
   setTimeout(checkEventsWithReminder, 1000);
 };
