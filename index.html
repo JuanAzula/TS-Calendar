@@ -41,7 +41,7 @@
     <div class="calendar__header">
       <span id="back-arrow">⬅️</span>
 
-      <span class="current-month preserve-spaces" id="current-month"> January </span>
+      <span class="current-month preserve-spaces" id="current-month" > January </span>
       <span class="preserve-spaces" id="current-year">2024 </span>
       <span id="forward-arrow">➡️</span>
     </div>
@@ -66,7 +66,7 @@
 
       <form id="form" class="modal__form">
         <label for="title" class="modal__label">Title</label>
-        <input id="title" class="modal__input" type="text"  placeholder="Title" required maxlength="60"/>
+        <input id="title" class="modal__input" type="text"  placeholder="Title" required maxlength="20" minlength="1" />
         <textarea placeholder="Description" rows="5" cols="40" maxlength="500" id="textDescription" class="modal__input"></textarea>
         <label for="date" class="modal__label">Date</label>
         <input id="date" class="modal__input" type="date" required />

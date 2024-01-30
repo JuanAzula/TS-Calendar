@@ -1,24 +1,24 @@
 export interface Event {
 
-    title: string, 
+    title: string,
     description: string,
     date: string,
-    time: string, 
+    time: string,
     endDate: string | null,
     endTime: string | null,
     type: EventType,
     reminder: Reminder | null
 }
 
- const enum EventType {
+export const enum EventType {
     Meeting = 'meeting',
     Party = 'party',
     Work = 'work',
     Conference = 'conference',
     Other = 'other'
 }
-const enum Reminder {
-    FiveMinuts ='00:05',
+export const enum Reminder {
+    FiveMinuts = '00:05',
     TenMinuts = '00:10',
     FiveteenMinuts = '00:15',
     ThirtyMinuts = '00:30',

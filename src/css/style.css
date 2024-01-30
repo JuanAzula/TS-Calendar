@@ -9,9 +9,12 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Mulish", sans-serif;
-
+    
 }
 
 .preserve-spaces {
     white-space: pre;
+  }
+  body{
+    background: var(--indigo-200);
   }

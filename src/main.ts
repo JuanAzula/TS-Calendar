@@ -1,5 +1,5 @@
 import { createCalendar, currentMonth, currentYear } from "./components/Calendar"
-import { StoreEvent } from "./components/Modal";
+import { StoreEvent, getEvents } from "./components/Modal";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -69,18 +69,18 @@ endDateCheckbox.addEventListener('click', () => {
   isEndDateVisible = !isEndDateVisible;
 })
 
-// //////// EVENT LISTENERS FOR CHECKBOX REMINDER
+//////// EVENT LISTENERS FOR CHECKBOX REMINDER
 
 const reminmderCheckbox = document.getElementById('reminmderCheckbox');
 const reminderTime = document.getElementById('reminderTime');
 
 let isCheckboxVisible = false;
 
-if(reminmderCheckbox && reminmderCheckbox instanceof HTMLInputElement){
-  reminmderCheckbox.addEventListener('click', ()=>{
-    if(isCheckboxVisible){
+if (reminmderCheckbox && reminmderCheckbox instanceof HTMLInputElement) {
+  reminmderCheckbox.addEventListener('click', () => {
+    if (isCheckboxVisible) {
       reminderTime?.classList.add("hide-modal");
-    }else {
+    } else {
       reminderTime?.classList.replace("hide-modal", 'modal__label')
 
     }
@@ -88,13 +88,47 @@ if(reminmderCheckbox && reminmderCheckbox instanceof HTMLInputElement){
   })
 }
 
-// //////// EVENT LISTENERS FOR VALIDATION
+// // //////// EVENT LISTENERS FOR VALIDATION
 
-const validationInputTitle = document.getElementById('title');
-const validationTextarea = document.getElementById('textDescription');
- const validationTime = document.getElementById('time');
-const validationEnddate = document.getElementById('endDate');
-const validationEndtime = document.getElementById('endTimeInput');
+// const validationTitle = document.getElementById('title') as HTMLInputElement;
+// const titleValue = validationTitle.value.trim(); 
+
+// const validationTextarea = document.getElementById('textDescription') as HTMLInputElement;
+// const validationTime = document.getElementById('time') as HTMLInputElement;
+// const validationEnddate = document.getElementById('endDate') as HTMLInputElement;
+// const validationEndtime = document.getElementById('endTimeInput') as HTMLInputElement;
+// const errorContainer = document.getElementById('modal-div') as HTMLDivElement;
+// const validationButton = document.getElementById('submit') as HTMLButtonElement;
+// let validForm = true;
+
+
+
+// validationButton.addEventListener('click',()=>{
+//     if (titleValue.length === 0) {
+//       const titleValue = validationTitle.value.trim(); 
+//       console.log('eeeeeeeeeeeeeeeeeeeeeeeeeee');
+//       const errorMessage = document.createElement('div');
+//       errorMessage.textContent = 'The input can`t be empty';
+//       validForm = false;
+//       modal?.classList.remove('hide-modal')
+      
+//     } else {
+//       validForm = true;
+//       modal?.classList.add('hide-modal')
+//     }
+
+// })
+
+
+//  const submitButton = document.getElementById("submit");
+
+
+
+
+
+
+
+
 
 
 
@@ -123,7 +157,7 @@ overlay?.addEventListener("click", () => {
   overlay?.classList.add("hide-modal");
 })
 
-//  /////// EVENT LISTENERS FOR SUBMIT BUTTON
+// //  /////// EVENT LISTENERS FOR SUBMIT BUTTON
 
 const submitButton = document.getElementById("submit");
 const title = document.getElementById("title");
@@ -134,7 +168,7 @@ const endTime = document.getElementById("endTimeInput")
 
 if (submitButton && submitButton instanceof HTMLButtonElement && title && title instanceof HTMLInputElement && date && date instanceof HTMLInputElement && time && time instanceof HTMLInputElement && endDate && endDate instanceof HTMLInputElement && endTime && endTime instanceof HTMLInputElement) {
   submitButton?.addEventListener("click", (event) => {
-    console.log("hola")
+    console.log("New event")
     event?.preventDefault();
     const titleValue = title?.value;
     const dateValue = date?.value;
@@ -143,8 +177,9 @@ if (submitButton && submitButton instanceof HTMLButtonElement && title && title 
     const endTimeValue = endTime?.value;
     console.log(titleValue, dateValue, timeValue)
     StoreEvent(titleValue, dateValue, timeValue, endDateValue, endTimeValue);
-    overlay?.classList.add("hide-modal");
-    modal?.classList.add("hide-modal");
+    // overlay?.classList.add("hide-modal");
+    // modal?.classList.add("hide-modal");
+
   })
 }
 
