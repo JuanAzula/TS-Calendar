@@ -30,14 +30,14 @@ export function deleteEvent(title: string, date: string) {
     if (previousEvents) {
         eventsTotal = JSON.parse(previousEvents);
 
-        eventsTotal.forEach((event: { title: string, date: string, time: string, endDate: string, endTime: string, description: string, type: string }) => {
+        eventsTotal.forEach((event: Event) => {
 
             const eventTitle = "Title: " + event.title
-            const eventDate = "Date: " + event.date
+            const eventDate = "Date: " + event.dateString
 
 
             if (eventTitle !== title && eventDate !== date) {
-                console.log(event.title, title, event.date, date)
+                console.log(event.title, title, event.dateString, date)
                 eventsTotalFilter.push(event);
             }
         })
@@ -133,7 +133,7 @@ export function getEvents() {
                 descriptionSpan.textContent = "Description: " + event.description;
 
             }
-            if (event.type === undefined || event.type === "") {
+            if (event.type === undefined) {
                 typeSpan.textContent = "";
             } else {
                 typeSpan.textContent = "Type: " + event.type;
