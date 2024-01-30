@@ -30,7 +30,7 @@ const formatWithZero: (num: number) => string = (num) => (num < 10 ? `0${num}` :
 // Format the date in YYYY-MM-DD format using string template literals
 const formattedDate: string = `${year}-${formatWithZero(month)}-${formatWithZero(day)}`;
 
-console.log(formattedDate); 
+console.log(formattedDate);
 
 
 export function createCalendar(month: Months, year: number): void {
@@ -55,8 +55,8 @@ export function createCalendar(month: Months, year: number): void {
       let dayCell = document.createElement("div");
       dayCell?.classList.add("day-item");
       dayCell.textContent = day.toString().padStart(2, "0");
-      
-      
+
+
 
       const dayButton = document.createElement("button");
       dayButton.classList.add("day__button");
@@ -91,65 +91,120 @@ export function createCalendar(month: Months, year: number): void {
       if (dayCell) {
         // Acceder al atributo 'data-mi-atributo'
         const attribute: string | null = dayCell.getAttribute('data-date');
-        if (attribute === formattedDate){
+        const dateValue = `${year}-0${monthValue}-${day
+          .toString()
+          .padStart(2, "0")}`;
+        if (attribute === formattedDate) {
           dayCell.classList.remove('day-item')
           dayCell.classList.add('current-day-item')
+          dayCell.setAttribute("data-date", dateValue);
+          dayButton.setAttribute("data-date", dateValue);
+
+          dayCell.appendChild(dayButton);
+          calendarGrid.appendChild(dayCell);
         }
+      }
+    }
+    getEvents();
+
+    // /////// ADD DAYCELL EVENT
+
+    const dayCells: any = document.querySelectorAll(".day-item");
+    const activeDayCell: any = document.querySelector(".current-day-item");
+    const dayButton: any = document.querySelectorAll(".day-item .day__button");
+    const activeDayButton: any = document.querySelectorAll(".current-day-item .day__button");
+    const overlay: any = document.querySelector('.overlay');
+
+    if (dayCells) {
+      dayCells.forEach((dayCell: any) => {
+        dayCell.addEventListener("mouseover", () => {
+
+          const dayData = dayCell.getAttribute("data-date");
+          const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
+
+          addButton?.classList.remove("hide-modal");
+        })
+        dayCell.addEventListener("mouseout", () => {
+
+          const dayData = dayCell.getAttribute("data-date");
+          const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
+
+          addButton?.classList.add("hide-modal");
+        })
+      })
+    }
+
+    if (activeDayCell) {
+      activeDayCell.addEventListener('mouseover', () => {
+        const dayData = activeDayCell.getAttribute('data-date');
+        const addButton = document.querySelector(`.current-day-item[data-date="${dayData}"] .day__button`);
+
+        addButton?.classList.remove('hide-modal');
+      })
+      activeDayCell.addEventListener('mouseout', () => {
+        const dayData = activeDayCell.getAttribute('data-date');
+        const addButton = document.querySelector(`.current-day-item[data-date="${dayData}"] .day__button`);
+        addButton?.classList.add('hide-modal');
+      })
+    }
+
+
+
+    if (dayButton) {
+      dayButton.forEach((button: any) => {
+        button.addEventListener("click", () => {
+
+          const modal = document.getElementById("modal");
+          const overlay = document.querySelector(".overlay");
+          const date = document.getElementById("date");
+
+          modal?.classList.remove("hide-modal");
+          overlay?.classList.remove("hide-modal");
+
+          const dataDate = button.getAttribute("data-date");
+
+          if (date && date instanceof HTMLInputElement) {
+            date.value = dataDate;
+          }
+
+
+
+          console.log(button.getAttribute('data-date'));
+        })
+      })
+    }
+    if (activeDayButton) {
+      activeDayButton.forEach((button: any) => {
+        button.addEventListener("click", () => {
+
+          const modal = document.getElementById("modal");
+          const date = document.getElementById("date");
+
+          modal?.classList.remove("hide-modal");
+          overlay?.classList.remove("hide-modal");
+
+          const dataDate = button.getAttribute("data-date");
+
+          if (date && date instanceof HTMLInputElement) {
+            date.value = dataDate;
+          }
+
+
+
+          console.log(button.getAttribute('data-date'));
+        })
+      })
     }
   }
-  getEvents();
-
-  // /////// ADD DAYCELL EVENT
-
-  const dayCells: any = document.querySelectorAll(".day-item");
-  const dayButton: any = document.querySelectorAll(".day-item .day__button");
-
-  if (dayCells) {
-    dayCells.forEach((dayCell: any) => {
-      dayCell.addEventListener("mouseover", () => {
-
-        const dayData = dayCell.getAttribute("data-date");
-        const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
-
-        addButton?.classList.remove("hide-modal");
-      })
-      dayCell.addEventListener("mouseout", () => {
-
-        const dayData = dayCell.getAttribute("data-date");
-        const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
-
-        addButton?.classList.add("hide-modal");
-      })
-    })
-  }
-
-
-
-  if (dayButton) {
-    dayButton.forEach((button: any) => {
-      button.addEventListener("click", () => {
-
-        const modal = document.getElementById("modal");
-        const overlay = document.querySelector(".overlay");
-        const date = document.getElementById("date");
-
-        modal?.classList.remove("hide-modal");
-        overlay?.classList.remove("hide-modal");
-
-        const dataDate = button.getAttribute("data-date");
-
-        if (date && date instanceof HTMLInputElement) {
-          date.value = dataDate;
-        }
-
-
-
-        console.log(button.getAttribute('data-date'));
-      })
-    })
-  }
 }
-}
+const overlay = document.querySelector(".overlay");
+overlay?.addEventListener("click", () => {
+  const modal = document.getElementById("modal");
+  const eventContainer = document.getElementById("event-info");
+  modal?.classList.add("hide-modal");
+  eventContainer?.classList.replace("event--info", "hide-event");
+  overlay?.classList.add("hide-modal");
+});
 
 const backArrow = document.getElementById("back-arrow") as HTMLSpanElement;
 const forwardArrow = document.getElementById(

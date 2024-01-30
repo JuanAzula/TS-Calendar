@@ -43,19 +43,36 @@ export function setReminder(event: Event) {
   const currentDateObject = Date.now();
   const currentDate = new Date(currentDateObject);
   const currentDateMS = currentDate.getTime();
-  if (event.reminder) {
+  if (event.reminder && checkIsPastEventWithReminder(event)) {
     const reminderTime = getReminderDuration(event.reminder);
     const difference = eventDateMS - currentDateMS - reminderTime;
-    //console.log(difference);
-    setTimeout(() => {
-      alert(
-        `Your event ${
-          event.title
-        } will start at ${eventDate.toLocaleTimeString()}.`
-      );
-    }, difference);
+    console.log(difference);
+    // setTimeout(() => {
+    //   alert(
+    //     `Your event ${event.title
+    //     } will start at ${eventDate.toLocaleTimeString()}.`
+    //   );
+    // }, difference);
   }
 }
+
+// function reminderNotification(event: Event) {
+//   setTimeout(() => {
+//     alert(
+//       `Your event ${event.title
+//       } will start at ${event.endDate?.toLocaleTimeString()}.`
+//     );
+//   }, 1000);
+// }
+
+// function reminderInterval(event: Event) {
+//   setInterval(() => {
+
+//   }, 10000);
+// }
+
+
+
 
 //al entrar en el página, función forEach que guarde un item en local storage con un array de timestamps de todos los reminders que debo iniciar
 // de este array. Ordenar el array (y todo el localstorage) por fecha de inicio. Función .sort().

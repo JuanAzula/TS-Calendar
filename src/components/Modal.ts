@@ -1,5 +1,5 @@
 import { Event } from "../interfaces/event";
-import { checkEvents } from "./Reminder";
+import { checkEvents, setReminder } from "./Reminder";
 import { createCalendar, currentMonth, currentYear } from "./Calendar";
 
 let eventsTotal: Event[] = [];
@@ -65,21 +65,21 @@ export function getEvents() {
         endTimeSpan.classList.add("hide-modal");
         eventTime.classList.add("hide-modal");
 
-    // eventTime.classList.add("hide-modal", "event--tooltip");
-    // eventTime.classList.add("event--tooltip");
-    eventDetails.classList.add("event--tooltip");
-    const isPastEvent = checkIsPastEvent(event.date);
-    // if (!isPastEvent && event.reminder) {
-    //   setReminder(event);
-    // }
+        // eventTime.classList.add("hide-modal", "event--tooltip");
+        // eventTime.classList.add("event--tooltip");
+        eventDetails.classList.add("event--tooltip");
+        const isPastEvent = checkIsPastEvent(event.date);
+        if (!isPastEvent && event.reminder) {
+            setReminder(event);
+        }
 
-    if (isPastEvent) {
-      eventDiv.classList.add("past-event");
-    }
+        if (isPastEvent) {
+            eventDiv.classList.add("past-event");
+        }
 
-    if (eventsTotal) {
-      checkEvents(eventsTotal);
-    }
+        if (eventsTotal) {
+            checkEvents(eventsTotal);
+        }
 
         eventDiv.appendChild(eventName);
         eventDiv.appendChild(eventTime);
@@ -91,8 +91,19 @@ export function getEvents() {
         const dayDiv = document.querySelector(
             `.day-item[data-date='${event.dateString}']`
         );
+        const activeDayDiv = document.querySelector(
+            `.current-day-item[data-date='${event.dateString}']`
+        )
         console.log(dayDiv);
         const dateDiv = dayDiv?.getAttribute("data-date");
+        const activeDateDiv = activeDayDiv?.getAttribute("data-date");
+
+        if (activeDateDiv !== null && activeDateDiv == event.dateString) {
+            console.log("Active date found");
+            activeDayDiv?.appendChild(eventDiv);
+        } else {
+            console.log("No active date found");
+        }
 
         if (dateDiv !== null && dateDiv == event.dateString) {
             console.log("Date found");
@@ -195,9 +206,9 @@ if (dayButton) {
 }
 
 function checkIsPastEvent(startDate: Date): boolean {
-  const startTime = new Date(startDate).getTime();
-  const now = new Date().getTime();
-  return startTime < now;
+    const startTime = new Date(startDate).getTime();
+    const now = new Date().getTime();
+    return startTime < now;
 }
 
 export function deleteEvent(title: string, date: string) {
@@ -224,16 +235,16 @@ export function deleteEvent(title: string, date: string) {
 }
 
 export function sortEvents() {
-  const previousEvents = localStorage.getItem("events");
+    const previousEvents = localStorage.getItem("events");
 
-  // const previousEvents = localStorage.getItem("events");
-  if (previousEvents) {
-    eventsTotal = JSON.parse(previousEvents);
-  }
+    // const previousEvents = localStorage.getItem("events");
+    if (previousEvents) {
+        eventsTotal = JSON.parse(previousEvents);
+    }
 
-  eventsTotal.sort((a, b) => a.startDateTimestamp - b.startDateTimestamp);
-  console.log(eventsTotal);
-  return eventsTotal;
+    eventsTotal.sort((a, b) => a.startDateTimestamp - b.startDateTimestamp);
+    console.log(eventsTotal);
+    return eventsTotal;
 }
 
 //sortEvents()
