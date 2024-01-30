@@ -128,9 +128,11 @@ export function getEvents() {
       // }
 
             overlay?.classList.remove("hide-modal");
-        });
+        }});
     });
 }
+
+
 
 
 // /////// ADD DAYCELL EVENT
@@ -182,3 +184,14 @@ if (dayButton) {
         })
     })
 }
+
+
+
+
+
+
+function checkIsPastEvent(startDate: Date) {
+    const startTime = new Date(startDate).getTime();
+    const now = new Date().getTime();
+    return startTime < now ;
+  }
