@@ -26,8 +26,8 @@ if (
   eventButton instanceof HTMLButtonElement
 ) {
   eventButton.addEventListener("click", () => {
-    overlay.classList.remove("hide-modal");
-    modal.classList.remove("hide-modal");
+    overlay.classList.remove("hide-element");
+    modal.classList.remove("hide-element");
     const event = localStorage.getItem("events");
     console.log(event);
   });
@@ -35,7 +35,7 @@ if (
 
 if (label && modal && label instanceof HTMLSpanElement) {
   label.addEventListener("click", () => {
-    modal.classList.remove("hide-modal");
+    modal.classList.remove("hide-element");
   });
 }
 
@@ -44,8 +44,8 @@ const closeModal = document.getElementById("close");
 
 if (closeModal && closeModal instanceof HTMLSpanElement) {
   closeModal?.addEventListener("click", () => {
-    overlay?.classList.add("hide-modal");
-    modal?.classList.add("hide-modal");
+    overlay?.classList.add("hide-element");
+    modal?.classList.add("hide-element");
   });
 }
 
@@ -68,15 +68,15 @@ let isEndDateVisible = false;
 
 endDateCheckbox.addEventListener("click", () => {
   if (isEndDateVisible) {
-    endDateLabel?.classList.add("hide-modal");
-    endDateInput?.classList.add("hide-modal");
-    endDateTimeLabel.classList.add("hide-modal");
-    endDateTimeInput.classList.add("hide-modal");
+    endDateLabel?.classList.add("hide-element");
+    endDateInput?.classList.add("hide-element");
+    endDateTimeLabel.classList.add("hide-element");
+    endDateTimeInput.classList.add("hide-element");
   } else {
-    endDateLabel.classList.replace("hide-modal", "modal__label");
-    endDateInput.classList.replace("hide-modal", "modal__input");
-    endDateTimeLabel.classList.replace("hide-modal", "modal__label");
-    endDateTimeInput.classList.replace("hide-modal", "modal__input");
+    endDateLabel.classList.replace("hide-element", "modal__label");
+    endDateInput.classList.replace("hide-element", "modal__input");
+    endDateTimeLabel.classList.replace("hide-element", "modal__label");
+    endDateTimeInput.classList.replace("hide-element", "modal__input");
   }
   isEndDateVisible = !isEndDateVisible;
 });
@@ -91,9 +91,9 @@ let isCheckboxVisible = false;
 if (reminmderCheckbox && reminmderCheckbox instanceof HTMLInputElement) {
   reminmderCheckbox.addEventListener("click", () => {
     if (isCheckboxVisible) {
-      reminderTime?.classList.add("hide-modal");
+      reminderTime?.classList.add("hide-element");
     } else {
-      reminderTime?.classList.replace("hide-modal", "modal__label");
+      reminderTime?.classList.replace("hide-element", "modal__label");
     }
     isCheckboxVisible = !isCheckboxVisible;
   });
@@ -103,25 +103,25 @@ if (reminmderCheckbox && reminmderCheckbox instanceof HTMLInputElement) {
 document.addEventListener("keydown", (event) => {
   if (overlay && overlay instanceof HTMLDivElement) {
     overlay?.addEventListener("click", () => {
-      overlay.classList.add("hide-modal");
-      modal?.classList.add("hide-modal");
+      overlay.classList.add("hide-element");
+      modal?.classList.add("hide-element");
     });
   }
   if (event.key === "Escape") {
     const modal = document.getElementById("modal");
     const eventContainer = document.getElementById("event-info");
-    modal?.classList.add("hide-modal");
+    modal?.classList.add("hide-element");
     eventContainer?.classList.replace("event--info", "hide-event");
-    overlay?.classList.add("hide-modal");
+    overlay?.classList.add("hide-element");
   }
 });
 
 overlay?.addEventListener("click", () => {
   const modal = document.getElementById("modal");
   const eventContainer = document.getElementById("event-info");
-  modal?.classList.add("hide-modal");
+  modal?.classList.add("hide-element");
   eventContainer?.classList.replace("event--info", "hide-event");
-  overlay?.classList.add("hide-modal");
+  overlay?.classList.add("hide-element");
 });
 
 //  /////// EVENT LISTENERS FOR SUBMIT BUTTON
@@ -187,8 +187,8 @@ if (
     };
 
     StoreEvent(eventObject);
-    overlay?.classList.add("hide-modal");
-    modal?.classList.add("hide-modal");
+    overlay?.classList.add("hide-element");
+    modal?.classList.add("hide-element");
 
   })
 }
@@ -209,9 +209,9 @@ if (deleteButton && deleteButton instanceof HTMLButtonElement) {
       deleteEvent(eventTitle, eventDate);
     }
 
-    modal?.classList.add("hide-modal");
+    modal?.classList.add("hide-element");
     eventContainer?.classList.replace("event--info", "hide-event");
-    overlay?.classList.add("hide-modal");
+    overlay?.classList.add("hide-element");
 
   })
 }

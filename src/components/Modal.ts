@@ -61,11 +61,11 @@ export function getEvents() {
             " End Time: " +
             event.endTime;
 
-        endDateSpan.classList.add("hide-modal");
-        endTimeSpan.classList.add("hide-modal");
-        eventTime.classList.add("hide-modal");
+        endDateSpan.classList.add("hide-element");
+        endTimeSpan.classList.add("hide-element");
+        eventTime.classList.add("hide-element");
 
-        // eventTime.classList.add("hide-modal", "event--tooltip");
+        // eventTime.classList.add("hide-element", "event--tooltip");
         // eventTime.classList.add("event--tooltip");
         eventDetails.classList.add("event--tooltip");
         const isPastEvent = checkIsPastEvent(event.date);
@@ -117,8 +117,8 @@ export function getEvents() {
             const overlay = document.querySelector(".overlay");
             eventContainer?.classList.replace("hide-event", "event--info");
             eventTime.classList.remove("event--tooltip");
-            eventTime.classList.add("hide-modal");
-            overlay?.classList.remove("hide-modal");
+            eventTime.classList.add("hide-element");
+            overlay?.classList.remove("hide-element");
 
 
             const titleSpan: any = document.getElementById("title-span");
@@ -171,7 +171,7 @@ if (dayCells) {
                 `.day-item[data-date="${dayData}"] .day__button`
             );
 
-            addButton?.classList.remove("hide-modal");
+            addButton?.classList.remove("hide-element");
         });
         dayCell.addEventListener("mouseout", () => {
             const dayData = dayCell.getAttribute("data-date");
@@ -179,7 +179,7 @@ if (dayCells) {
                 `.day-item[data-date="${dayData}"] .day__button`
             );
 
-            addButton?.classList.add("hide-modal");
+            addButton?.classList.add("hide-element");
         });
     });
 }
@@ -191,8 +191,8 @@ if (dayButton) {
             const overlay = document.querySelector(".overlay");
             const date = document.getElementById("date");
 
-            modal?.classList.remove("hide-modal");
-            overlay?.classList.remove("hide-modal");
+            modal?.classList.remove("hide-element");
+            overlay?.classList.remove("hide-element");
 
             const dataDate = button.getAttribute("data-date");
 

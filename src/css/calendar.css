@@ -8,11 +8,11 @@
 
 .calendar {
     width: 80%;
-    max-height: 80%;
+    /* max-height: 80%; */
     border: 1px solid rgb(255, 255, 255);
     /* box-shadow: 3px 3px 50px rgb(255, 255, 255); */
     border-radius: 0.5rem;
-    margin-top: 7%;
+    margin-top: 5%;
     margin-bottom: 7%;
     /* background-color: rgba(255, 255, 255, 0.471); */
 }
@@ -125,7 +125,7 @@
     margin-bottom: 1rem;
     overflow-y: scroll;
     /* box-shadow: 0.5px 0.5px 10px rgb(243, 243, 243); */
-    background-color: rgb(240, 248, 255);
+    background-color: rgba(240, 248, 255, 0.919);
 }
 
 .current-day-item {
@@ -140,7 +140,7 @@
     margin-bottom: 1rem;
     overflow-y: scroll;
     box-shadow: 0.5px 0.5px 10px rgb(129, 129, 129);
-    background-color: rgb(61, 108, 219);
+    background-color: rgba(61, 108, 219, 0.802);
 }
 
 @keyframes changeMonthAnimation {

@@ -60,7 +60,7 @@ export function createCalendar(month: Months, year: number): void {
 
       const dayButton = document.createElement("button");
       dayButton.classList.add("day__button");
-      dayButton.classList.add("hide-modal");
+      dayButton.classList.add("hide-element");
       dayButton.textContent = "add";
 
       const monthValue = month.toString(); // Asegurarse de que el mes tenga al menos dos dígitos
@@ -122,14 +122,14 @@ export function createCalendar(month: Months, year: number): void {
           const dayData = dayCell.getAttribute("data-date");
           const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
 
-          addButton?.classList.remove("hide-modal");
+          addButton?.classList.remove("hide-element");
         })
         dayCell.addEventListener("mouseout", () => {
 
           const dayData = dayCell.getAttribute("data-date");
           const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
 
-          addButton?.classList.add("hide-modal");
+          addButton?.classList.add("hide-element");
         })
       })
     }
@@ -139,12 +139,12 @@ export function createCalendar(month: Months, year: number): void {
         const dayData = activeDayCell.getAttribute('data-date');
         const addButton = document.querySelector(`.current-day-item[data-date="${dayData}"] .day__button`);
 
-        addButton?.classList.remove('hide-modal');
+        addButton?.classList.remove('hide-element');
       })
       activeDayCell.addEventListener('mouseout', () => {
         const dayData = activeDayCell.getAttribute('data-date');
         const addButton = document.querySelector(`.current-day-item[data-date="${dayData}"] .day__button`);
-        addButton?.classList.add('hide-modal');
+        addButton?.classList.add('hide-element');
       })
     }
 
@@ -158,8 +158,8 @@ export function createCalendar(month: Months, year: number): void {
           const overlay = document.querySelector(".overlay");
           const date = document.getElementById("date");
 
-          modal?.classList.remove("hide-modal");
-          overlay?.classList.remove("hide-modal");
+          modal?.classList.remove("hide-element");
+          overlay?.classList.remove("hide-element");
 
           const dataDate = button.getAttribute("data-date");
 
@@ -180,8 +180,8 @@ export function createCalendar(month: Months, year: number): void {
           const modal = document.getElementById("modal");
           const date = document.getElementById("date");
 
-          modal?.classList.remove("hide-modal");
-          overlay?.classList.remove("hide-modal");
+          modal?.classList.remove("hide-element");
+          overlay?.classList.remove("hide-element");
 
           const dataDate = button.getAttribute("data-date");
 
@@ -201,9 +201,9 @@ const overlay = document.querySelector(".overlay");
 overlay?.addEventListener("click", () => {
   const modal = document.getElementById("modal");
   const eventContainer = document.getElementById("event-info");
-  modal?.classList.add("hide-modal");
+  modal?.classList.add("hide-element");
   eventContainer?.classList.replace("event--info", "hide-event");
-  overlay?.classList.add("hide-modal");
+  overlay?.classList.add("hide-element");
 });
 
 const backArrow = document.getElementById("back-arrow") as HTMLSpanElement;
