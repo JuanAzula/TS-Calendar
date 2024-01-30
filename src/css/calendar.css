@@ -7,13 +7,12 @@
 }
 
 .calendar {
-    max-width: 70rem;
+    width: 80%;
     max-height: 80%;
     border: 1px solid rgb(255, 255, 255);
     box-shadow: 3px 3px 50px rgb(255, 255, 255);
     border-radius: 0.5rem;
     margin-top: 4%;
-
     background-color: white;
 }
 
@@ -160,7 +159,7 @@
     border-radius: 0.5rem;
     border: 1px solid black;
     width: 2rem;
-    top: 1px;
-    right: -54%;
+    top: 2px;
+    right: -58%;
     /* margin-left: 60%; */
 }
