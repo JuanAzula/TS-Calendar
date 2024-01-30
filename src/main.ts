@@ -3,7 +3,8 @@ import {
   currentMonth,
   currentYear,
 } from "./components/Calendar";
-import { StoreEvent, deleteEvent } from "./components/Modal";
+import { StoreEvent, checkIsPastEvent, deleteEvent } from "./components/Modal";
+import { checkIsPastEventWithReminder, getReminderDuration } from "./components/Reminder";
 
 import { Event, EventType, Reminder } from "./interfaces/event";
 
@@ -242,8 +243,8 @@ function getCompleteDate(date: Date, hours: number) {
   return date;
 }
 
-function getTimestamp(date:Date){
-  const eventDate = new Date (date);
+function getTimestamp(date: Date) {
+  const eventDate = new Date(date);
   //console.log(eventDate);
   const eventDateMS = eventDate.getTime()
   return eventDateMS
@@ -286,3 +287,38 @@ function convertToTypeEnum(value: string): EventType | null {
 
 
 //checkEvents(sortEvents())
+
+const eventsWithAlertShown = new Set<string>(); // Conjunto para almacenar los IDs de los eventos con alerta mostrada
+
+function checkEventsWithReminder() {
+  let eventsTotal = []
+  const events = localStorage.getItem("events");
+  if (events) {
+    eventsTotal = JSON.parse(events);
+  }
+
+  eventsTotal.forEach((event: Event) => {
+    const eventId = event.completeDate.toString();
+    const eventDate = new Date(event.completeDate);
+    const eventDateMS = eventDate.getTime();
+    if (event.reminder && checkIsPastEventWithReminder(event) && !eventsWithAlertShown.has(eventId)) {
+      const reminderTime = getReminderDuration(event.reminder);
+      console.log(reminderTime);
+      const newCurrentDateMS = Date.now();
+      const difference = eventDateMS - newCurrentDateMS - reminderTime;
+      console.log(difference);
+      if (difference <= reminderTime) {
+        alert(
+          `Your event ${event.title
+          } will start at ${eventDate.toLocaleTimeString()}.`
+        );
+        eventsWithAlertShown.add(eventId);
+      } else {
+        console.log('no hay alerta');
+      }
+    }
+  })
+  setTimeout(checkEventsWithReminder, 1000);
+};
+
+checkEventsWithReminder()

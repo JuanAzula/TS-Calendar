@@ -13,7 +13,7 @@ import { Event, Reminder } from "../interfaces/event";
 // ThirtyMinuts = '00:30',
 // OneHour = '01:00'
 
-function getReminderDuration(duration: Reminder): number {
+export function getReminderDuration(duration: Reminder): number {
   let reminderDuration: number = 0;
   switch (duration) {
     case "01:00":
@@ -47,14 +47,44 @@ export function setReminder(event: Event) {
     const reminderTime = getReminderDuration(event.reminder);
     const difference = eventDateMS - currentDateMS - reminderTime;
     console.log(difference);
-    // setTimeout(() => {
-    //   alert(
-    //     `Your event ${event.title
-    //     } will start at ${eventDate.toLocaleTimeString()}.`
-    //   );
-    // }, difference);
+    setTimeout(() => {
+      if (difference === 0) { // Verifica si la diferencia es igual al tiempo del recordatorio
+        alert(
+          `Your event ${event.title
+          } will start at ${eventDate.toLocaleTimeString()}.`
+        );
+      }
+    }, difference);
   }
 }
+
+
+// const interval = setInterval(() => {
+//   let eventsTotal = []
+//   const events = localStorage.getItem("events");
+//   if (events) {
+//     eventsTotal = JSON.parse(events);
+//   }
+
+//   eventsTotal.forEach((event: Event) => {
+//     const eventDate = new Date(event.completeDate);
+//     const eventDateMS = eventDate.getTime();
+//     if (event.reminder && checkIsPastEventWithReminder(event)) {
+//       const reminderTime = getReminderDuration(event.reminder);
+//       console.log(reminderTime);
+//       const newCurrentDateMS = Date.now();
+//       const difference = eventDateMS - newCurrentDateMS - reminderTime;
+//       console.log(difference);
+//       if (difference <= reminderTime) {
+//         alert(
+//           `Your event ${event.title
+//           } will start at ${eventDate.toLocaleTimeString()}.`
+//         );
+//         clearInterval(interval);
+//       }
+//     }
+//   })
+// }, 1000);
 
 // function reminderNotification(event: Event) {
 //   setTimeout(() => {
@@ -104,7 +134,7 @@ export function setReminder(event: Event) {
 //   sortedEvents.shift();
 // }
 
-function checkIsPastEventWithReminder(event: Event) {
+export function checkIsPastEventWithReminder(event: Event) {
   if (event.reminder) {
     const reminderTime = getReminderDuration(event.reminder);
     const now = new Date().getTime();

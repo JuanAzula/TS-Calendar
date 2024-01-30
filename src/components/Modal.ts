@@ -205,7 +205,7 @@ if (dayButton) {
     });
 }
 
-function checkIsPastEvent(startDate: Date): boolean {
+export function checkIsPastEvent(startDate: Date): boolean {
     const startTime = new Date(startDate).getTime();
     const now = new Date().getTime();
     return startTime < now;
