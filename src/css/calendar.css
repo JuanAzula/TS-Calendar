@@ -98,10 +98,10 @@
 
 .calendar--month__container {
     display: flex;
-    justify-content: center;
     align-items: center;
     width: 100%;
-    margin-left: 0;
+    margin-left: 1%;
+    padding-left: 0%;
     margin-bottom: 1rem;
 }
 
