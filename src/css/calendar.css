@@ -155,9 +155,12 @@
 }
 
 .day__button {
+    position: relative;
     cursor: pointer;
     border-radius: 0.5rem;
     border: 1px solid black;
     width: 2rem;
-    margin-left: 60%;
+    top: 1px;
+    right: -40px;
+    /* margin-left: 60%; */
 }
