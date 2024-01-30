@@ -4,11 +4,13 @@ import {
   currentYear,
 } from "./components/Calendar";
 import { StoreEvent, deleteEvent } from "./components/Modal";
+
 import { Event, EventType, Reminder } from "./interfaces/event";
 
 document.addEventListener("DOMContentLoaded", () => {
   // getEvents();
 });
+
 
 // ///////// EVENT LISTENERS FOR ADD EVENT BUTTON
 const eventButton = document.getElementById("add-event");
@@ -214,6 +216,8 @@ if (deleteButton && deleteButton instanceof HTMLButtonElement) {
 }
 
 
+
+
 function convertHour(time: string, date: Date) {
   const timeString = time;
 
@@ -278,3 +282,7 @@ function convertToTypeEnum(value: string): EventType | null {
       return null;
   }
 }
+
+
+
+//checkEvents(sortEvents())
