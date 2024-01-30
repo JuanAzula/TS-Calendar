@@ -212,47 +212,61 @@ if (deleteButton && deleteButton instanceof HTMLButtonElement) {
   })
 }
 
-// /////// ADD DAYCELL EVENT
 
-const dayCells: any = document.querySelectorAll(".day-item");
-const dayButton: any = document.querySelectorAll(".day-item .day__button");
+function convertHour(time: string, date: Date) {
+  const timeString = time;
 
-if (dayCells) {
-  dayCells.forEach((dayCell: any) => {
-    dayCell.addEventListener("mouseover", () => {
+  const parts = timeString.split(":");
+  const hours = parseInt(parts[0], 10); // Convert the hours part to number
+  const minutes = parseInt(parts[1], 10); // Convert the minutes part to number
 
-      const dayData = dayCell.getAttribute("data-date");
-      const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
+  // Create a new Date object (this will create a date with the current time)
+  //date.setHours = new Date();
 
-      addButton?.classList.remove("hide-modal");
-    })
-    dayCell.addEventListener("mouseout", () => {
+  // Set the hours and minutes to the Date object
+  date.setHours(hours, minutes, 0, 0); // The last two zeros are for seconds and milliseconds
 
-      const dayData = dayCell.getAttribute("data-date");
-      const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
-
-      addButton?.classList.add("hide-modal");
-    })
-  })
+  // // Now you can use date to get the hours and minutes if needed
+  // const setHours = date.getHours(); // Get the hours
+  // const setMinutes = date.getMinutes(); // Get the minutes// Obtener los minutos
+  return date.getHours();
 }
 
+function getCompleteDate(date: Date, hours: number) {
+  date.setHours(hours);
+  return date;
+}
 
+function convertToReminderEnum(value: string): Reminder | null {
+  switch (value) {
+    case Reminder.FiveMinutes:
+      return Reminder.FiveMinutes;
+    case Reminder.TenMinutes:
+      return Reminder.TenMinutes;
+    case Reminder.FifteenMinutes:
+      return Reminder.FifteenMinutes;
+    case Reminder.ThirtyMinutes:
+      return Reminder.ThirtyMinutes;
+    case Reminder.OneHour:
+      return Reminder.OneHour;
+    default:
+      return null;
+  }
+}
 
-if (dayButton) {
-  dayButton.forEach((button: any) => {
-    button.addEventListener("click", () => {
-      modal?.classList.remove("hide-modal");
-      overlay?.classList.remove("hide-modal");
-
-      const dataDate = button.getAttribute("data-date");
-
-      if (date && date instanceof HTMLInputElement) {
-        date.value = dataDate;
-      }
-
-
-
-      console.log(button.getAttribute('data-date'));
-    })
-  })
+function convertToTypeEnum(value: string): EventType | null {
+  switch (value) {
+    case EventType.Meeting:
+      return EventType.Meeting;
+    case EventType.Party:
+      return EventType.Party;
+    case EventType.Work:
+      return EventType.Work;
+    case EventType.Conference:
+      return EventType.Conference;
+    case EventType.Other:
+      return EventType.Other;
+    default:
+      return null;
+  }
 }
