@@ -80,7 +80,7 @@ endDateCheckbox.addEventListener("click", () => {
   isEndDateVisible = !isEndDateVisible;
 });
 
-// //////// EVENT LISTENERS FOR CHECKBOX REMINDER
+//////// EVENT LISTENERS FOR CHECKBOX REMINDER
 
 const reminmderCheckbox = document.getElementById("reminmderCheckbox");
 const reminderTime = document.getElementById("reminderTime");
