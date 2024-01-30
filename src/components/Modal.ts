@@ -75,6 +75,7 @@ export function getEvents() {
 
         if (isPastEvent) {
             eventDiv.classList.add("past-event");
+            console.log("is past event");
         }
 
         if (eventsTotal) {

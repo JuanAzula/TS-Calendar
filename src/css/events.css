@@ -8,7 +8,9 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    background-color: var(--indigo-400);
+    /* background-color: var(--indigo-400); */
+    background-color: #6B6ECC;
+    background: linear-gradient(45deg, #04051dea 0%, #2b566e 100%);
     padding: 1rem;
     border-radius: 1rem;
     position: absolute;
@@ -26,7 +28,9 @@
     height: 79%;
     width: 90%;
     padding: 2rem;
-    background-color: var(--indigo-500);
+    /* background-color: var(--indigo-500); */
+    /* background-color: #6B6ECC;
+    background: linear-gradient(45deg, #04051dea 0%, #2b566e 100%); */
     z-index: 6;
 
 }
@@ -37,9 +41,24 @@
     color: white;
     /* height: 100%; */
     /* width: 100%; */
+    font-size: x-large;
     z-index: 6;
+    font-weight: 700;
 }
 
+.event-info__button {
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    padding: 4px 12px;
+    letter-spacing: 1px;
+    margin-bottom: 7px;
+    background: var(--indigo-50);
+}
+
+.event-info__button:hover {
+    background: rgb(29, 78, 106);
+}
 
 
 
