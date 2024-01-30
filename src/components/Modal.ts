@@ -37,16 +37,16 @@ export function getEvents() {
         eventName.textContent = event.title + " ";
 
         const eventTime = document.createElement("p");
-        eventTime.textContent = event.time + " ";
+        eventTime.textContent = event.timeString + " ";
 
         const endDateSpan = document.createElement("span");
-        endDateSpan.textContent = event.endDate + " ";
+        endDateSpan.textContent = event.endDateString + " ";
 
         const endTimeSpan = document.createElement("span");
-        endTimeSpan.textContent = event.endTime?.toString();
+        endTimeSpan.textContent = event.endTimeString;
 
         const eventDetails = document.createElement("p");
-        eventDetails.textContent = "Date: " + event.date + " Description: " + event.description + " Time: " + event.time + " Type: " + event.type + " End Date: " + event.endDate + " End Time: " + event.endTime;
+        eventDetails.textContent = "Date: " + event.dateString + " Description: " + event.description + " Time: " + event.time + " Type: " + event.type + " End Date: " + event.endDate + " End Time: " + event.endTime;
 
         endDateSpan.classList.add("hide-modal");
         endTimeSpan.classList.add("hide-modal");
@@ -96,8 +96,8 @@ export function getEvents() {
             const typeSpan: any = document.getElementById("type-span");
 
             titleSpan.textContent = "Title: " + event.title;
-            timeSpan.textContent = "Time: " + event.time;
-            dateSpan.textContent = "Date: " + event.date;
+            timeSpan.textContent = "Time: " + event.timeString;
+            dateSpan.textContent = "Date: " + event.dateString;
             if (event.description === undefined || event.description === "") {
                 descriptionSpan.textContent = "";
             } else {
@@ -110,13 +110,13 @@ export function getEvents() {
                 typeSpan.textContent = "Type: " + event.type;
 
             }
-            if (event.endDate === null) {
+            if (event.endDateString === null || event.endDateString === "") {
                 endDateSpan.textContent = "";
             } else {
                 endDateSpan.textContent = "End Date: " + event.endDate;
 
             }
-            if (event.endTime === null) {
+            if (event.endTimeString === null || event.endTimeString === "") {
                 endTimeSpan.textContent = "";
             } else {
                 endTimeSpan.textContent = "End Time: " + event.endTime;

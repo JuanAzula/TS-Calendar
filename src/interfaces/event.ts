@@ -5,9 +5,12 @@ export interface Event {
     dateString: string,
     date: Date,
     time: number,
+    timeString: string,
     completeDate: Date,
     endDate: Date | null,
+    endDateString: string | null,
     endTime: number | null,
+    endTimeString: string | null,
     type: EventType | null,
     reminder: Reminder | null
 }

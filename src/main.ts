@@ -172,9 +172,12 @@ if (
       dateString: dateValueString,//coger description del formulario
       date: dateValue,
       time: timeValue,
+      timeString: timeValueString,
       completeDate: completeDate,
       endDate: completeEndDate, //hay que cambiarlo
+      endDateString: endDateValueString,
       endTime: endTimeValue, //hay que cambiarlo
+      endTimeString: endTimeValueString,
       type: convertToTypeEnum(typeValue), //coger reminder del formulario
       reminder: convertToReminderEnum(reminderValue),//coger reminder del formulario
     };
