@@ -149,6 +149,10 @@ function changeMonth(current: Months, change: number): void {
   ) as HTMLSpanElement;
   // console.log(currentMonthSpan);
   currentMonthSpan?.classList.add("preserve-spaces");
+  currentMonthSpan?.classList.remove("month");
+  void currentMonthSpan?.offsetWidth;
+  currentMonthSpan?.classList.add("month");
+
   const currentYearSpan = document.getElementById(
     "current-year"
   ) as HTMLSpanElement;
@@ -157,6 +161,9 @@ function changeMonth(current: Months, change: number): void {
     newMonth = Months.December;
     newYear = currentYear - 1;
     createCalendar(newMonth, newYear);
+    currentMonthSpan?.classList.remove("month");
+    void currentMonthSpan?.offsetWidth;
+    currentMonthSpan?.classList.add("month");
 
     currentMonthSpan.textContent = `${Months[newMonth]} `;
     currentYearSpan.textContent = newYear.toString();
@@ -164,25 +171,31 @@ function changeMonth(current: Months, change: number): void {
     newMonth = Months.January;
     newYear = currentYear + 1;
     createCalendar(newMonth, newYear);
-
+    currentMonthSpan?.classList.remove("month");
+    void currentMonthSpan?.offsetWidth;
+    currentMonthSpan?.classList.add("month");
     currentMonthSpan.textContent = `${Months[newMonth]} `;
     currentYearSpan.textContent = newYear.toString();
   } else if (change === -1) {
     newMonth = currentMonth - 1;
     newYear = currentYear;
     createCalendar(newMonth, newYear);
-
+    currentMonthSpan?.classList.remove("month");
+    void currentMonthSpan?.offsetWidth;
+    currentMonthSpan?.classList.add("month");
     currentMonthSpan.textContent = `${Months[newMonth]} `;
     currentYearSpan.textContent = newYear.toString();
   } else {
     newMonth = currentMonth + 1;
     newYear = currentYear;
     createCalendar(newMonth, newYear);
-
+    currentMonthSpan?.classList.remove("month");
+    void currentMonthSpan?.offsetWidth;
+    currentMonthSpan?.classList.add("month");
     currentMonthSpan.textContent = `${Months[newMonth]} `;
     currentYearSpan.textContent = newYear.toString();
+    // Asegura que se mantenga en el rango 0-11
   }
-  // Asegura que se mantenga en el rango 0-11
 
   currentMonth = newMonth;
   currentYear = newYear;
