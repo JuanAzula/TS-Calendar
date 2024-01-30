@@ -193,24 +193,66 @@ if (
 
 const deleteButton = document.getElementById("delete-event");
 
-// if (events) {
-//   events.forEach((event) => {
-//     event.addEventListener("click", () => {
-//       console.log(event.textContent)
-//       overlay?.classList.remove("hide-modal");
+if (deleteButton && deleteButton instanceof HTMLButtonElement) {
+  deleteButton?.addEventListener("click", () => {
+    const modal = document.getElementById("modal");
+    const eventContainer = document.getElementById("event-info");
+
+    const eventTitle = document.getElementById("title-span")?.textContent;
+    const eventDate = document.getElementById("date-span")?.textContent;
+
+    if (eventTitle && eventDate) {
+      deleteEvent(eventTitle, eventDate);
+    }
+
+    modal?.classList.add("hide-modal");
+    eventContainer?.classList.replace("event--info", "hide-event");
+    overlay?.classList.add("hide-modal");
+
+  })
+}
+
+// /////// ADD DAYCELL EVENT
+
+const dayCells: any = document.querySelectorAll(".day-item");
+const dayButton: any = document.querySelectorAll(".day-item .day__button");
+
+if (dayCells) {
+  dayCells.forEach((dayCell: any) => {
+    dayCell.addEventListener("mouseover", () => {
+
+      const dayData = dayCell.getAttribute("data-date");
+      const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
+
+      addButton?.classList.remove("hide-modal");
+    })
+    dayCell.addEventListener("mouseout", () => {
+
+      const dayData = dayCell.getAttribute("data-date");
+      const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
+
+      addButton?.classList.add("hide-modal");
+    })
+  })
+}
 
 
-//       const eventContainer = document.getElementById("event-info");
 
-//       eventContainer?.classList.replace("hide-event", "event--info");
+if (dayButton) {
+  dayButton.forEach((button: any) => {
+    button.addEventListener("click", () => {
+      modal?.classList.remove("hide-modal");
+      overlay?.classList.remove("hide-modal");
 
-//       const eventSpan = document.getElementById("event-span");
+      const dataDate = button.getAttribute("data-date");
 
-//       if (eventSpan) {
-//         eventSpan.textContent = event.textContent;
-//       }
+      if (date && date instanceof HTMLInputElement) {
+        date.value = dataDate;
+      }
 
 
-//     })
-//   })
-// }
+
+      console.log(button.getAttribute('data-date'));
+    })
+  })
+}
