@@ -3,7 +3,7 @@ import {
   currentMonth,
   currentYear,
 } from "./components/Calendar";
-import { StoreEvent } from "./components/Modal";
+import { StoreEvent, deleteEvent } from "./components/Modal";
 import { Event, EventType, Reminder } from "./interfaces/event";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -39,7 +39,7 @@ if (label && modal && label instanceof HTMLSpanElement) {
 // ///////// EVENT LISTENERS FOR CLOSE BUTTON
 const closeModal = document.getElementById("close");
 
-if (closeModal && closeModal instanceof HTMLButtonElement) {
+if (closeModal && closeModal instanceof HTMLSpanElement) {
   closeModal?.addEventListener("click", () => {
     overlay?.classList.add("hide-modal");
     modal?.classList.add("hide-modal");
@@ -109,6 +109,7 @@ document.addEventListener("keydown", (event) => {
     const eventContainer = document.getElementById("event-info");
     modal?.classList.add("hide-modal");
     eventContainer?.classList.replace("event--info", "hide-event");
+    overlay?.classList.add("hide-modal");
   }
 });
 
@@ -148,7 +149,6 @@ if (
   reminderDuration && reminderDuration instanceof HTMLSelectElement
 ) {
   submitButton?.addEventListener("click", (event) => {
-    console.log("hola");
     event?.preventDefault();
     const titleValue = title?.value;
     const dateValueString = date?.value;
@@ -158,29 +158,60 @@ if (
     const completeDate = getCompleteDate(dateValue, timeValue);
     const reminderValue = reminderDuration.value;
     console.log(completeDate);
-    const endDateValue = endDate?.value; // pasar a date
-    const endTimeValue = endTime?.value;
+    const endDateValueString = endDate?.value; // pasar a date
+    const endDateValue = new Date(endDateValueString);
+    const endTimeValueString = endTime?.value;
+    const endTimeValue = convertHour(endTimeValueString, endDateValue);
+    const completeEndDate = getCompleteDate(endDateValue, endTimeValue);
     const descriptionValue = textDescription?.value;
-    const typeValue = typeSelected?.value; 
+    const typeValue = typeSelected?.value;
     console.log(reminderValue);
     const eventObject: Event = {
       title: titleValue,
-      description: "", 
+      description: descriptionValue,
       dateString: dateValueString,//coger description del formulario
       date: dateValue,
       time: timeValue,
+      timeString: timeValueString,
       completeDate: completeDate,
-      endDate: dateValue, //hay que cambiarlo
-      endTime: timeValue, //hay que cambiarlo
-      type: EventType.Meeting, //coger reminder del formulario
+      endDate: completeEndDate, //hay que cambiarlo
+      endDateString: endDateValueString,
+      endTime: endTimeValue, //hay que cambiarlo
+      endTimeString: endTimeValueString,
+      type: convertToTypeEnum(typeValue), //coger reminder del formulario
       reminder: convertToReminderEnum(reminderValue),//coger reminder del formulario
     };
 
     StoreEvent(eventObject);
     overlay?.classList.add("hide-modal");
     modal?.classList.add("hide-modal");
-  });
+
+  })
 }
+
+// /////// DELETE EVENT
+
+const deleteButton = document.getElementById("delete-event");
+
+if (deleteButton && deleteButton instanceof HTMLButtonElement) {
+  deleteButton?.addEventListener("click", () => {
+    const modal = document.getElementById("modal");
+    const eventContainer = document.getElementById("event-info");
+
+    const eventTitle = document.getElementById("title-span")?.textContent;
+    const eventDate = document.getElementById("date-span")?.textContent;
+
+    if (eventTitle && eventDate) {
+      deleteEvent(eventTitle, eventDate);
+    }
+
+    modal?.classList.add("hide-modal");
+    eventContainer?.classList.replace("event--info", "hide-event");
+    overlay?.classList.add("hide-modal");
+
+  })
+}
+
 
 function convertHour(time: string, date: Date) {
   const timeString = time;
@@ -208,44 +239,34 @@ function getCompleteDate(date: Date, hours: number) {
 
 function convertToReminderEnum(value: string): Reminder | null {
   switch (value) {
-      case Reminder.FiveMinutes:
-          return Reminder.FiveMinutes;
-      case Reminder.TenMinutes:
-          return Reminder.TenMinutes;
-      case Reminder.FifteenMinutes:
-          return Reminder.FifteenMinutes;
-      case Reminder.ThirtyMinutes:
-          return Reminder.ThirtyMinutes;
-      case Reminder.OneHour:
-          return Reminder.OneHour;
-      default:
-          return null; 
+    case Reminder.FiveMinutes:
+      return Reminder.FiveMinutes;
+    case Reminder.TenMinutes:
+      return Reminder.TenMinutes;
+    case Reminder.FifteenMinutes:
+      return Reminder.FifteenMinutes;
+    case Reminder.ThirtyMinutes:
+      return Reminder.ThirtyMinutes;
+    case Reminder.OneHour:
+      return Reminder.OneHour;
+    default:
+      return null;
   }
 }
 
-// Uso de la función para convertir la cadena a enum
-
-
-// /////// EVENT LISTENERS FOR EVENTS
-
-// const events = document.querySelectorAll(".day-item .event");
-
-// if (events) {
-//   events.forEach((event) => {
-//     event.addEventListener("click", () => {
-//       console.log(event.textContent)
-//       overlay?.classList.remove("hide-modal");
-
-//       const eventContainer = document.getElementById("event-info");
-
-//       eventContainer?.classList.replace("hide-event", "event--info");
-
-//       const eventSpan = document.getElementById("event-span");
-
-//       if (eventSpan) {
-//         eventSpan.textContent = event.textContent;
-//       }
-
-//     })
-//   })
-// }
+function convertToTypeEnum(value: string): EventType | null {
+  switch (value) {
+    case EventType.Meeting:
+      return EventType.Meeting;
+    case EventType.Party:
+      return EventType.Party;
+    case EventType.Work:
+      return EventType.Work;
+    case EventType.Conference:
+      return EventType.Conference;
+    case EventType.Other:
+      return EventType.Other;
+    default:
+      return null;
+  }
+}
