@@ -147,16 +147,22 @@ function changeMonth(current: Months, change: number): void {
     newYear = currentYear - 1;
     createCalendar(newMonth, newYear);
     resetMonth();
+    currentMonthSpan.textContent = `${Months[newMonth]} `;
+    currentYearSpan.textContent = newYear.toString();
   } else if (current === Months.December && change === 1) {
     newMonth = Months.January;
     newYear = currentYear + 1;
     createCalendar(newMonth, newYear);
     resetMonth();
+    currentMonthSpan.textContent = `${Months[newMonth]} `;
+    currentYearSpan.textContent = newYear.toString();
   } else if (change === -1) {
     newMonth = currentMonth - 1;
     newYear = currentYear;
     createCalendar(newMonth, newYear);
     resetMonth();
+    currentMonthSpan.textContent = `${Months[newMonth]} `;
+    currentYearSpan.textContent = newYear.toString();
   } else {
     newMonth = currentMonth + 1;
     newYear = currentYear;

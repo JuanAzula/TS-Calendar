@@ -31,7 +31,7 @@
     padding-top: 2rem;
     justify-content: center;
     align-items: center;
-    background-color: rgb(48, 48, 187);
+    background-color: rgb(240, 240, 240);
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
 }
@@ -41,14 +41,14 @@
     font-size: 2rem;
     font-weight: 600;
     margin-right: 1rem;
-    margin-left: 2%;
-    color: #fff;
+    margin-left:10%;
+    color: #3d3d3d;
 }
 
 .calendar--year {
     font-size: 2rem;
     font-weight: 600;
-    color: #fff;
+    color: #3d3d3d;
 }
 
 
@@ -180,7 +180,10 @@
     position: relative;
     cursor: pointer;
     border-radius: 0.5rem;
-    border: 1px solid black;
+    background-color: rgb(159, 159, 159);
+    border: 0.3px solid rgb(230, 229, 229);
+    box-shadow: 0px 2px 2px rgb(206, 206, 206);
+    color: white;
     width: 2rem;
     top: 2px;
     left: 62%;

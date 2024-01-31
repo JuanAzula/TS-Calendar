@@ -15,7 +15,9 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    background-color: var(--indigo-400);
+    background-color: rgb(240, 240, 240);
+    border: 0.3px solid rgb(230, 229, 229);
+    box-shadow: 0px 100px 60px rgb(163, 163, 163);
     padding: 1rem;
     border-radius: 1rem;
     position: absolute;
@@ -32,13 +34,15 @@
     height: 79%;
     width: 90%;
     padding: 2rem;
-    background-color: var(--indigo-500);
+    background-color: rgb(240, 240, 240);
+   
     z-index: 6;
 }
 
 /* Styles for event information span */
 .event-info__div .event-info__span {
-    color: white;
+    color: #3d3d3d;
+    font-size: large;
     z-index: 6;
 }
 
@@ -66,7 +70,7 @@
     justify-content: center;
     gap: 1rem;
     overflow-y: scroll;
-    background-color: var(--indigo-200);
+   
     padding: 1rem;
     border-radius: 0.5rem;
     position: absolute;
@@ -75,9 +79,9 @@
     transform: translate(-50%, -50%);
     width: 28rem;
     height: 40rem;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  
     z-index: 5;
-    border: 1px solid black;
+    
 }
 .modal__label{
    display: none;
@@ -129,9 +133,9 @@
 /* Styles for events */
 .event {
     cursor: pointer;
-    border: 1px solid black;
-    padding: 0.25rem;
-    margin: 0.2rem;
+    border: 1px solid #ccc;
+    padding: 0.1rem;
+    margin: 0.3rem;
     border-radius: 0.5rem;
     background-color: var(--indigo-100);
 }
@@ -143,6 +147,7 @@
     left: 50%;
     transform: translateX(-50%);
     visibility: hidden;
+    margin-top: 2%;
     padding: 8px;
     background-color: rgba(255, 255, 255, 0.05);
     border: 1px solid #ccc;
