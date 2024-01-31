@@ -1,158 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./src/assets/calendaricon.png"
+      alt="calendar icon"
+    />
+    <link href="./src/css/style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap"
+      rel="stylesheet"
+    />
+    <title>TS Calendar</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="./src/assets/calendaricon.png" alt="calendar icon" />
-  <link href="./src/css/style.css" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap"
-    rel="stylesheet" />
-  <title>TS Calendar</title>
-</head>
+  <body>
+    <div id="app"></div>
 
-<body>
-  <div id="app"></div>
-
-  <!-- ////////////////////////////// HEADER -->
-  <section class="header--container">
-    <header class="header">
-      <div class="header__div">
-        <h1 class="header__h1">Ts Calendar</h1>
-        <button id="add-event" class="header__button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none"
-            class="svg-icon">
-            <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-              <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-              <path d="m8 3v4"></path>
-              <path d="m16 3v4"></path>
-              <path d="m4 11h16"></path>
-            </g>
-          </svg>
-          <span class="header__button--text">Add to Calendar</span>
-        </button>
-      </div>
-    </header>
-  </section>
-
-  <!-- ///////////////////////////// CALENDAR -->
-
-  <main class="calendar--container">
-    <div id="calendar" class="calendar">
-      <div class="calendar__header">
-        <div class="calendar--month__container">
-          <span class="calendar--month preserve-spaces" id="current-month"> January </span>
-          <span class="preserve-spaces calendar--year" id="current-year">2024 </span>
-
-        </div>
-        <div class="calendar--arrow__container">
-          <span id="back-arrow" class="calendar--arrow"><svg xmlns="http://www.w3.org/2000/svg"
-              class="icon icon-tabler icon-tabler-arrow-big-left" width="44" height="44" viewBox="0 0 24 24"
-              stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path
-                d="M20 15h-8v3.586a1 1 0 0 1 -1.707 .707l-6.586 -6.586a1 1 0 0 1 0 -1.414l6.586 -6.586a1 1 0 0 1 1.707 .707v3.586h8a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1z" />
+    <!-- ////////////////////////////// HEADER -->
+    <section class="header--container">
+      <header class="header">
+        <div class="header__div">
+          <h1 class="header__h1">Ts Calendar</h1>
+          <button id="add-event" class="header__button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              viewBox="0 0 24 24"
+              height="24"
+              fill="none"
+              class="svg-icon"
+            >
+              <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+                <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+                <path d="m8 3v4"></path>
+                <path d="m16 3v4"></path>
+                <path d="m4 11h16"></path>
+              </g>
             </svg>
-          </span>
-          <span id="forward-arrow" class="calendar--arrow"><svg xmlns="http://www.w3.org/2000/svg"
-              class="icon icon-tabler icon-tabler-arrow-big-right" width="44" height="44" viewBox="0 0 24 24"
-              stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path
-                d="M4 9h8v-3.586a1 1 0 0 1 1.707 -.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1 -1.707 -.707v-3.586h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1z" />
-            </svg>
-          </span>
-
+            <span class="header__button--text">Add to Calendar</span>
+          </button>
         </div>
-      </div>
+      </header>
+    </section>
 
-      <div class="day-names__container">
-        <div class="day-name">Monday</div>
-        <div class="day-name">Tuesday</div>
-        <div class="day-name">Wednesday</div>
-        <div class="day-name">Thursday</div>
-        <div class="day-name">Friday</div>
-        <div class="day-name">Saturday</div>
-        <div class="day-name">Sunday</div>
-      </div>
+    <!-- ///////////////////////////// CALENDAR -->
 
-      <div id="calendar-container" class="calendar__div"></div>
-    </div>
-  </main>
-
-  <!-- //////////////////////////// MODAL -->
-  <section id="modal" class="hide-element">
-    <div id="modal-div" class="modal__div">
-      <h1 class="modal__h1">Add Event</h1>
-
-      <form id="form" class="modal__form">
-        <label for="title" class="modal__label">Title</label>
-        <input id="title" class="modal__input" type="text" placeholder="Title" required maxlength="20" minlength="1" />
-        <textarea placeholder="Description" rows="5" cols="40" maxlength="500" id="textDescription"
-          class="modal__input"></textarea>
-        <label for="date" class="modal__label">Date</label>
-        <input id="date" class="modal__input" type="date" value="2024-01-01" required />
-        <label for="time" class="modal__label">Time</label>
-        <input id="time" class="modal__input" type="time" required />
-        End Date and Time
-        <input id="checkbox" class="modal__input" type="checkbox" />
-        <label id='endDate-label' for="title" class="hide-element">End date</label>
-        <input id="endDate" class="hide-element" type="date" />
-        <label id="endTimeLabel" for="title" class="hide-element">End Time</label>
-
-        <input id="endTimeInput" class="hide-element" type="time">Set reminder
-        <label for="title">
-          <input type="checkbox" id="reminmderCheckbox" class="modal__input">
-        </label>
-        <select id="reminderTime" class="hide-element">
-          <option value="00:05">5 minuts before</option>
-          <option value="00:10">10 minuts before</option>
-          <option value="00:15">15 minuts before</option>
-          <option value="00:30">30 minuts before</option>
-          <option value="01:00">1 hour before</option>
-        </select>
-
-        <label for="eventType">Event Type:</label>
-        <select id="eventType" name="eventType" required>
-          <option value="Meeting">Meeting</option>
-          <option value="Party">Party</option>
-          <option value="Work">Work</option>
-          <option value="Conference">Conference</option>
-          <option value="Other">Other</option>
-        </select>
-
-        <button id="submit" class="modal__button">Save</button>
-
-        <div class="modal__div--close">
-          <span id="close" class="modal__button">Cancel</span>
+    <main class="calendar--container">
+      <div id="calendar" class="calendar">
+        <div class="calendar__header">
+          <div class="calendar--month__container">
+            <span class="calendar--month preserve-spaces" id="current-month">
+              January
+            </span>
+            <span class="preserve-spaces calendar--year" id="current-year"
+              >2024
+            </span>
+          </div>
+          <div class="calendar--arrow__container">
+            <span id="back-arrow" class="calendar--arrow"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-arrow-big-left"
+                width="44"
+                height="44"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="#fff"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M20 15h-8v3.586a1 1 0 0 1 -1.707 .707l-6.586 -6.586a1 1 0 0 1 0 -1.414l6.586 -6.586a1 1 0 0 1 1.707 .707v3.586h8a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1z"
+                />
+              </svg>
+            </span>
+            <span id="forward-arrow" class="calendar--arrow"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-arrow-big-right"
+                width="44"
+                height="44"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="#fff"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M4 9h8v-3.586a1 1 0 0 1 1.707 -.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1 -1.707 -.707v-3.586h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1z"
+                />
+              </svg>
+            </span>
+          </div>
         </div>
-      </form>
 
-    </div>
-  </section>
-  <div class="overlay hide-element"></div>
+        <div class="day-names__container">
+          <div class="day-name">Monday</div>
+          <div class="day-name">Tuesday</div>
+          <div class="day-name">Wednesday</div>
+          <div class="day-name">Thursday</div>
+          <div class="day-name">Friday</div>
+          <div class="day-name">Saturday</div>
+          <div class="day-name">Sunday</div>
+        </div>
 
-  <!------------------------->
-  <section id="event-info" class="hide-event">
-    <div class="event-info__div">
-      <p id="title-span" class="event-info__span"></p>
-      <p id="time-span" class="event-info__span"></p>
-      <p id="date-span" class="event-info__span"></p>
-      <p id="description-span" class="event-info__span"></p>
-      <p id="endDate-span" class="event-info__span"></p>
-      <p id="endTime-span" class="event-info__span"></p>
-      <p id="type-span" class="event-info__span"></p>
-    </div>
-    <div class="event-info__div--close">
-      <button id="delete-event" class="event-info__button">Delete</button>
-    </div>
+        <div id="calendar-container" class="calendar__div"></div>
+      </div>
+    </main>
 
-  </section>
+    <!-- //////////////////////////// MODAL -->
+    <section id="modal" class="hide-element">
+      <div id="modal-div" class="modal__div">
+        <h1 class="modal__h1">Add Event</h1>
 
-  <script type="module" src="/src/main.ts"></script>
-</body>
+        <form id="form" class="modal__form">
+          <label for="title" class="modal__label">Title</label>
+          <input
+            id="title"
+            class="modal__input"
+            type="text"
+            placeholder="Title"
+            required
+            maxlength="20"
+            minlength="1"
+          />
+          <textarea
+            placeholder="Description"
+            rows="5"
+            cols="40"
+            maxlength="500"
+            id="textDescription"
+            class="modal__input"
+          ></textarea>
+          <label for="date" class="modal__label">Date</label>
+          <input
+            id="date"
+            class="modal__input"
+            type="date"
+            value="2024-01-01"
+            required
+          />
+          <label for="time" class="modal__label">Time</label>
+          <input id="time" class="modal__input" type="time" required />
+          End Date and Time
+          <input id="checkbox" class="modal__input" type="checkbox" />
+          <label id="endDate-label" for="title" class="hide-element"
+            >End date</label
+          >
+          <input id="endDate" class="hide-element" type="date" />
+          <label id="endTimeLabel" for="title" class="hide-element"
+            >End Time</label
+          >
 
+          <input id="endTimeInput" class="hide-element" type="time" />Set
+          reminder
+          <label for="title">
+            <input type="checkbox" id="reminderCheckbox" class="modal__input" />
+          </label>
+          <select id="reminderTime" class="hide-element">
+            <option value="00:05">5 minuts before</option>
+            <option value="00:10">10 minuts before</option>
+            <option value="00:15">15 minuts before</option>
+            <option value="00:30">30 minuts before</option>
+            <option value="01:00">1 hour before</option>
+          </select>
+
+          <label for="eventType">Event Type:</label>
+          <select id="eventType" name="eventType" required>
+            <option value="Meeting">Meeting</option>
+            <option value="Party">Party</option>
+            <option value="Work">Work</option>
+            <option value="Conference">Conference</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <button id="submit" class="modal__button">Save</button>
+
+          <div class="modal__div--close">
+            <span id="close" class="modal__button">Cancel</span>
+          </div>
+        </form>
+      </div>
+    </section>
+    <div class="overlay hide-element"></div>
+
+    <!------------------------->
+    <section id="event-info" class="hide-event">
+      <div class="event-info__div">
+        <p id="title-span" class="event-info__span"></p>
+        <p id="time-span" class="event-info__span"></p>
+        <p id="date-span" class="event-info__span"></p>
+        <p id="description-span" class="event-info__span"></p>
+        <p id="endDate-span" class="event-info__span"></p>
+        <p id="endTime-span" class="event-info__span"></p>
+        <p id="type-span" class="event-info__span"></p>
+      </div>
+      <div class="event-info__div--close">
+        <button id="delete-event" class="event-info__button">Delete</button>
+      </div>
+    </section>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

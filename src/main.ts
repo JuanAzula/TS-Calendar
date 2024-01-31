@@ -3,54 +3,52 @@ import {
   currentMonth,
   currentYear,
 } from "./components/Calendar";
-import { StoreEvent, checkIsPastEvent, deleteEvent } from "./components/Modal";
-import { checkIsPastEventWithReminder, getReminderDuration } from "./components/Reminder";
+import {
+  StoreEvent,
+  checkIsPastEvent,
+  //deleteEvent,
+  hideModal,
+} from "./components/Modal";
+import {
+  checkIsPastEventWithReminder,
+  getReminderDuration,
+} from "./components/Reminder";
+import { eventButton, label, modal, overlay } from "./consts/domConsts";
 
 import { Event, EventType, Reminder } from "./interfaces/event";
 
-document.addEventListener("DOMContentLoaded", () => {
-  // getEvents();
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   // getEvents();
+// });
 
+//Creates calendar when page is loaded
+createCalendar(currentMonth, currentYear);
 
-// ///////// EVENT LISTENERS FOR ADD EVENT BUTTON
-const eventButton = document.getElementById("add-event");
-const label = document.querySelector("#add-event .header__button--text");
-const modal = document.getElementById("modal");
-const overlay = document.querySelector(".overlay");
-
+//Opens modal when 'add to calendar' button is clicked
 if (
   eventButton &&
   overlay &&
   modal &&
-  eventButton instanceof HTMLButtonElement
+  eventButton 
 ) {
   eventButton.addEventListener("click", () => {
     overlay.classList.remove("hide-element");
     modal.classList.remove("hide-element");
     const event = localStorage.getItem("events");
-    //console.log(event);
+    console.log(event);
   });
 }
 
-if (label && modal && label instanceof HTMLSpanElement) {
+if (label && modal && label) {
   label.addEventListener("click", () => {
     modal.classList.remove("hide-element");
   });
 }
 
-// ///////// EVENT LISTENERS FOR CLOSE BUTTON
-const closeModal = document.getElementById("close");
 
-if (closeModal && closeModal instanceof HTMLSpanElement) {
-  closeModal?.addEventListener("click", () => {
-    overlay?.classList.add("hide-element");
-    modal?.classList.add("hide-element");
-  });
-}
 
-// ///////// CALENDAR
-createCalendar(currentMonth, currentYear);
+
+
 
 // //////// EVENT LISTENERS FOR CHECKBOX END DATE
 
@@ -83,13 +81,13 @@ endDateCheckbox.addEventListener("click", () => {
 
 //////// EVENT LISTENERS FOR CHECKBOX REMINDER
 
-const reminmderCheckbox = document.getElementById("reminmderCheckbox");
+const reminderCheckbox = document.getElementById("reminderCheckbox");
 const reminderTime = document.getElementById("reminderTime");
 
 let isCheckboxVisible = false;
 
-if (reminmderCheckbox && reminmderCheckbox instanceof HTMLInputElement) {
-  reminmderCheckbox.addEventListener("click", () => {
+if (reminderCheckbox && reminderCheckbox instanceof HTMLInputElement) {
+  reminderCheckbox.addEventListener("click", () => {
     if (isCheckboxVisible) {
       reminderTime?.classList.add("hide-element");
     } else {
@@ -99,40 +97,13 @@ if (reminmderCheckbox && reminmderCheckbox instanceof HTMLInputElement) {
   });
 }
 
-// //////// EVENT LISTENERS FOR CLOSE MODAL
-document.addEventListener("keydown", (event) => {
-  if (overlay && overlay instanceof HTMLDivElement) {
-    overlay?.addEventListener("click", () => {
-      overlay.classList.add("hide-element");
-      modal?.classList.add("hide-element");
-    });
-  }
-  if (event.key === "Escape") {
-    const modal = document.getElementById("modal");
-    const eventContainer = document.getElementById("event-info");
-    modal?.classList.add("hide-element");
-    eventContainer?.classList.replace("event--info", "hide-event");
-    overlay?.classList.add("hide-element");
-  }
-});
-
-overlay?.addEventListener("click", () => {
-  const modal = document.getElementById("modal");
-  const eventContainer = document.getElementById("event-info");
-  modal?.classList.add("hide-element");
-  eventContainer?.classList.replace("event--info", "hide-event");
-  overlay?.classList.add("hide-element");
-});
-
-//  /////// EVENT LISTENERS FOR SUBMIT BUTTON
-
 const submitButton = document.getElementById("submit");
 const title = document.getElementById("title");
 const date = document.getElementById("date");
 const time = document.getElementById("time");
 const endDate = document.getElementById("endDate");
 const endTime = document.getElementById("endTimeInput");
-const reminderDuration = document.getElementById("reminderTime")
+const reminderDuration = document.getElementById("reminderTime");
 const textDescription = document.getElementById("textDescription");
 const typeSelected = document.getElementById("eventType");
 
@@ -148,84 +119,60 @@ if (
   endDate &&
   endDate instanceof HTMLInputElement &&
   endTime &&
-  endTime instanceof HTMLInputElement && textDescription instanceof HTMLTextAreaElement && typeSelected instanceof HTMLSelectElement &&
-  reminderDuration && reminderDuration instanceof HTMLSelectElement
+  endTime instanceof HTMLInputElement &&
+  textDescription instanceof HTMLTextAreaElement &&
+  typeSelected instanceof HTMLSelectElement &&
+  reminderDuration &&
+  reminderDuration instanceof HTMLSelectElement
 ) {
-  submitButton?.addEventListener("click", (event) => {
-    event?.preventDefault();
+  submitButton.addEventListener("click", (event) => {
+    event.preventDefault();
     if (!title?.value || !date?.value || !time?.value) {
       alert("The title, date and time can not be empty!");
-      return; // Salir de la función de manejo de eventos sin ejecutar el código restante
+      return; 
     }
 
-    const titleValue = title?.value;
-    const dateValueString = date?.value;
+    const titleValue = title.value;
+    const dateValueString = date.value;
     const dateValue = new Date(dateValueString);
-    const timeValueString = time?.value;
+    const timeValueString = time.value;
     const timeValue = convertHour(timeValueString, dateValue);
     const completeDate = getCompleteDate(dateValue, timeValue);
     const reminderValue = reminderDuration.value;
     console.log(completeDate);
-    const endDateValueString = endDate?.value; // pasar a date
+    const endDateValueString = endDate.value; // pasar a date
     const endDateValue = new Date(endDateValueString);
-    const endTimeValueString = endTime?.value;
+    const endTimeValueString = endTime.value;
     const endTimeValue = convertHour(endTimeValueString, endDateValue);
     const completeEndDate = getCompleteDate(endDateValue, endTimeValue);
-    const descriptionValue = textDescription?.value;
-    const typeValue = typeSelected?.value;
-    //console.log(reminderValue);
+    const descriptionValue = textDescription.value;
+    const typeValue = typeSelected.value;
+    console.log(reminderValue);
     const eventObject: Event = {
       title: titleValue,
       description: descriptionValue,
-      dateString: dateValueString,//coger description del formulario
+      dateString: dateValueString, //coger description del formulario
       date: dateValue,
       time: timeValue,
       timeString: timeValueString,
       completeDate: completeDate,
       startDateTimestamp: getTimestamp(completeDate),
-      endDate: completeEndDate, //hay que cambiarlo
+      endDate: completeEndDate, 
       endDateString: endDateValueString,
-      endTime: endTimeValue, //hay que cambiarlo
+      endTime: endTimeValue, 
       endTimeString: endTimeValueString,
-      type: convertToTypeEnum(typeValue), //coger reminder del formulario
-      reminder: convertToReminderEnum(reminderValue),//coger reminder del formulario
+      type: convertToTypeEnum(typeValue), 
+      reminder: convertToReminderEnum(reminderValue), 
     };
 
     StoreEvent(eventObject);
-    overlay?.classList.add("hide-element");
-    modal?.classList.add("hide-element");
+    hideModal();
     title.value = "";
     date.value = "";
     time.value = "";
     textDescription.value = "";
-
-  })
+  });
 }
-
-// /////// DELETE EVENT
-
-const deleteButton = document.getElementById("delete-event");
-
-if (deleteButton && deleteButton instanceof HTMLButtonElement) {
-  deleteButton?.addEventListener("click", () => {
-    const modal = document.getElementById("modal");
-    const eventContainer = document.getElementById("event-info");
-
-    const eventTitle = document.getElementById("title-span")?.textContent;
-    const eventDate = document.getElementById("date-span")?.textContent;
-
-    if (eventTitle && eventDate) {
-      deleteEvent(eventTitle, eventDate);
-    }
-
-    modal?.classList.add("hide-element");
-    eventContainer?.classList.replace("event--info", "hide-event");
-    overlay?.classList.add("hide-element");
-
-  })
-}
-
-
 
 
 function convertHour(time: string, date: Date) {
@@ -255,8 +202,8 @@ function getCompleteDate(date: Date, hours: number) {
 function getTimestamp(date: Date) {
   const eventDate = new Date(date);
   //console.log(eventDate);
-  const eventDateMS = eventDate.getTime()
-  return eventDateMS
+  const eventDateMS = eventDate.getTime();
+  return eventDateMS;
 }
 
 function convertToReminderEnum(value: string): Reminder | null {
@@ -293,14 +240,12 @@ function convertToTypeEnum(value: string): EventType | null {
   }
 }
 
-
-
 //checkEvents(sortEvents())
 
 const eventsWithAlertShown = new Set<string>(); // Conjunto para almacenar los IDs de los eventos con alerta mostrada
 
 function checkEventsWithReminder() {
-  let eventsTotal = []
+  let eventsTotal = [];
   const events = localStorage.getItem("events");
   if (events) {
     eventsTotal = JSON.parse(events);
@@ -312,28 +257,38 @@ function checkEventsWithReminder() {
     const eventDateMS = eventDate.getTime();
     if (event.endDate) {
       checkIsPastEvent(event.endDate);
-
     }
-    if (event.reminder && checkIsPastEventWithReminder(event) && !eventsWithAlertShown.has(eventId)) {
+    if (
+      event.reminder &&
+      checkIsPastEventWithReminder(event) &&
+      !eventsWithAlertShown.has(eventId)
+    ) {
       const reminderTime = getReminderDuration(event.reminder);
       console.log(reminderTime);
       const newCurrentDateMS = Date.now();
       const difference = eventDateMS - newCurrentDateMS;
-      console.log("EventDateMS:", eventDateMS, "newCurrentDateMS:", newCurrentDateMS, "reminderTime:", reminderTime);
+      console.log(
+        "EventDateMS:",
+        eventDateMS,
+        "newCurrentDateMS:",
+        newCurrentDateMS,
+        "reminderTime:",
+        reminderTime
+      );
       console.log(difference);
       if (difference <= reminderTime) {
         alert(
-          `Your event ${event.title
+          `Your event ${
+            event.title
           } will start at ${eventDate.toLocaleTimeString()}.`
         );
         eventsWithAlertShown.add(eventId);
       } else {
-        console.log('no hay alerta');
+        console.log("no hay alerta");
       }
     }
-
-  })
+  });
   setTimeout(checkEventsWithReminder, 1000);
-};
+}
 
-checkEventsWithReminder()
+checkEventsWithReminder();
