@@ -8,10 +8,6 @@ import { checkIsPastEventWithReminder, getReminderDuration } from "./components/
 
 import { Event, EventType, Reminder } from "./interfaces/event";
 
-document.addEventListener("DOMContentLoaded", () => {
-  // getEvents();
-});
-
 
 // ///////// EVENT LISTENERS FOR ADD EVENT BUTTON
 const eventButton = document.getElementById("add-event");
@@ -28,8 +24,6 @@ if (
   eventButton.addEventListener("click", () => {
     overlay.classList.remove("hide-element");
     modal.classList.remove("hide-element");
-    const event = localStorage.getItem("events");
-    console.log(event);
   });
 }
 
@@ -155,7 +149,7 @@ if (
     event?.preventDefault();
     if (!title?.value || !date?.value || !time?.value) {
       alert("The title, date and time can not be empty!");
-      return; // Salir de la función de manejo de eventos sin ejecutar el código restante
+      return;
     }
 
     const titleValue = title?.value;
@@ -165,30 +159,28 @@ if (
     const timeValue = convertHour(timeValueString, dateValue);
     const completeDate = getCompleteDate(dateValue, timeValue);
     const reminderValue = reminderDuration.value;
-    console.log(completeDate);
-    const endDateValueString = endDate?.value; // pasar a date
+    const endDateValueString = endDate?.value;
     const endDateValue = new Date(endDateValueString);
     const endTimeValueString = endTime?.value;
     const endTimeValue = convertHour(endTimeValueString, endDateValue);
     const completeEndDate = getCompleteDate(endDateValue, endTimeValue);
     const descriptionValue = textDescription?.value;
     const typeValue = typeSelected?.value;
-    console.log(reminderValue);
     const eventObject: Event = {
       title: titleValue,
       description: descriptionValue,
-      dateString: dateValueString,//coger description del formulario
+      dateString: dateValueString,
       date: dateValue,
       time: timeValue,
       timeString: timeValueString,
       completeDate: completeDate,
       startDateTimestamp: getTimestamp(completeDate),
-      endDate: completeEndDate, //hay que cambiarlo
+      endDate: completeEndDate,
       endDateString: endDateValueString,
-      endTime: endTimeValue, //hay que cambiarlo
+      endTime: endTimeValue,
       endTimeString: endTimeValueString,
-      type: convertToTypeEnum(typeValue), //coger reminder del formulario
-      reminder: convertToReminderEnum(reminderValue),//coger reminder del formulario
+      type: convertToTypeEnum(typeValue),
+      reminder: convertToReminderEnum(reminderValue)
     };
 
     StoreEvent(eventObject);
@@ -235,15 +227,9 @@ function convertHour(time: string, date: Date) {
   const hours = parseInt(parts[0], 10); // Convert the hours part to number
   const minutes = parseInt(parts[1], 10); // Convert the minutes part to number
 
-  // Create a new Date object (this will create a date with the current time)
-  //date.setHours = new Date();
-
   // Set the hours and minutes to the Date object
   date.setHours(hours, minutes, 0, 0); // The last two zeros are for seconds and milliseconds
 
-  // // Now you can use date to get the hours and minutes if needed
-  // const setHours = date.getHours(); // Get the hours
-  // const setMinutes = date.getMinutes(); // Get the minutes// Obtener los minutos
   return date.getHours();
 }
 
@@ -254,7 +240,6 @@ function getCompleteDate(date: Date, hours: number) {
 
 function getTimestamp(date: Date) {
   const eventDate = new Date(date);
-  //console.log(eventDate);
   const eventDateMS = eventDate.getTime()
   return eventDateMS
 }
@@ -295,9 +280,8 @@ function convertToTypeEnum(value: string): EventType | null {
 
 
 
-//checkEvents(sortEvents())
 
-const eventsWithAlertShown = new Set<string>(); // Conjunto para almacenar los IDs de los eventos con alerta mostrada
+const eventsWithAlertShown = new Set<string>();
 
 function checkEventsWithReminder() {
   let eventsTotal = []
@@ -316,19 +300,14 @@ function checkEventsWithReminder() {
     }
     if (event.reminder && checkIsPastEventWithReminder(event) && !eventsWithAlertShown.has(eventId)) {
       const reminderTime = getReminderDuration(event.reminder);
-      console.log(reminderTime);
       const newCurrentDateMS = Date.now();
       const difference = eventDateMS - newCurrentDateMS;
-      console.log("EventDateMS:", eventDateMS, "newCurrentDateMS:", newCurrentDateMS, "reminderTime:", reminderTime);
-      console.log(difference);
       if (difference <= reminderTime) {
         alert(
           `Your event ${event.title
           } will start at ${eventDate.toLocaleTimeString()}.`
         );
         eventsWithAlertShown.add(eventId);
-      } else {
-        console.log('no hay alerta');
       }
     }
 

@@ -30,7 +30,6 @@ const formatWithZero: (num: number) => string = (num) => (num < 10 ? `0${num}` :
 // Format the date in YYYY-MM-DD format using string template literals
 const formattedDate: string = `${year}-${formatWithZero(month)}-${formatWithZero(day)}`;
 
-console.log(formattedDate);
 
 
 export function createCalendar(month: Months, year: number): void {
@@ -44,13 +43,11 @@ export function createCalendar(month: Months, year: number): void {
   if (calendarGrid) {
     calendarGrid.innerHTML = "";
 
-    // Omplir els dies anteriors al primer dia del mes
     for (let i = 0; i < firstDayAdjusted; i++) {
       let emptyCell = document.createElement("div");
       calendarGrid.appendChild(emptyCell);
     }
 
-    // Omplir amb els dies del mes
     for (let day = 1; day <= daysInMonth; day++) {
       let dayCell = document.createElement("div");
       dayCell?.classList.add("day-item");
@@ -63,10 +60,8 @@ export function createCalendar(month: Months, year: number): void {
       dayButton.classList.add("hide-element");
       dayButton.textContent = "add";
 
-      const monthValue = month.toString(); // Asegurarse de que el mes tenga al menos dos dígitos
-      // console.log("hola" + monthValue);
+      const monthValue = month.toString();
       if (monthValue == '11' || monthValue == '10' || monthValue == '12') {
-        // console.log('squad');
 
         const dateValue = `${year}-${monthValue}-${day
           .toString()
@@ -75,9 +70,7 @@ export function createCalendar(month: Months, year: number): void {
         dayButton.setAttribute("data-date", dateValue);
         dayCell.appendChild(dayButton);
         calendarGrid.appendChild(dayCell);
-        // console.log(dayCell.getAttribute("data-date"));
       } else {
-        // console.log('hamilton');
         const dateValue = `${year}-0${monthValue}-${day
           .toString()
           .padStart(2, "0")}`;
@@ -86,10 +79,8 @@ export function createCalendar(month: Months, year: number): void {
 
         dayCell.appendChild(dayButton);
         calendarGrid.appendChild(dayCell);
-        // console.log(dayCell.getAttribute("data-date"));
       }
       if (dayCell) {
-        // Acceder al atributo 'data-mi-atributo'
         const attribute: string | null = dayCell.getAttribute('data-date');
         const dateValue = `${year}-0${monthValue}-${day
           .toString()
@@ -169,7 +160,6 @@ export function createCalendar(month: Months, year: number): void {
 
 
 
-          console.log(button.getAttribute('data-date'));
         })
       })
     }
@@ -191,7 +181,6 @@ export function createCalendar(month: Months, year: number): void {
 
 
 
-          console.log(button.getAttribute('data-date'));
         })
       })
     }
@@ -212,25 +201,19 @@ const forwardArrow = document.getElementById(
 ) as HTMLSpanElement;
 
 backArrow.addEventListener("click", () => {
-  console.log("hola");
   changeMonth(currentMonth, -1);
 });
 
 forwardArrow.addEventListener("click", () => changeMonth(currentMonth, 1));
 
-// function getMonthName(month: Months): string {
-//     return Months[month];}
 
-//Change month
 function changeMonth(current: Months, change: number): void {
-  //   const newMonth = (current + change + 12) % 12;
   let newMonth: Months;
   let newYear: number;
 
   const currentMonthSpan = document.getElementById(
     "current-month"
   ) as HTMLSpanElement;
-  // console.log(currentMonthSpan);
   currentMonthSpan?.classList.add("preserve-spaces");
   currentMonthSpan?.classList.remove("month");
   void currentMonthSpan?.offsetWidth;
@@ -282,13 +265,11 @@ function changeMonth(current: Months, change: number): void {
 
   currentMonth = newMonth;
   currentYear = newYear;
-  // console.log(currentMonth, currentYear);
 }
 
 
 
 
-// Pots cridar aquesta funció amb el mes i any actuals
 export let currentMonth: Months = new Date().getMonth() + 1;
 export let currentYear: number = new Date().getFullYear();
 createCalendar(currentMonth, currentYear);

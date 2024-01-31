@@ -6,16 +6,13 @@ let eventsTotal: Event[] = [];
 
 export const StoreEvent = (event: Event) => {
     if (event.title && event.date && event.time) {
-        // Obtener la lista actual de eventos del localStorage
         const previousEvents = localStorage.getItem("events");
         if (previousEvents) {
             eventsTotal = JSON.parse(previousEvents);
         }
 
-        // Agregar el nuevo evento a la lista
         eventsTotal.push(event);
 
-        // Guardar la lista actualizada en el localStorage
         localStorage.setItem("events", JSON.stringify(eventsTotal));
 
         createCalendar(currentMonth, currentYear);
@@ -25,7 +22,6 @@ export const StoreEvent = (event: Event) => {
 export function getEvents() {
     const previousEvents = localStorage.getItem("events");
 
-    // const previousEvents = localStorage.getItem("events");
     if (previousEvents) {
         eventsTotal = JSON.parse(previousEvents);
     }
@@ -65,8 +61,6 @@ export function getEvents() {
         endTimeSpan.classList.add("hide-element");
         eventTime.classList.add("hide-element");
 
-        // eventTime.classList.add("hide-element", "event--tooltip");
-        // eventTime.classList.add("event--tooltip");
         eventDetails.classList.add("event--tooltip");
         if (event.endDate) {
 
@@ -77,7 +71,6 @@ export function getEvents() {
 
             if (isPastEvent) {
                 eventDiv.classList.add("past-event");
-                console.log("is past event");
             }
         } else {
             const isPastEvent = checkIsPastEvent(event.date);
@@ -87,7 +80,6 @@ export function getEvents() {
 
             if (isPastEvent) {
                 eventDiv.classList.add("past-event");
-                console.log("is past event");
             }
 
         }
@@ -102,29 +94,23 @@ export function getEvents() {
         eventDiv.appendChild(endTimeSpan);
         eventDiv.appendChild(eventDetails);
 
-        //console.log(event.date);
         const dayDiv = document.querySelector(
             `.day-item[data-date='${event.dateString}']`
         );
         const activeDayDiv = document.querySelector(
             `.current-day-item[data-date='${event.dateString}']`
         )
-        console.log(dayDiv);
         const dateDiv = dayDiv?.getAttribute("data-date");
         const activeDateDiv = activeDayDiv?.getAttribute("data-date");
 
         if (activeDateDiv !== null && activeDateDiv == event.dateString) {
-            console.log("Active date found");
             activeDayDiv?.appendChild(eventDiv);
         } else {
-            console.log("No active date found");
         }
 
         if (dateDiv !== null && dateDiv == event.dateString) {
-            console.log("Date found");
             dayDiv?.appendChild(eventDiv);
         } else {
-            console.log("No date found");
         }
 
         eventDiv.addEventListener("click", () => {
@@ -215,7 +201,6 @@ if (dayButton) {
                 date.value = dataDate;
             }
 
-            console.log(button.getAttribute("data-date"));
         });
     });
 }
@@ -229,7 +214,6 @@ export function checkIsPastEvent(startDate: Date): boolean {
 export function deleteEvent(title: string, date: string) {
     const previousEvents = localStorage.getItem("events");
     let eventsTotalFilter: any = [];
-    console.log("título: ", title, date);
 
     if (previousEvents) {
         eventsTotal = JSON.parse(previousEvents);
@@ -239,7 +223,6 @@ export function deleteEvent(title: string, date: string) {
             const eventDate = "Date: " + event.dateString;
 
             if (eventTitle !== title || eventDate !== date) {
-                console.log(event.title, title, event.dateString, eventDate, date);
                 eventsTotalFilter.push(event);
             }
         });
@@ -252,14 +235,11 @@ export function deleteEvent(title: string, date: string) {
 export function sortEvents() {
     const previousEvents = localStorage.getItem("events");
 
-    // const previousEvents = localStorage.getItem("events");
     if (previousEvents) {
         eventsTotal = JSON.parse(previousEvents);
     }
 
     eventsTotal.sort((a, b) => a.startDateTimestamp - b.startDateTimestamp);
-    console.log(eventsTotal);
     return eventsTotal;
 }
 
-//sortEvents()
