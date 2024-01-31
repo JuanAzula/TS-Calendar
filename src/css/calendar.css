@@ -83,8 +83,8 @@
     display: grid;
     grid-template-rows: repeat(5, 1fr);
     grid-template-columns: repeat(7, 1fr);
-    padding-left: 2rem;
-    padding-right: 1rem;
+    padding-left: 0rem;
+    padding-right: 0.4rem;
     background-color: rgba(255, 255, 255, 0.183);
     border-bottom-right-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
