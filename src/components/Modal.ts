@@ -4,33 +4,36 @@ import { createCalendar, currentMonth, currentYear } from "./Calendar";
 
 let eventsTotal: Event[] = [];
 
+// StoreEvent function to save events to localStorage
 export const StoreEvent = (event: Event) => {
     if (event.title && event.date && event.time) {
-        // Obtener la lista actual de eventos del localStorage
+        // Get the current list of events from localStorage
         const previousEvents = localStorage.getItem("events");
         if (previousEvents) {
             eventsTotal = JSON.parse(previousEvents);
         }
 
-        // Agregar el nuevo evento a la lista
+        // Add the new event to the list
         eventsTotal.push(event);
 
-        // Guardar la lista actualizada en el localStorage
+        // Save the updated list to localStorage
         localStorage.setItem("events", JSON.stringify(eventsTotal));
 
+        // Update the calendar display
         createCalendar(currentMonth, currentYear);
     }
 };
 
+// Function to retrieve and display events from localStorage
 export function getEvents() {
     const previousEvents = localStorage.getItem("events");
 
-    // const previousEvents = localStorage.getItem("events");
     if (previousEvents) {
         eventsTotal = JSON.parse(previousEvents);
     }
 
     eventsTotal.forEach((event: Event) => {
+        // Create elements for displaying events
         const eventDiv = document.createElement("div");
         eventDiv.classList.add("event");
 
@@ -61,42 +64,42 @@ export function getEvents() {
             " End Time: " +
             event.endTime;
 
+        // Hide certain elements initially
         endDateSpan.classList.add("hide-modal");
         endTimeSpan.classList.add("hide-modal");
         eventTime.classList.add("hide-modal");
-
-        // eventTime.classList.add("hide-modal", "event--tooltip");
-        // eventTime.classList.add("event--tooltip");
         eventDetails.classList.add("event--tooltip");
+
+        // Check if the event is in the past and has a reminder
         const isPastEvent = checkIsPastEvent(event.date);
         if (!isPastEvent && event.reminder) {
             setReminder(event);
         }
 
+        // Add CSS classes for past events
         if (isPastEvent) {
             eventDiv.classList.add("past-event");
         }
 
+        // Append elements to the eventDiv
         eventDiv.appendChild(eventName);
         eventDiv.appendChild(eventTime);
         eventDiv.appendChild(endDateSpan);
         eventDiv.appendChild(endTimeSpan);
         eventDiv.appendChild(eventDetails);
 
-        //console.log(event.date);
+        // Find the corresponding dayDiv in the calendar
         const dayDiv = document.querySelector(
             `.day-item[data-date='${event.dateString}']`
         );
-        console.log(dayDiv);
-        const dateDiv = dayDiv?.getAttribute("data-date");
 
+        // Append the eventDiv to the dayDiv
+        const dateDiv = dayDiv?.getAttribute("data-date");
         if (dateDiv !== null && dateDiv == event.dateString) {
-            console.log("Date found");
             dayDiv?.appendChild(eventDiv);
-        } else {
-            console.log("No date found");
         }
 
+        // Event click listener to show event details
         eventDiv.addEventListener("click", () => {
             const eventContainer = document.getElementById("event-info");
             const overlay = document.querySelector(".overlay");
@@ -105,7 +108,7 @@ export function getEvents() {
             eventTime.classList.add("hide-modal");
             overlay?.classList.remove("hide-modal");
 
-
+            // Display event details in the modal
             const titleSpan: any = document.getElementById("title-span");
             const timeSpan: any = document.getElementById("time-span");
             const dateSpan: any = document.getElementById("date-span");
@@ -117,39 +120,41 @@ export function getEvents() {
             titleSpan.textContent = "Title: " + event.title;
             timeSpan.textContent = "Time: " + event.timeString;
             dateSpan.textContent = "Date: " + event.dateString;
+
+            // Display optional details if they exist
             if (event.description === undefined || event.description === "") {
                 descriptionSpan.textContent = "";
             } else {
                 descriptionSpan.textContent = "Description: " + event.description;
             }
+
             if (event.type === undefined) {
                 typeSpan.textContent = "";
             } else {
                 typeSpan.textContent = "Type: " + event.type;
             }
+
             if (event.endDateString === null || event.endDateString === "") {
                 endDateSpan.textContent = "";
             } else {
                 endDateSpan.textContent = "End Date: " + event.endDate;
             }
+
             if (event.endTimeString === null || event.endTimeString === "") {
                 endTimeSpan.textContent = "";
             } else {
                 endTimeSpan.textContent = "End Time: " + event.endTime;
-
-
             }
         });
     });
 }
-
-// /////// ADD DAYCELL EVENT
-
+// Add event listeners to day cells for hover effect
 const dayCells: any = document.querySelectorAll(".day-item");
 const dayButton: any = document.querySelectorAll(".day-item .day__button");
 
 if (dayCells) {
     dayCells.forEach((dayCell: any) => {
+        // Show add button on mouseover
         dayCell.addEventListener("mouseover", () => {
             const dayData = dayCell.getAttribute("data-date");
             const addButton = document.querySelector(
@@ -158,6 +163,8 @@ if (dayCells) {
 
             addButton?.classList.remove("hide-modal");
         });
+
+        // Hide add button on mouseout
         dayCell.addEventListener("mouseout", () => {
             const dayData = dayCell.getAttribute("data-date");
             const addButton = document.querySelector(
@@ -170,8 +177,10 @@ if (dayCells) {
 }
 
 if (dayButton) {
+    // Add event listener to day buttons for click effect
     dayButton.forEach((button: any) => {
         button.addEventListener("click", () => {
+            // Show modal on button click
             const modal = document.getElementById("modal");
             const overlay = document.querySelector(".overlay");
             const date = document.getElementById("date");
@@ -179,8 +188,8 @@ if (dayButton) {
             modal?.classList.remove("hide-modal");
             overlay?.classList.remove("hide-modal");
 
+            // Set the date value in the modal
             const dataDate = button.getAttribute("data-date");
-
             if (date && date instanceof HTMLInputElement) {
                 date.value = dataDate;
             }
@@ -190,21 +199,24 @@ if (dayButton) {
     });
 }
 
+// Function to check if an event is in the past
 function checkIsPastEvent(startDate: Date) {
     const startTime = new Date(startDate).getTime();
     const now = new Date().getTime();
     return startTime < now;
 }
 
+// Function to delete an event and update the calendar
 export function deleteEvent(title: string, date: string) {
     const previousEvents = localStorage.getItem("events");
     let eventsTotalFilter: any = [];
-    console.log("título: ", title, date);
+    console.log("title: ", title, date);
 
     if (previousEvents) {
         eventsTotal = JSON.parse(previousEvents);
 
         eventsTotal.forEach((event: Event) => {
+            // Check if the event matches the provided title and date
             const eventTitle = "Title: " + event.title;
             const eventDate = "Date: " + event.date;
 
@@ -214,7 +226,9 @@ export function deleteEvent(title: string, date: string) {
             }
         });
 
+        // Update localStorage with the filtered events
         localStorage.setItem("events", JSON.stringify(eventsTotalFilter));
+        // Update the calendar display
         createCalendar(currentMonth, currentYear);
     }
 }

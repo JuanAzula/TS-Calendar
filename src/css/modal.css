@@ -1,11 +1,14 @@
+/* Hide modal class */
 .hide-modal {
     display: none;
 }
 
+/* Hide event class */
 .hide-event {
     display: none;
 }
 
+/* Styles for event information */
 .event--info {
     display: flex;
     flex-direction: column;
@@ -24,50 +27,45 @@
     z-index: 3;
 }
 
+/* Styles for event information div */
 .event-info__div {
-    /* border: 1px solid black; */
-    /* border-radius: 0.5rem; */
     height: 79%;
     width: 90%;
     padding: 2rem;
     background-color: var(--indigo-500);
     z-index: 6;
-
 }
 
-/* .event-info span {} */
-
+/* Styles for event information span */
 .event-info__div .event-info__span {
     color: white;
-    /* height: 100%; */
-    /* width: 100%; */
     z-index: 6;
 }
 
+/* Styles for overlay */
 .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    /* background-color: rgba(0, 0, 0, 0.6); */
-    backdrop-filter: blur(3px);
+    height: 100rem;
+    backdrop-filter: blur(4px);
     z-index: 3;
 }
 
+/* Styles for modal heading */
 .modal__h1 {
     margin-top: 2rem;
 }
 
+/* Styles for modal div */
 .modal__div {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
-
     overflow-y: scroll;
-
     background-color: var(--indigo-200);
     padding: 1rem;
     border-radius: 0.5rem;
@@ -79,41 +77,56 @@
     height: 40rem;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
     z-index: 5;
-    border: 1px solid black
+    border: 1px solid black;
+}
+.modal__label{
+   display: none;
+}
+.checkbox{
+    margin-right: 20rem;
 }
 
+/* Styles for modal form */
 .modal__form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.5rem;
     width: 100%;
     height: 100%;
+    
 }
 
+/* Styles for modal button */
 .modal__button {
+    display: flex;
+    flex-direction: row;
     cursor: pointer;
     border-radius: 0.5rem;
     border: 1px solid black;
     padding: 4px 12px;
-    letter-spacing: 1px;
+    
     margin-bottom: 7px;
     background: var(--indigo-50);
 }
 
+/* Styles for modal button on hover */
 .modal__button:hover {
     background: var(--indigo-500);
 }
 
+/* Styles for modal input */
 .modal__input {
     width: 100%;
-    /* cursor: pointer; */
+    cursor: pointer;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    border: 1px solid black
+    border: 1px solid black;
+    margin: 0.3rem;
 }
 
+/* Styles for events */
 .event {
     cursor: pointer;
     border: 1px solid black;
@@ -123,6 +136,7 @@
     background-color: var(--indigo-100);
 }
 
+/* Styles for event tooltip */
 .event--tooltip {
     position: absolute;
     top: 100%;
@@ -139,11 +153,15 @@
     font-size: 12px;
 }
 
+/* Hover effect for events */
 .event:hover {
     transform: translateY(-0px);
 }
 
+/* Hover effect for event tooltip */
 .event:hover .event--tooltip {
     visibility: visible;
     opacity: 1;
 }
+
+

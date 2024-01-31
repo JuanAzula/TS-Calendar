@@ -11,13 +11,13 @@
 }
 
 .calendar {
-    max-width: 70rem;
+    width: 70rem;
     max-height: 80%;
     border:1px solid rgb(255, 255, 255);
-    /* box-shadow: 3px 3px 30px rgb(255, 255, 255); */
+    box-shadow: 0px 100px 60px rgb(163, 163, 163);
     border-radius: 0.5rem;
-    margin-top: 4%;
-
+    margin-top: 2%;
+    margin-bottom: 30rem;
     background-color: white;
 }
 
@@ -27,16 +27,18 @@
     height: 100%;
     align-items: center;
     justify-content: center;
+
 }
 
 .calendar__header {
     display: flex;
-    padding-top: 4rem;
+    padding-top: 0.5rem;
     justify-content: center;
     align-items: center;
-    background-color: rgb(223, 239, 254);
+    background-color: rgb(240, 240, 240);
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
+   
 }
 
 
@@ -45,13 +47,13 @@
     font-weight: 600;
     margin-right: 1rem;
     margin-left: 2%;
-    color: var(--indigo-600);
+    color: rgb(66, 66, 66);
 }
 
 .calendar--year {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--indigo-600);
+    color: rgb(66, 66, 66);
 }
 
 
@@ -62,30 +64,29 @@
     /* padding-left: 2rem; */
     border-bottom: 1px solid rgb(240, 240, 240);
     box-shadow: 0px 2px 10px rgb(179, 179, 179, 00.2rem);
-    background-color: rgb(223, 239, 254);
+    background-color: rgb(240, 240, 240);
     /* height: 5rem; */
     width: 100%;
     /* margin-left: 1rem; */
     /* padding-bottom: 1.5rem; */
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     margin-right: 1rem;
-    padding-top: 2rem;
+    padding-top: 0.5rem;
     /* padding-right: 1rem; */
     /* gap: 1rem; */
 }
 
 .day-name {
-    background-color: var(--indigo-400);
-    /* border-radius: 0.3rem; */
-    padding: 0.8rem;
-    margin: 1rem 0rem 1rem 0rem;
+    background-color: rgb(159, 159, 159);
+    border-radius: 0.9rem;
+    padding: rem;
+    margin: 0.1rem 0.9rem 1rem 0.9rem;
     /* width: 10rem; */
-    width: 100%;
+    width: 80%;
     border: 0px solid;
     text-align: center;
     font-weight: 700;
     color: white;
-
 }
 
 .calendar__div {
@@ -94,11 +95,11 @@
     grid-template-columns: repeat(7, 1fr);
     padding-left: 2rem;
     padding-right: 1rem;
-    background-color: rgb(255, 255, 255);
+    /* background-color: rgba(34, 23, 23, 0.6); */
     border-bottom-right-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
     /* gap: 1rem; */
-
+   
 }
 
 .calendar--month__container {
@@ -134,13 +135,13 @@
     margin: 0.5rem;
     margin-bottom: 1rem;
     overflow-y: scroll;
-    box-shadow: 0.5px 0.5px 10px rgb(243, 243, 243);
-    background-color: rgb(240, 248, 255);
+    box-shadow: 0.5px 0.5px 10px rgb(216, 216, 216);
+    background-color: rgb(230, 230, 230);
     transition: transform 0.3s ease;
     cursor: pointer;
 }
 .day-item:hover {
-    transform: scale(1.2); /* Amplía la tarjeta en un 10% al hacer hover */
+    transform: scale(1.4); /* Amplía la tarjeta en un 10% al hacer hover */
   }
 
 @keyframes changeMonthAnimation {
