@@ -236,10 +236,10 @@ export function deleteEvent(title: string, date: string) {
 
         eventsTotal.forEach((event: Event) => {
             const eventTitle = "Title: " + event.title;
-            const eventDate = "Date: " + event.date;
+            const eventDate = "Date: " + event.dateString;
 
-            if (eventTitle !== title && eventDate !== date) {
-                console.log(event.title, title, event.date, date);
+            if (eventTitle !== title || eventDate !== date) {
+                console.log(event.title, title, event.dateString, eventDate, date);
                 eventsTotalFilter.push(event);
             }
         });
