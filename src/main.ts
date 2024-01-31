@@ -3,8 +3,8 @@ import {
   currentMonth,
   currentYear,
 } from "./components/Calendar";
-import { StoreEvent, checkIsPastEvent, checkIsPastEventWithReminder2, deleteEvent } from "./components/Modal";
-import { getReminderDuration } from "./components/Reminder";
+import { StoreEvent, checkIsPastEvent, deleteEvent } from "./components/Modal";
+import { checkIsPastEventWithReminder, getReminderDuration } from "./components/Reminder";
 
 import { Event, EventType, Reminder } from "./interfaces/event";
 
@@ -314,7 +314,7 @@ function checkEventsWithReminder() {
       checkIsPastEvent(event.endDate);
 
     }
-    if (event.reminder && checkIsPastEventWithReminder2(event) && !eventsWithAlertShown.has(eventId)) {
+    if (event.reminder && checkIsPastEventWithReminder(event) && !eventsWithAlertShown.has(eventId)) {
       const reminderTime = getReminderDuration(event.reminder);
       console.log(reminderTime);
       const newCurrentDateMS = Date.now();

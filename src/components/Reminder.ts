@@ -139,9 +139,7 @@ export function checkIsPastEventWithReminder(event: Event) {
     const reminderTime = getReminderDuration(event.reminder);
     const now = new Date().getTime();
     const timestamp = event.startDateTimestamp
-    return timestamp - reminderTime < now;
-  } else {
-    return true;
+    return timestamp - now + 100000 > reminderTime;
   }
 }
 // function checkFirstEvent() {
