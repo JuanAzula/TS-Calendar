@@ -150,6 +150,11 @@ if (
 ) {
   submitButton?.addEventListener("click", (event) => {
     event?.preventDefault();
+    if (!title?.value || !date?.value || !time?.value) {
+      alert("The title, date and time can not be empty!");
+      return; // Salir de la función de manejo de eventos sin ejecutar el código restante
+    }
+
     const titleValue = title?.value;
     const dateValueString = date?.value;
     const dateValue = new Date(dateValueString);
@@ -183,8 +188,12 @@ if (
     };
 
     StoreEvent(eventObject);
-    overlay?.classList.add("hide-modal");
-    modal?.classList.add("hide-modal");
+    overlay?.classList.add("hide-element");
+    modal?.classList.add("hide-element");
+    title.value = "";
+    date.value = "";
+    time.value = "";
+    textDescription.value = "";
 
   })
 }
@@ -270,3 +279,48 @@ function convertToTypeEnum(value: string): EventType | null {
       return null;
   }
 }
+
+
+
+//checkEvents(sortEvents())
+
+const eventsWithAlertShown = new Set<string>(); // Conjunto para almacenar los IDs de los eventos con alerta mostrada
+
+function checkEventsWithReminder() {
+  let eventsTotal = []
+  const events = localStorage.getItem("events");
+  if (events) {
+    eventsTotal = JSON.parse(events);
+  }
+
+  eventsTotal.forEach((event: Event) => {
+    const eventId = event.completeDate.toString();
+    const eventDate = new Date(event.completeDate);
+    const eventDateMS = eventDate.getTime();
+    if (event.endDate) {
+      checkIsPastEvent(event.endDate);
+
+    }
+    if (event.reminder && checkIsPastEventWithReminder2(event) && !eventsWithAlertShown.has(eventId)) {
+      const reminderTime = getReminderDuration(event.reminder);
+      console.log(reminderTime);
+      const newCurrentDateMS = Date.now();
+      const difference = eventDateMS - newCurrentDateMS;
+      console.log("EventDateMS:", eventDateMS, "newCurrentDateMS:", newCurrentDateMS, "reminderTime:", reminderTime);
+      console.log(difference);
+      if (difference <= reminderTime) {
+        alert(
+          `Your event ${event.title
+          } will start at ${eventDate.toLocaleTimeString()}.`
+        );
+        eventsWithAlertShown.add(eventId);
+      } else {
+        console.log('no hay alerta');
+      }
+    }
+
+  })
+  setTimeout(checkEventsWithReminder, 1000);
+};
+
+checkEventsWithReminder()

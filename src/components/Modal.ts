@@ -60,7 +60,7 @@ export function getEvents() {
             " Type: " +
             event.type +
             " End Date: " +
-            event.endDate +
+            event.endDateString +
             " End Time: " +
             event.endTime;
 
@@ -69,16 +69,28 @@ export function getEvents() {
         endTimeSpan.classList.add("hide-modal");
         eventTime.classList.add("hide-modal");
         eventDetails.classList.add("event--tooltip");
+        if (event.endDate) {
 
-        // Check if the event is in the past and has a reminder
-        const isPastEvent = checkIsPastEvent(event.date);
-        if (!isPastEvent && event.reminder) {
-            setReminder(event);
-        }
+            const isPastEvent = checkIsPastEvent(event.endDate);
+            if (!isPastEvent && event.reminder) {
+                setReminder(event);
+            }
 
-        // Add CSS classes for past events
-        if (isPastEvent) {
-            eventDiv.classList.add("past-event");
+            if (isPastEvent) {
+                eventDiv.classList.add("past-event");
+                console.log("is past event");
+            }
+        } else {
+            const isPastEvent = checkIsPastEvent(event.date);
+            if (!isPastEvent && event.reminder) {
+                setReminder(event);
+            }
+
+            if (isPastEvent) {
+                eventDiv.classList.add("past-event");
+                console.log("is past event");
+            }
+
         }
 
         // Append elements to the eventDiv
