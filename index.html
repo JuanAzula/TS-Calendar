@@ -19,22 +19,25 @@
   <div id="app"></div>
 
   <!-- ////////////////////////////// HEADER -->
-  <header class="header">
-    <div class="header__div">
-      <h1 class="header__h1">Ts Calendar</h1>
-      <button id="add-event" class="header__button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon">
-          <g stroke-width="2" stroke-linecap="round" stroke="#fff">
-            <rect y="5" x="4" width="16" rx="2" height="16"></rect>
-            <path d="m8 3v4"></path>
-            <path d="m16 3v4"></path>
-            <path d="m4 11h16"></path>
-          </g>
-        </svg>
-        <span class="header__button--text">Add to Calendar</span>
-      </button>
-    </div>
-  </header>
+  <section class="header--container">
+    <header class="header">
+      <div class="header__div">
+        <h1 class="header__h1">Ts Calendar</h1>
+        <button id="add-event" class="header__button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none"
+            class="svg-icon">
+            <g stroke-width="2" stroke-linecap="round" stroke="#fff">
+              <rect y="5" x="4" width="16" rx="2" height="16"></rect>
+              <path d="m8 3v4"></path>
+              <path d="m16 3v4"></path>
+              <path d="m4 11h16"></path>
+            </g>
+          </svg>
+          <span class="header__button--text">Add to Calendar</span>
+        </button>
+      </div>
+    </header>
+  </section>
 
   <!-- ///////////////////////////// CALENDAR -->
 
@@ -49,7 +52,7 @@
         <div class="calendar--arrow__container">
           <span id="back-arrow" class="calendar--arrow"><svg xmlns="http://www.w3.org/2000/svg"
               class="icon icon-tabler icon-tabler-arrow-big-left" width="44" height="44" viewBox="0 0 24 24"
-              stroke-width="1.5" stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path
                 d="M20 15h-8v3.586a1 1 0 0 1 -1.707 .707l-6.586 -6.586a1 1 0 0 1 0 -1.414l6.586 -6.586a1 1 0 0 1 1.707 .707v3.586h8a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1z" />
@@ -57,7 +60,7 @@
           </span>
           <span id="forward-arrow" class="calendar--arrow"><svg xmlns="http://www.w3.org/2000/svg"
               class="icon icon-tabler icon-tabler-arrow-big-right" width="44" height="44" viewBox="0 0 24 24"
-              stroke-width="1.5" stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path
                 d="M4 9h8v-3.586a1 1 0 0 1 1.707 -.707l6.586 6.586a1 1 0 0 1 0 1.414l-6.586 6.586a1 1 0 0 1 -1.707 -.707v-3.586h-8a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1z" />
@@ -82,7 +85,7 @@
   </main>
 
   <!-- //////////////////////////// MODAL -->
-  <section id="modal" class="hide-modal">
+  <section id="modal" class="hide-element">
     <div id="modal-div" class="modal__div">
       <h1 class="modal__h1">Add Event</h1>
 
@@ -96,16 +99,16 @@
         <label for="time" class="modal__label">Time</label>
         <input id="time" class="modal__input" type="time" required />
         End Date and Time
-        <input id="checkbox" class="checkbox" type="checkbox" />
+        <input id="checkbox" class="modal__input" type="checkbox" />
         <label id='endDate-label' for="title" class="hide-modal">End date</label>
         <input id="endDate" class="hide-modal" type="date" />
         <label id="endTimeLabel" for="title" class="hide-modal">End Time</label>
 
-        <input id="endTimeInput" class="hide-modal" type="time">Set reminder
+        <input id="endTimeInput" class="hide-element" type="time">Set reminder
         <label for="title">
           <input type="checkbox" id="reminmderCheckbox" class="modal__input">
         </label>
-        <select id="reminderTime" class="hide-modal">
+        <select id="reminderTime" class="hide-element">
           <option value="00:05">5 minuts before</option>
           <option value="00:10">10 minuts before</option>
           <option value="00:15">15 minuts before</option>
@@ -131,7 +134,7 @@
 
     </div>
   </section>
-  <div class="overlay hide-modal"></div>
+  <div class="overlay hide-element"></div>
 
   <!------------------------->
   <section id="event-info" class="hide-event">
@@ -150,7 +153,11 @@
 
   </section>
 
-  
+  <!-- /////////////////////////// FOOTER -->
+
+  <footer class="footer" id="footer">
+    <p class="footer__p">Made with ❤️ by SQUAD HAMILTON</p>
+  </footer>
 
   <script type="module" src="/src/main.ts"></script>
 </body>

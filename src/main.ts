@@ -3,12 +3,15 @@ import {
   currentMonth,
   currentYear,
 } from "./components/Calendar";
-import { StoreEvent, deleteEvent } from "./components/Modal";
+import { StoreEvent, checkIsPastEvent, checkIsPastEventWithReminder2, deleteEvent } from "./components/Modal";
+import { getReminderDuration } from "./components/Reminder";
+
 import { Event, EventType, Reminder } from "./interfaces/event";
 
 document.addEventListener("DOMContentLoaded", () => {
   // getEvents();
 });
+
 
 // ///////// EVENT LISTENERS FOR ADD EVENT BUTTON
 const eventButton = document.getElementById("add-event");
@@ -23,8 +26,8 @@ if (
   eventButton instanceof HTMLButtonElement
 ) {
   eventButton.addEventListener("click", () => {
-    overlay.classList.remove("hide-modal");
-    modal.classList.remove("hide-modal");
+    overlay.classList.remove("hide-element");
+    modal.classList.remove("hide-element");
     const event = localStorage.getItem("events");
     console.log(event);
   });
@@ -32,7 +35,7 @@ if (
 
 if (label && modal && label instanceof HTMLSpanElement) {
   label.addEventListener("click", () => {
-    modal.classList.remove("hide-modal");
+    modal.classList.remove("hide-element");
   });
 }
 
@@ -41,8 +44,8 @@ const closeModal = document.getElementById("close");
 
 if (closeModal && closeModal instanceof HTMLSpanElement) {
   closeModal?.addEventListener("click", () => {
-    overlay?.classList.add("hide-modal");
-    modal?.classList.add("hide-modal");
+    overlay?.classList.add("hide-element");
+    modal?.classList.add("hide-element");
   });
 }
 
@@ -65,15 +68,15 @@ let isEndDateVisible = false;
 
 endDateCheckbox.addEventListener("click", () => {
   if (isEndDateVisible) {
-    endDateLabel?.classList.add("hide-modal");
-    endDateInput?.classList.add("hide-modal");
-    endDateTimeLabel.classList.add("hide-modal");
-    endDateTimeInput.classList.add("hide-modal");
+    endDateLabel?.classList.add("hide-element");
+    endDateInput?.classList.add("hide-element");
+    endDateTimeLabel.classList.add("hide-element");
+    endDateTimeInput.classList.add("hide-element");
   } else {
-    endDateLabel.classList.replace("hide-modal", "modal__label");
-    endDateInput.classList.replace("hide-modal", "modal__input");
-    endDateTimeLabel.classList.replace("hide-modal", "modal__label");
-    endDateTimeInput.classList.replace("hide-modal", "modal__input");
+    endDateLabel.classList.replace("hide-element", "modal__label");
+    endDateInput.classList.replace("hide-element", "modal__input");
+    endDateTimeLabel.classList.replace("hide-element", "modal__label");
+    endDateTimeInput.classList.replace("hide-element", "modal__input");
   }
   isEndDateVisible = !isEndDateVisible;
 });
@@ -88,9 +91,9 @@ let isCheckboxVisible = false;
 if (reminmderCheckbox && reminmderCheckbox instanceof HTMLInputElement) {
   reminmderCheckbox.addEventListener("click", () => {
     if (isCheckboxVisible) {
-      reminderTime?.classList.add("hide-modal");
+      reminderTime?.classList.add("hide-element");
     } else {
-      reminderTime?.classList.replace("hide-modal", "modal__label");
+      reminderTime?.classList.replace("hide-element", "modal__label");
     }
     isCheckboxVisible = !isCheckboxVisible;
   });
@@ -100,25 +103,25 @@ if (reminmderCheckbox && reminmderCheckbox instanceof HTMLInputElement) {
 document.addEventListener("keydown", (event) => {
   if (overlay && overlay instanceof HTMLDivElement) {
     overlay?.addEventListener("click", () => {
-      overlay.classList.add("hide-modal");
-      modal?.classList.add("hide-modal");
+      overlay.classList.add("hide-element");
+      modal?.classList.add("hide-element");
     });
   }
   if (event.key === "Escape") {
     const modal = document.getElementById("modal");
     const eventContainer = document.getElementById("event-info");
-    modal?.classList.add("hide-modal");
+    modal?.classList.add("hide-element");
     eventContainer?.classList.replace("event--info", "hide-event");
-    overlay?.classList.add("hide-modal");
+    overlay?.classList.add("hide-element");
   }
 });
 
 overlay?.addEventListener("click", () => {
   const modal = document.getElementById("modal");
   const eventContainer = document.getElementById("event-info");
-  modal?.classList.add("hide-modal");
+  modal?.classList.add("hide-element");
   eventContainer?.classList.replace("event--info", "hide-event");
-  overlay?.classList.add("hide-modal");
+  overlay?.classList.add("hide-element");
 });
 
 //  /////// EVENT LISTENERS FOR SUBMIT BUTTON
@@ -174,6 +177,7 @@ if (
       time: timeValue,
       timeString: timeValueString,
       completeDate: completeDate,
+      startDateTimestamp: getTimestamp(completeDate),
       endDate: completeEndDate, //hay que cambiarlo
       endDateString: endDateValueString,
       endTime: endTimeValue, //hay que cambiarlo
@@ -183,8 +187,8 @@ if (
     };
 
     StoreEvent(eventObject);
-    overlay?.classList.add("hide-modal");
-    modal?.classList.add("hide-modal");
+    overlay?.classList.add("hide-element");
+    modal?.classList.add("hide-element");
 
   })
 }
@@ -205,12 +209,14 @@ if (deleteButton && deleteButton instanceof HTMLButtonElement) {
       deleteEvent(eventTitle, eventDate);
     }
 
-    modal?.classList.add("hide-modal");
+    modal?.classList.add("hide-element");
     eventContainer?.classList.replace("event--info", "hide-event");
-    overlay?.classList.add("hide-modal");
+    overlay?.classList.add("hide-element");
 
   })
 }
+
+
 
 
 function convertHour(time: string, date: Date) {
@@ -235,6 +241,13 @@ function convertHour(time: string, date: Date) {
 function getCompleteDate(date: Date, hours: number) {
   date.setHours(hours);
   return date;
+}
+
+function getTimestamp(date: Date) {
+  const eventDate = new Date(date);
+  //console.log(eventDate);
+  const eventDateMS = eventDate.getTime()
+  return eventDateMS
 }
 
 function convertToReminderEnum(value: string): Reminder | null {
@@ -270,3 +283,45 @@ function convertToTypeEnum(value: string): EventType | null {
       return null;
   }
 }
+
+
+
+//checkEvents(sortEvents())
+
+const eventsWithAlertShown = new Set<string>(); // Conjunto para almacenar los IDs de los eventos con alerta mostrada
+
+function checkEventsWithReminder() {
+  let eventsTotal = []
+  const events = localStorage.getItem("events");
+  if (events) {
+    eventsTotal = JSON.parse(events);
+  }
+
+  eventsTotal.forEach((event: Event) => {
+    const eventId = event.completeDate.toString();
+    const eventDate = new Date(event.completeDate);
+    const eventDateMS = eventDate.getTime();
+    checkIsPastEvent(event.date);
+    if (event.reminder && checkIsPastEventWithReminder2(event) && !eventsWithAlertShown.has(eventId)) {
+      const reminderTime = getReminderDuration(event.reminder);
+      console.log(reminderTime);
+      const newCurrentDateMS = Date.now();
+      const difference = eventDateMS - newCurrentDateMS;
+      console.log("EventDateMS:", eventDateMS, "newCurrentDateMS:", newCurrentDateMS, "reminderTime:", reminderTime);
+      console.log(difference);
+      if (difference <= reminderTime) {
+        alert(
+          `Your event ${event.title
+          } will start at ${eventDate.toLocaleTimeString()}.`
+        );
+        eventsWithAlertShown.add(eventId);
+      } else {
+        console.log('no hay alerta');
+      }
+    }
+
+  })
+  setTimeout(checkEventsWithReminder, 1000);
+};
+
+checkEventsWithReminder()
