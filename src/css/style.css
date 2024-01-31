@@ -14,11 +14,12 @@
 }
 
 body {
-  background: var(--indigo-200);
+  /* background: var(--indigo-200);
   background-image: url("../assets/biel-morro-_l8ZdgJ9m7w-unsplash.jpg");
   background-attachment: fixed;
   background-size: cover;
-  background-position: center;
+  background-position: center; */
+  background-color: rgb(233, 233, 233);
 }
 
 .hide-element {
