@@ -1,5 +1,5 @@
 import { Event } from "../interfaces/event";
-import { checkEvents } from "./Reminder";
+import { checkEvents,  setReminder } from "./Reminder";
 import { createCalendar, currentMonth, currentYear } from "./Calendar";
 
 let eventsTotal: Event[] = [];
@@ -57,29 +57,44 @@ export function getEvents() {
             " Type: " +
             event.type +
             " End Date: " +
-            event.endDate +
+            event.endDateString +
             " End Time: " +
             event.endTime;
 
-        endDateSpan.classList.add("hide-modal");
-        endTimeSpan.classList.add("hide-modal");
-        eventTime.classList.add("hide-modal");
+        endDateSpan.classList.add("hide-element");
+        endTimeSpan.classList.add("hide-element");
+        eventTime.classList.add("hide-element");
 
-    // eventTime.classList.add("hide-modal", "event--tooltip");
-    // eventTime.classList.add("event--tooltip");
-    eventDetails.classList.add("event--tooltip");
-    const isPastEvent = checkIsPastEvent(event.date);
-    // if (!isPastEvent && event.reminder) {
-    //   setReminder(event);
-    // }
+        // eventTime.classList.add("hide-element", "event--tooltip");
+        // eventTime.classList.add("event--tooltip");
+        eventDetails.classList.add("event--tooltip");
+        if (event.endDate) {
 
-    if (isPastEvent) {
-      eventDiv.classList.add("past-event");
-    }
+            const isPastEvent = checkIsPastEvent(event.endDate);
+            if (!isPastEvent && event.reminder) {
+                setReminder(event);
+            }
 
-    if (eventsTotal) {
-      checkEvents(eventsTotal);
-    }
+            if (isPastEvent) {
+                eventDiv.classList.add("past-event");
+                console.log("is past event");
+            }
+        } else {
+            const isPastEvent = checkIsPastEvent(event.date);
+            if (!isPastEvent && event.reminder) {
+                setReminder(event);
+            }
+
+            if (isPastEvent) {
+                eventDiv.classList.add("past-event");
+                console.log("is past event");
+            }
+
+        }
+
+        if (eventsTotal) {
+            checkEvents(eventsTotal);
+        }
 
         eventDiv.appendChild(eventName);
         eventDiv.appendChild(eventTime);
@@ -91,8 +106,19 @@ export function getEvents() {
         const dayDiv = document.querySelector(
             `.day-item[data-date='${event.dateString}']`
         );
+        const activeDayDiv = document.querySelector(
+            `.current-day-item[data-date='${event.dateString}']`
+        )
         console.log(dayDiv);
         const dateDiv = dayDiv?.getAttribute("data-date");
+        const activeDateDiv = activeDayDiv?.getAttribute("data-date");
+
+        if (activeDateDiv !== null && activeDateDiv == event.dateString) {
+            console.log("Active date found");
+            activeDayDiv?.appendChild(eventDiv);
+        } else {
+            console.log("No active date found");
+        }
 
         if (dateDiv !== null && dateDiv == event.dateString) {
             console.log("Date found");
@@ -106,8 +132,8 @@ export function getEvents() {
             const overlay = document.querySelector(".overlay");
             eventContainer?.classList.replace("hide-event", "event--info");
             eventTime.classList.remove("event--tooltip");
-            eventTime.classList.add("hide-modal");
-            overlay?.classList.remove("hide-modal");
+            eventTime.classList.add("hide-element");
+            overlay?.classList.remove("hide-element");
 
 
             const titleSpan: any = document.getElementById("title-span");
@@ -160,7 +186,7 @@ if (dayCells) {
                 `.day-item[data-date="${dayData}"] .day__button`
             );
 
-            addButton?.classList.remove("hide-modal");
+            addButton?.classList.remove("hide-element");
         });
         dayCell.addEventListener("mouseout", () => {
             const dayData = dayCell.getAttribute("data-date");
@@ -168,7 +194,7 @@ if (dayCells) {
                 `.day-item[data-date="${dayData}"] .day__button`
             );
 
-            addButton?.classList.add("hide-modal");
+            addButton?.classList.add("hide-element");
         });
     });
 }
@@ -180,8 +206,8 @@ if (dayButton) {
             const overlay = document.querySelector(".overlay");
             const date = document.getElementById("date");
 
-            modal?.classList.remove("hide-modal");
-            overlay?.classList.remove("hide-modal");
+            modal?.classList.remove("hide-element");
+            overlay?.classList.remove("hide-element");
 
             const dataDate = button.getAttribute("data-date");
 
@@ -194,11 +220,20 @@ if (dayButton) {
     });
 }
 
-function checkIsPastEvent(startDate: Date): boolean {
-  const startTime = new Date(startDate).getTime();
-  const now = new Date().getTime();
-  return startTime < now;
+export function checkIsPastEvent(startDate: Date): boolean {
+    const startTime = new Date(startDate).getTime();
+    const now = new Date().getTime();
+    return startTime < now;
 }
+
+// export function checkIsPastEventWithReminder2(event: Event) {
+//     if (event.reminder) {
+//         const reminderTime = getReminderDuration(event.reminder);
+//         const now = new Date().getTime();
+//         const timestamp = event.startDateTimestamp
+//         return timestamp - now + 100000 > reminderTime;
+//     }
+// }
 
 export function deleteEvent(title: string, date: string) {
     const previousEvents = localStorage.getItem("events");
@@ -224,16 +259,16 @@ export function deleteEvent(title: string, date: string) {
 }
 
 export function sortEvents() {
-  const previousEvents = localStorage.getItem("events");
+    const previousEvents = localStorage.getItem("events");
 
-  // const previousEvents = localStorage.getItem("events");
-  if (previousEvents) {
-    eventsTotal = JSON.parse(previousEvents);
-  }
+    // const previousEvents = localStorage.getItem("events");
+    if (previousEvents) {
+        eventsTotal = JSON.parse(previousEvents);
+    }
 
-  eventsTotal.sort((a, b) => a.startDateTimestamp - b.startDateTimestamp);
-  console.log(eventsTotal);
-  return eventsTotal;
+    eventsTotal.sort((a, b) => a.startDateTimestamp - b.startDateTimestamp);
+    console.log(eventsTotal);
+    return eventsTotal;
 }
 
 //sortEvents()

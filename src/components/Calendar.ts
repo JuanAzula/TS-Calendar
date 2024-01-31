@@ -1,20 +1,5 @@
+import { Months } from "../interfaces/calendarInterface";
 import { getEvents } from "./Modal";
-
-enum Months {
-  January = 1,
-  February,
-  March,
-  April,
-  May,
-  June,
-  July,
-  August,
-  September,
-  October,
-  November,
-  December,
-}
-
 
 // Create a Date object with Date.now()
 const todayDate: Date = new Date(Date.now());
@@ -25,13 +10,15 @@ const month: number = todayDate.getMonth() + 1; // Month (add 1 because months r
 const day: number = todayDate.getDate(); // Day of the month
 
 // Function to format month and day to ensure two digits
-const formatWithZero: (num: number) => string = (num) => (num < 10 ? `0${num}` : num.toString());
+const formatWithZero: (num: number) => string = (num) =>
+  num < 10 ? `0${num}` : num.toString();
 
 // Format the date in YYYY-MM-DD format using string template literals
-const formattedDate: string = `${year}-${formatWithZero(month)}-${formatWithZero(day)}`;
+const formattedDate: string = `${year}-${formatWithZero(
+  month
+)}-${formatWithZero(day)}`;
 
-console.log(formattedDate); 
-
+console.log(formattedDate);
 
 export function createCalendar(month: Months, year: number): void {
   const firstDay: number = new Date(year, month - 1, 1).getDay();
@@ -55,17 +42,15 @@ export function createCalendar(month: Months, year: number): void {
       let dayCell = document.createElement("div");
       dayCell?.classList.add("day-item");
       dayCell.textContent = day.toString().padStart(2, "0");
-      
-      
 
       const dayButton = document.createElement("button");
       dayButton.classList.add("day__button");
-      dayButton.classList.add("hide-modal");
+      dayButton.classList.add("hide-element");
       dayButton.textContent = "add";
 
       const monthValue = month.toString(); // Asegurarse de que el mes tenga al menos dos dígitos
       // console.log("hola" + monthValue);
-      if (monthValue == '11' || monthValue == '10' || monthValue == '12') {
+      if (monthValue == "11" || monthValue == "10" || monthValue == "12") {
         // console.log('squad');
 
         const dateValue = `${year}-${monthValue}-${day
@@ -90,66 +75,124 @@ export function createCalendar(month: Months, year: number): void {
       }
       if (dayCell) {
         // Acceder al atributo 'data-mi-atributo'
-        const attribute: string | null = dayCell.getAttribute('data-date');
-        if (attribute === formattedDate){
-          dayCell.classList.remove('day-item')
-          dayCell.classList.add('current-day-item')
+        const attribute: string | null = dayCell.getAttribute("data-date");
+        const dateValue = `${year}-0${monthValue}-${day
+          .toString()
+          .padStart(2, "0")}`;
+        if (attribute === formattedDate) {
+          dayCell.classList.remove("day-item");
+          dayCell.classList.add("current-day-item");
+          dayCell.setAttribute("data-date", dateValue);
+          dayButton.setAttribute("data-date", dateValue);
+          dayCell.appendChild(dayButton);
+          calendarGrid.appendChild(dayCell);
         }
+      }
+    }
+    getEvents();
+
+    // /////// ADD DAYCELL EVENT
+
+    const dayCells: any = document.querySelectorAll(".day-item");
+    const dayButton: any = document.querySelectorAll(".day-item .day__button");
+    const activeDayCell: any = document.querySelector(".current-day-item");
+    const activeDayButton: any = document.querySelectorAll(
+      ".current-day-item .day__button"
+    );
+    const overlay: any = document.querySelector(".overlay");
+
+    if (dayCells) {
+      dayCells.forEach((dayCell: any) => {
+        dayCell.addEventListener("mouseover", () => {
+          const dayData = dayCell.getAttribute("data-date");
+          const addButton = document.querySelector(
+            `.day-item[data-date="${dayData}"] .day__button`
+          );
+
+          addButton?.classList.remove("hide-element");
+        });
+        dayCell.addEventListener("mouseout", () => {
+          const dayData = dayCell.getAttribute("data-date");
+          const addButton = document.querySelector(
+            `.day-item[data-date="${dayData}"] .day__button`
+          );
+
+          addButton?.classList.add("hide-element");
+        });
+      });
+    }
+
+    if (activeDayCell) {
+      activeDayCell.addEventListener("mouseover", () => {
+        const dayData = activeDayCell.getAttribute("data-date");
+        const addButton = document.querySelector(
+          `.current-day-item[data-date="${dayData}"] .day__button`
+        );
+
+        addButton?.classList.remove("hide-element");
+      });
+      activeDayCell.addEventListener("mouseout", () => {
+        const dayData = activeDayCell.getAttribute("data-date");
+        const addButton = document.querySelector(
+          `.current-day-item[data-date="${dayData}"] .day__button`
+        );
+        addButton?.classList.add("hide-element");
+      });
+    }
+
+    if (dayButton) {
+      dayButton.forEach((button: any) => {
+        button.addEventListener("click", () => {
+          const modal = document.getElementById("modal");
+          const overlay = document.querySelector(".overlay");
+          const date = document.getElementById("date");
+
+          modal?.classList.remove("hide-element");
+          overlay?.classList.remove("hide-element");
+
+          const dataDate = button.getAttribute("data-date");
+
+          if (date && date instanceof HTMLInputElement) {
+            date.value = dataDate;
+          }
+
+          console.log(button.getAttribute("data-date"));
+        });
+      });
+    }
+    if (activeDayButton) {
+      activeDayButton.forEach((button: any) => {
+        button.addEventListener("click", () => {
+
+          const modal = document.getElementById("modal");
+          const date = document.getElementById("date");
+
+          modal?.classList.remove("hide-element");
+          overlay?.classList.remove("hide-element");
+
+          const dataDate = button.getAttribute("data-date");
+
+          if (date && date instanceof HTMLInputElement) {
+            date.value = dataDate;
+          }
+
+
+
+          console.log(button.getAttribute('data-date'));
+        })
+      })
     }
   }
-  getEvents();
-
-  // /////// ADD DAYCELL EVENT
-
-  const dayCells: any = document.querySelectorAll(".day-item");
-  const dayButton: any = document.querySelectorAll(".day-item .day__button");
-
-  if (dayCells) {
-    dayCells.forEach((dayCell: any) => {
-      dayCell.addEventListener("mouseover", () => {
-
-        const dayData = dayCell.getAttribute("data-date");
-        const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
-
-        addButton?.classList.remove("hide-modal");
-      })
-      dayCell.addEventListener("mouseout", () => {
-
-        const dayData = dayCell.getAttribute("data-date");
-        const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
-
-        addButton?.classList.add("hide-modal");
-      })
-    })
-  }
-
-
-
-  if (dayButton) {
-    dayButton.forEach((button: any) => {
-      button.addEventListener("click", () => {
-
-        const modal = document.getElementById("modal");
-        const overlay = document.querySelector(".overlay");
-        const date = document.getElementById("date");
-
-        modal?.classList.remove("hide-modal");
-        overlay?.classList.remove("hide-modal");
-
-        const dataDate = button.getAttribute("data-date");
-
-        if (date && date instanceof HTMLInputElement) {
-          date.value = dataDate;
-        }
-
-
-
-        console.log(button.getAttribute('data-date'));
-      })
-    })
-  }
 }
-}
+
+const overlay = document.querySelector(".overlay");
+overlay?.addEventListener("click", () => {
+  const modal = document.getElementById("modal");
+  const eventContainer = document.getElementById("event-info");
+  modal?.classList.add("hide-element");
+  eventContainer?.classList.replace("event--info", "hide-event");
+  overlay?.classList.add("hide-element");
+});
 
 const backArrow = document.getElementById("back-arrow") as HTMLSpanElement;
 const forwardArrow = document.getElementById(
@@ -230,13 +273,7 @@ function changeMonth(current: Months, change: number): void {
   // console.log(currentMonth, currentYear);
 }
 
-
-
-
 // Pots cridar aquesta funció amb el mes i any actuals
 export let currentMonth: Months = new Date().getMonth() + 1;
 export let currentYear: number = new Date().getFullYear();
 createCalendar(currentMonth, currentYear);
-
-
-
