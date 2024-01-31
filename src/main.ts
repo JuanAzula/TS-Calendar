@@ -153,6 +153,11 @@ if (
 ) {
   submitButton?.addEventListener("click", (event) => {
     event?.preventDefault();
+    if (!title?.value || !date?.value || !time?.value) {
+      alert("The title, date and time can not be empty!");
+      return; // Salir de la función de manejo de eventos sin ejecutar el código restante
+    }
+
     const titleValue = title?.value;
     const dateValueString = date?.value;
     const dateValue = new Date(dateValueString);
@@ -189,6 +194,10 @@ if (
     StoreEvent(eventObject);
     overlay?.classList.add("hide-element");
     modal?.classList.add("hide-element");
+    title.value = "";
+    date.value = "";
+    time.value = "";
+    textDescription.value = "";
 
   })
 }
