@@ -16,24 +16,6 @@ enum Months {
   December,
 }
 
-
-// Create a Date object with Date.now()
-const todayDate: Date = new Date(Date.now());
-
-// Extract the year, month, and day with explicit types
-const year: number = todayDate.getFullYear(); // Year
-const month: number = todayDate.getMonth() + 1; // Month (add 1 because months range from 0 to 11)
-const day: number = todayDate.getDate(); // Day of the month
-
-// Function to format month and day to ensure two digits
-const formatWithZero: (num: number) => string = (num) => (num < 10 ? `0${num}` : num.toString());
-
-// Format the date in YYYY-MM-DD format using string template literals
-const formattedDate: string = `${year}-${formatWithZero(month)}-${formatWithZero(day)}`;
-
-console.log(formattedDate);
-
-
 // Function to create a calendar for a given month and year
 export function createCalendar(month: Months, year: number): void {
   // Calculate first day, adjusted first day, and days in the month
@@ -62,11 +44,9 @@ export function createCalendar(month: Months, year: number): void {
       dayCell?.classList.add("day-item");
       dayCell.textContent = day.toString().padStart(2, "0");
 
-
-
       const dayButton = document.createElement("button");
       dayButton.classList.add("day__button");
-      dayButton.classList.add("hide-element");
+      dayButton.classList.add("hide-modal");
       dayButton.textContent = "add";
 
       // Ensure the month has at least two digits
@@ -83,82 +63,52 @@ export function createCalendar(month: Months, year: number): void {
         dayButton.setAttribute("data-date", dateValue);
         dayCell.appendChild(dayButton);
         calendarGrid.appendChild(dayCell);
-        // console.log(dayCell.getAttribute("data-date"));
       }
     }
   }
+  
+  // Call the getEvents function
   getEvents();
 
-  // /////// ADD DAYCELL EVENT
-
+  // Event handling for day cell hover
   const dayCells: any = document.querySelectorAll(".day-item");
   const dayButton: any = document.querySelectorAll(".day-item .day__button");
 
   if (dayCells) {
     dayCells.forEach((dayCell: any) => {
       dayCell.addEventListener("mouseover", () => {
-
         const dayData = dayCell.getAttribute("data-date");
         const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
-
         addButton?.classList.remove("hide-modal");
-      })
+      });
       dayCell.addEventListener("mouseout", () => {
-
         const dayData = dayCell.getAttribute("data-date");
         const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
-
         addButton?.classList.add("hide-modal");
-      })
-    })
+      });
+    });
   }
 
-
-
+  // Event handling for day button click
   if (dayButton) {
     dayButton.forEach((button: any) => {
       button.addEventListener("click", () => {
-
         const modal = document.getElementById("modal");
         const overlay = document.querySelector(".overlay");
         const date = document.getElementById("date");
 
-          modal?.classList.remove("hide-element");
-          overlay?.classList.remove("hide-element");
+        modal?.classList.remove("hide-modal");
+        overlay?.classList.remove("hide-modal");
 
-          const dataDate = button.getAttribute("data-date");
-
-          if (date && date instanceof HTMLInputElement) {
-            date.value = dataDate;
-          }
-
-
-
-          console.log(button.getAttribute('data-date'));
-        })
-      })
-    }
-    if (activeDayButton) {
-      activeDayButton.forEach((button: any) => {
-        button.addEventListener("click", () => {
-
-          const modal = document.getElementById("modal");
-          const date = document.getElementById("date");
-
-          modal?.classList.remove("hide-element");
-          overlay?.classList.remove("hide-element");
-
-          const dataDate = button.getAttribute("data-date");
+        const dataDate = button.getAttribute("data-date");
 
         if (date && date instanceof HTMLInputElement) {
           date.value = dataDate;
         }
 
-
-
         console.log(button.getAttribute('data-date'));
-      })
-    })
+      });
+    });
   }
 }
 

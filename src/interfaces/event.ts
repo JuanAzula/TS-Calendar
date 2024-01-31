@@ -7,7 +7,6 @@ export interface Event {
     time: number,
     timeString: string,
     completeDate: Date,
-    startDateTimestamp: number,
     endDate: Date | null,
     endDateString: string | null,
     endTime: number | null,

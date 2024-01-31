@@ -1,11 +1,14 @@
+/* Hide modal class */
 .hide-modal {
     display: none;
 }
 
+/* Hide event class */
 .hide-event {
     display: none;
 }
 
+/* Styles for event information */
 .event--info {
     display: flex;
     flex-direction: column;
@@ -24,37 +27,33 @@
     z-index: 3;
 }
 
+/* Styles for event information div */
 .event-info__div {
-    /* border: 1px solid black; */
-    /* border-radius: 0.5rem; */
     height: 79%;
     width: 90%;
     padding: 2rem;
     background-color: var(--indigo-500);
     z-index: 6;
-
 }
 
-/* .event-info span {} */
-
+/* Styles for event information span */
 .event-info__div .event-info__span {
     color: white;
-    /* height: 100%; */
-    /* width: 100%; */
     z-index: 6;
 }
 
+/* Styles for overlay */
 .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    /* background-color: rgba(0, 0, 0, 0.6); */
-    backdrop-filter: blur(3px);
+    height: 100rem;
+    backdrop-filter: blur(4px);
     z-index: 3;
 }
 
+/* Styles for modal heading */
 .modal__h1 {
     margin-top: 2rem;
 }
@@ -67,7 +66,6 @@
     justify-content: center;
     gap: 1rem;
     overflow-y: scroll;
-
     background-color: var(--indigo-200);
     padding: 1rem;
     border-radius: 0.5rem;
@@ -100,7 +98,6 @@
     
 }
 
-
 /* Styles for modal button */
 .modal__button {
     display: flex;
@@ -129,6 +126,7 @@
     margin: 0.3rem;
 }
 
+/* Styles for events */
 .event {
     cursor: pointer;
     border: 1px solid black;
@@ -138,6 +136,7 @@
     background-color: var(--indigo-100);
 }
 
+/* Styles for event tooltip */
 .event--tooltip {
     position: absolute;
     top: 100%;
@@ -154,11 +153,15 @@
     font-size: 12px;
 }
 
+/* Hover effect for events */
 .event:hover {
     transform: translateY(-0px);
 }
 
+/* Hover effect for event tooltip */
 .event:hover .event--tooltip {
     visibility: visible;
     opacity: 1;
 }
+
+
