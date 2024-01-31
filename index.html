@@ -91,20 +91,22 @@
         <input id="title" class="modal__input" type="text" placeholder="Title" required maxlength="20" minlength="1" />
         <textarea placeholder="Description" rows="5" cols="40" maxlength="500" id="textDescription"
           class="modal__input"></textarea>
-        <label for="date" class="modal__label">Date</label>
+        
         <input id="date" class="modal__input" type="date" value="2024-01-01" required />
-        <label for="time" class="modal__label">Time</label>
         <input id="time" class="modal__input" type="time" required />
-        End Date and Time
+        
         <input id="checkbox" class="checkbox" type="checkbox" />
+
+        End Date and Time
+        <br>
         <label id='endDate-label' for="title" class="hide-modal">End date</label>
         <input id="endDate" class="hide-modal" type="date" />
         <label id="endTimeLabel" for="title" class="hide-modal">End Time</label>
-
-        <input id="endTimeInput" class="hide-modal" type="time">Set reminder
-        <label for="title">
-          <input type="checkbox" id="reminmderCheckbox" class="modal__input">
-        </label>
+       
+        <input id="endTimeInput" class="hide-modal" type="time">
+        <label for="title"></label>
+          <input type="checkbox" id="reminmderCheckbox" class="modal__input--">Set reminder
+        
         <select id="reminderTime" class="hide-modal">
           <option value="00:05">5 minuts before</option>
           <option value="00:10">10 minuts before</option>
@@ -112,7 +114,8 @@
           <option value="00:30">30 minuts before</option>
           <option value="01:00">1 hour before</option>
         </select>
-
+<br>
+         <div class="edit-content">
         <label for="eventType">Event Type:</label>
         <select id="eventType" name="eventType" required>
           <option value="Meeting">Meeting</option>
@@ -121,12 +124,15 @@
           <option value="Conference">Conference</option>
           <option value="Other">Other</option>
         </select>
-
+      </div>
+      
+        <div class="editButton">
         <button id="submit" class="modal__button">Save</button>
 
         <div class="modal__div--close">
           <span id="close" class="modal__button">Cancel</span>
         </div>
+      </div>
       </form>
 
     </div>
