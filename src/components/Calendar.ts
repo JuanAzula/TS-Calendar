@@ -20,6 +20,7 @@ const formattedDate: string = `${year}-${formatWithZero(
 
 console.log(formattedDate);
 
+
 export function createCalendar(month: Months, year: number): void {
   const firstDay: number = new Date(year, month - 1, 1).getDay();
   const firstDayAdjusted: number = firstDay === 0 ? 6 : firstDay - 1;
@@ -42,6 +43,8 @@ export function createCalendar(month: Months, year: number): void {
       let dayCell = document.createElement("div");
       dayCell?.classList.add("day-item");
       dayCell.textContent = day.toString().padStart(2, "0");
+
+
 
       const dayButton = document.createElement("button");
       dayButton.classList.add("day__button");
@@ -75,15 +78,16 @@ export function createCalendar(month: Months, year: number): void {
       }
       if (dayCell) {
         // Acceder al atributo 'data-mi-atributo'
-        const attribute: string | null = dayCell.getAttribute("data-date");
+        const attribute: string | null = dayCell.getAttribute('data-date');
         const dateValue = `${year}-0${monthValue}-${day
           .toString()
           .padStart(2, "0")}`;
         if (attribute === formattedDate) {
-          dayCell.classList.remove("day-item");
-          dayCell.classList.add("current-day-item");
+          dayCell.classList.remove('day-item')
+          dayCell.classList.add('current-day-item')
           dayCell.setAttribute("data-date", dateValue);
           dayButton.setAttribute("data-date", dateValue);
+
           dayCell.appendChild(dayButton);
           calendarGrid.appendChild(dayCell);
         }
@@ -94,55 +98,50 @@ export function createCalendar(month: Months, year: number): void {
     // /////// ADD DAYCELL EVENT
 
     const dayCells: any = document.querySelectorAll(".day-item");
-    const dayButton: any = document.querySelectorAll(".day-item .day__button");
     const activeDayCell: any = document.querySelector(".current-day-item");
-    const activeDayButton: any = document.querySelectorAll(
-      ".current-day-item .day__button"
-    );
-    const overlay: any = document.querySelector(".overlay");
+    const dayButton: any = document.querySelectorAll(".day-item .day__button");
+    const activeDayButton: any = document.querySelectorAll(".current-day-item .day__button");
+    const overlay: any = document.querySelector('.overlay');
 
     if (dayCells) {
       dayCells.forEach((dayCell: any) => {
         dayCell.addEventListener("mouseover", () => {
+
           const dayData = dayCell.getAttribute("data-date");
-          const addButton = document.querySelector(
-            `.day-item[data-date="${dayData}"] .day__button`
-          );
+          const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
 
           addButton?.classList.remove("hide-element");
-        });
+        })
         dayCell.addEventListener("mouseout", () => {
+
           const dayData = dayCell.getAttribute("data-date");
-          const addButton = document.querySelector(
-            `.day-item[data-date="${dayData}"] .day__button`
-          );
+          const addButton = document.querySelector(`.day-item[data-date="${dayData}"] .day__button`);
 
           addButton?.classList.add("hide-element");
-        });
-      });
+        })
+      })
     }
 
     if (activeDayCell) {
-      activeDayCell.addEventListener("mouseover", () => {
-        const dayData = activeDayCell.getAttribute("data-date");
-        const addButton = document.querySelector(
-          `.current-day-item[data-date="${dayData}"] .day__button`
-        );
+      activeDayCell.addEventListener('mouseover', () => {
+        const dayData = activeDayCell.getAttribute('data-date');
+        const addButton = document.querySelector(`.current-day-item[data-date="${dayData}"] .day__button`);
 
-        addButton?.classList.remove("hide-element");
-      });
-      activeDayCell.addEventListener("mouseout", () => {
-        const dayData = activeDayCell.getAttribute("data-date");
-        const addButton = document.querySelector(
-          `.current-day-item[data-date="${dayData}"] .day__button`
-        );
-        addButton?.classList.add("hide-element");
-      });
+        addButton?.classList.remove('hide-element');
+      })
+      activeDayCell.addEventListener('mouseout', () => {
+        const dayData = activeDayCell.getAttribute('data-date');
+        const addButton = document.querySelector(`.current-day-item[data-date="${dayData}"] .day__button`);
+        addButton?.classList.add('hide-element');
+      })
     }
+
+
 
     if (dayButton) {
       dayButton.forEach((button: any) => {
         button.addEventListener("click", () => {
+
           const modal = document.getElementById("modal");
           const overlay = document.querySelector(".overlay");
           const date = document.getElementById("date");
@@ -156,9 +155,11 @@ export function createCalendar(month: Months, year: number): void {
             date.value = dataDate;
           }
 
-          console.log(button.getAttribute("data-date"));
-        });
-      });
+
+
+          console.log(button.getAttribute('data-date'));
+        })
+      })
     }
     if (activeDayButton) {
       activeDayButton.forEach((button: any) => {
@@ -184,7 +185,6 @@ export function createCalendar(month: Months, year: number): void {
     }
   }
 }
-
 const overlay = document.querySelector(".overlay");
 overlay?.addEventListener("click", () => {
   const modal = document.getElementById("modal");

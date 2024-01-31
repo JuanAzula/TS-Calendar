@@ -1,5 +1,5 @@
 import { Event } from "../interfaces/event";
-import { checkEvents,  setReminder } from "./Reminder";
+import { checkEvents, setReminder } from "./Reminder";
 import { createCalendar, currentMonth, currentYear } from "./Calendar";
 
 let eventsTotal: Event[] = [];

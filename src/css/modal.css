@@ -18,8 +18,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 28rem;
-    height: 40rem;
+    width: 32rem;
+    height: 49rem;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
     z-index: 5;
     border: 1px solid black
