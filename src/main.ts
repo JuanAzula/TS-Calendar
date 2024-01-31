@@ -310,7 +310,10 @@ function checkEventsWithReminder() {
     const eventId = event.completeDate.toString();
     const eventDate = new Date(event.completeDate);
     const eventDateMS = eventDate.getTime();
-    checkIsPastEvent(event.date);
+    if (event.endDate) {
+      checkIsPastEvent(event.endDate);
+
+    }
     if (event.reminder && checkIsPastEventWithReminder2(event) && !eventsWithAlertShown.has(eventId)) {
       const reminderTime = getReminderDuration(event.reminder);
       console.log(reminderTime);

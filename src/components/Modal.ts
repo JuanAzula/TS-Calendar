@@ -57,7 +57,7 @@ export function getEvents() {
             " Type: " +
             event.type +
             " End Date: " +
-            event.endDate +
+            event.endDateString +
             " End Time: " +
             event.endTime;
 
@@ -68,14 +68,28 @@ export function getEvents() {
         // eventTime.classList.add("hide-element", "event--tooltip");
         // eventTime.classList.add("event--tooltip");
         eventDetails.classList.add("event--tooltip");
-        const isPastEvent = checkIsPastEvent(event.date);
-        if (!isPastEvent && event.reminder) {
-            setReminder(event);
-        }
+        if (event.endDate) {
 
-        if (isPastEvent) {
-            eventDiv.classList.add("past-event");
-            console.log("is past event");
+            const isPastEvent = checkIsPastEvent(event.endDate);
+            if (!isPastEvent && event.reminder) {
+                setReminder(event);
+            }
+
+            if (isPastEvent) {
+                eventDiv.classList.add("past-event");
+                console.log("is past event");
+            }
+        } else {
+            const isPastEvent = checkIsPastEvent(event.date);
+            if (!isPastEvent && event.reminder) {
+                setReminder(event);
+            }
+
+            if (isPastEvent) {
+                eventDiv.classList.add("past-event");
+                console.log("is past event");
+            }
+
         }
 
         if (eventsTotal) {
