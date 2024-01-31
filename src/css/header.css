@@ -31,7 +31,7 @@
     position: relative;
     cursor: pointer;
     align-self: flex-end;
-    background-color: rgb(119, 119, 119);
+    background-color: var(--indigo-700);
     border-radius: 20px;
     padding: 9px 12px;
     gap: 8px;
