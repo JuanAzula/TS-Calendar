@@ -37,6 +37,11 @@ export function createCalendar(month: Months, year: number): void {
   const firstDayAdjusted: number = firstDay === 0 ? 6 : firstDay - 1;
   const daysInMonth: number = new Date(year, month, 0).getDate();
 
+  const currentMonthSpan = document.getElementById(
+    "current-month"
+  ) as HTMLSpanElement;
+  currentMonthSpan.textContent = `${Months[month]}`;
+
   const calendarGrid: HTMLElement | null =
     document.getElementById("calendar-container");
 
